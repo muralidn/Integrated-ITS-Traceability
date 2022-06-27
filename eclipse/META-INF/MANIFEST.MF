@@ -4,3 +4,5 @@ Bundle-Name: eclipse
 Bundle-SymbolicName: eclipse; singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Require-Bundle: org.eclipse.emf.ecore
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: eclipse
