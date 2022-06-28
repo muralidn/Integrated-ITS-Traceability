@@ -1,0 +1,68 @@
+@namespace(
+	uri="Trace_Information_Model",
+	prefix="")
+
+@gmf
+package TIM;
+
+@gmf.diagram(onefile="true")
+class GlobalTraceModel
+{	
+	val Artifact[*] artifacts;
+	val Traceability[*] traceLinks;
+	val Change_Request_Ticket[*] CR_Tickets;
+	
+}
+
+@gmf.node(label = "id,summary", label.pattern = "{0} : {1}", label.icon = "false", figure = "rectangle", phantom = "true")
+class Change_Request_Ticket
+{
+	attr int ~id;
+	attr String summary;
+	attr String description;
+	ref Artifact[*]#changeRequests affectedArtifacts;
+}
+
+enum Progress_Enum
+{
+	ZERO;
+	TWENTY_FIVE_PERCENT;
+	FIFTY_PERCENT;
+	SEVENTY_FIVE_PERCENT;
+	HUNDERD_PERCENT;
+}
+
+@gmf.node(label = "artifactID,progress", label.icon = "false")
+abstract class Artifact
+{
+	attr int artifactID;
+	attr Progress_Enum progress;
+	@gmf.link(label="changeRequests")
+	ref Change_Request_Ticket[*]#affectedArtifacts changeRequests;
+}
+
+@gmf.link(label = type, source = "source", target = "destination") 
+class Traceability
+{
+	attr String type;
+	ref Artifact[*]#destination source;
+	ref Artifact[*]#source destination;
+}
+
+@gmf.node(label.pattern = "REQ-{0}, Progress: {1}")
+class Requirement extends Artifact
+{
+	
+}
+
+@gmf.node(label.pattern = "DESIGN-{0}, Progress: {1}")
+class Design extends Artifact
+{
+	
+}
+
+@gmf.node(label.pattern = "TEST-{0}, Progress: {1}")
+class Test extends Artifact
+{
+	
+}
