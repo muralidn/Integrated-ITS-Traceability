@@ -1,0 +1,66 @@
+"Querying Simulink Models ".println();
+// QUERY
+var reqSet=SLREQ!RequirementSet.all;
+var reqs=SLREQ!Requirement.all;
+var just=SLREQ!Justification.all;
+var refs=SLREQ!Reference.all;
+var functional=SLREQ!RQ_Functional.all;  
+var container=SLREQ!RF_Container.all; 
+
+var linkset=SLREQ!LinkSet.all;
+var link=SLREQ!Link.all; 
+var implement=SLREQ!L_Implement.all;
+var derive=SLREQ!L_Derive.all;
+
+var total = reqs.size()+just.size()+refs.size() + link.size() + linkset.size() + reqSet.size() ;
+(total.println("elements:") == SLREQ.allContents().size());
+
+//if (link.at(i).hasProperty("Description"))
+//	link.at(i).getProperty("Description").print();
+
+//if (link.at(i).hasProperty("Type"))
+//	link.at(i).getProperty("Type").print(" ");
+
+//if (link.at(i).getSource().hasProperty("id"))
+//	link.at(i).getSource().getProperty("id").print(" #");
+	
+//if (link.at(i).getSource().hasProperty("artifact"))
+//	link.at(i).getSource().getProperty("artifact").print(" in ");
+
+//if (link.at(i).getDestination().hasProperty("id"))
+//	link.at(i).getDestination().getProperty("id").print(" to #");
+
+//if (link.at(i).getDestination().hasProperty("artifact"))
+//	link.at(i).getDestination().getProperty("artifact").print(" in");
+
+//"".println();
+//i = i + 1;
+
+if (link.size() > 0)
+{
+
+	var i : Integer = 0;
+	while (i < reqs.size())
+	{
+			link.at(i).getSource().getProperty("id").println("SID: ");
+			
+			link.at(i).getSource().getProperty("artifact").println("SD: ");
+
+			//link.at(i).getSource().getProperty("summary").println("SS: ");
+			
+			
+			link.at(i).getProperty("Type").println("LT: ");
+			
+			link.at(i).getDestination().getProperty("id").println("DID: ");
+		
+			link.at(i).getDestination().getProperty("artifact").println("DD: ");
+			
+			link.at(i).getDestination().getProperty("summary").println("DS: ");
+			
+			link.at(i).getDestination().getProperty("reqSet").println("DS: ");
+			
+			"".println();
+		
+		i = i + 1;
+	}
+}

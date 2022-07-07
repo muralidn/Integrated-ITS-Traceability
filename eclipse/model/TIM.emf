@@ -49,8 +49,14 @@ class Traceability
 	ref Artifact[*]#source destination;
 }
 
-@gmf.node(label.pattern = "REQ-{0}, Progress: {1}")
-class Requirement extends Artifact
+@gmf.node(label.pattern = "SYRS-{0}, Progress: {1}")
+class SystemRequirement extends Artifact
+{
+	
+}
+
+@gmf.node(label.pattern = "FUNC-{0}, Progress: {1}")
+class FunctionalRequirement extends Artifact
 {
 	
 }
