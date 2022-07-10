@@ -8,8 +8,13 @@ package TIM;
 @gmf.diagram(onefile="true")
 class GlobalTraceModel
 {	
-	val Artifact[*] artifacts;
-	val Traceability[*] traceLinks;
+	val SystemRequirement[*] sysRequirements;
+	val FunctionalRequirement[*] funcRequirements;
+	val Model[*] modelBlocks;
+	val Test[*] testBlocks;
+	val Derive[*] deriveTraceLinks;
+	val Implement[*] implementTraceLinks;
+	val Verify[*] verifyTraceLinks;
 	val Change_Request_Ticket[*] CR_Tickets;
 	
 }
@@ -32,42 +37,66 @@ enum Progress_Enum
 	HUNDERD_PERCENT;
 }
 
-@gmf.node(label = "artifactID,progress", label.icon = "false")
+@gmf.node(label = "artifactID, progress", label.icon = "false", figure="ellipse", label.color = "255,255,255", label.pattern = "{0}, Prog: {1}")
 abstract class Artifact
 {
-	attr int artifactID;
+	attr String artifactID;
 	attr Progress_Enum progress;
 	@gmf.link(label="changeRequests")
 	ref Change_Request_Ticket[*]#affectedArtifacts changeRequests;
 }
 
-@gmf.link(label = type, source = "source", target = "destination") 
-class Traceability
+@gmf.link(source = "source", target = "destination",source.constraint = "self <> oppositeEnd", source.decoration = "filledclosedarrow",
+target.constraint = "self <> oppositeEnd", target.decoration = "filledclosedarrow")
+abstract class Traceability
 {
-	attr String type;
-	ref Artifact[*]#destination source;
-	ref Artifact[*]#source destination;
+
 }
 
-@gmf.node(label.pattern = "SYRS-{0}, Progress: {1}")
+@gmf.link(label = type)
+class Derive extends Traceability 
+{
+	attr String type = "DERIVE";
+	ref SystemRequirement[*]#destination source;
+	ref FunctionalRequirement[*]#source destination;
+}
+
+@gmf.link(label = type)
+class Implement extends Traceability 
+{
+	attr String type = "IMPLEMENT";
+	ref FunctionalRequirement[*]#destination source;
+	ref Model[*]#source destination;
+}
+
+@gmf.link(label = type)
+class Verify extends Traceability 
+{
+	attr String type = "VERIFY";
+	ref FunctionalRequirement[*]#destination source;
+	ref Test[*]#source destination;
+}
+
+
+@gmf.node(label.pattern = "{0}, Progress: {1}", color = "75,0,0")
 class SystemRequirement extends Artifact
 {
 	
 }
 
-@gmf.node(label.pattern = "FUNC-{0}, Progress: {1}")
+@gmf.node(label.pattern = "{0}, Progress: {1}", color = "175,0,0")
 class FunctionalRequirement extends Artifact
 {
 	
 }
 
-@gmf.node(label.pattern = "DESIGN-{0}, Progress: {1}")
-class Design extends Artifact
+@gmf.node( color = "0,125,0")
+class Model extends Artifact
 {
 	
 }
 
-@gmf.node(label.pattern = "TEST-{0}, Progress: {1}")
+@gmf.node(label.pattern = "{0}, Progress: {1}", color = "0,0,125")
 class Test extends Artifact
 {
 	
