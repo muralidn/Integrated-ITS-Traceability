@@ -24,5 +24,78 @@ for(dl : GTM!Derive in deriveLinks) {
 		
 		dl.source.select = false;
 		dl.destination.select = false;
-	 	}	
-	 }
+ 	}	
+}
+
+var implementLinks = GTM!Implement.all;
+for(il : GTM!Implement in implementLinks) {	
+	 if(il.source.select or il.destination.select) {
+	 
+	 if(il.source.select or il.destination.select) {
+	 
+		var funcRequirement = gtmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = il.source.artifactID);	 
+	 	
+		var sourceArtifact = null;
+		if (funcRequirement != null) 
+			sourceArtifact = funcRequirement;
+		}
+		else {
+			sourceArtifact = new LTM!SystemRequirement;
+			sourceArtifact.artifactID = il.source.artifactID;
+			sourceArtifact.progress = LTM!Progress_Enum#ZERO;
+			gtmBoundary.sysRequirements.add(sourceArtifact);
+		}
+		
+				
+		var destArtifact = new LTM!Model;
+		destArtifact.artifactID = il.destination.artifactID;
+		destArtifact.progress = LTM!Progress_Enum#ZERO;
+		gtmBoundary.modelBlocks.add(destArtifact);
+		
+		
+		var traceLink = new LTM!Implement;
+		traceLink.source = sourceArtifact;
+		traceLink.destination = destArtifact;
+		traceLink.valid = false;
+		gtmBoundary.implementTraceLinks.add(traceLink);
+		
+		il.source.select = false;
+		il.destination.select = false;
+ 	}	
+}
+
+var verifyLinks = GTM!Verify.all;
+for(il : GTM!Verify in verifyLinks) {	
+	 if(il.source.select or il.destination.select) {
+	 
+	 if(il.source.select or il.destination.select) {
+	 
+		var funcRequirement = gtmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = il.source.artifactID);	 
+	 	
+		var sourceArtifact = null;
+		if (funcRequirement != null) 
+			sourceArtifact = funcRequirement;
+		}
+		else {
+			sourceArtifact = new LTM!SystemRequirement;
+			sourceArtifact.artifactID = il.source.artifactID;
+			sourceArtifact.progress = LTM!Progress_Enum#ZERO;
+			gtmBoundary.sysRequirements.add(sourceArtifact);
+		}
+		
+				
+		var destArtifact = new LTM!Test;
+		destArtifact.artifactID = il.destination.artifactID;
+		destArtifact.progress = LTM!Progress_Enum#ZERO;
+		gtmBoundary.testBlocks.add(destArtifact);
+		
+		var traceLink = new LTM!Verify;
+		traceLink.source = sourceArtifact;
+		traceLink.destination = destArtifact;
+		traceLink.valid = false;
+		gtmBoundary.verifyTraceLinks.add(traceLink);
+		
+		il.source.select = false;
+		il.destination.select = false;
+ 	}	
+}

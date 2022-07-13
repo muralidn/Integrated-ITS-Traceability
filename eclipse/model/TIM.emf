@@ -107,7 +107,7 @@ class FunctionalRequirement extends Artifact
 	
 }
 
-@gmf.node( color = "0,125,0")
+@gmf.node(label.pattern = "{0}, Progress: {1}", color = "0,125,0")
 class Model extends Artifact
 {
 	
