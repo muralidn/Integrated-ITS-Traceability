@@ -5,9 +5,11 @@
 @gmf
 package TIM;
 
-@gmf.diagram(onefile="true")
+@gmf.diagram
 class GlobalTraceModel
 {	
+	val GTMController gtmController;
+	val GTMVersion gtmVersion;
 	val SystemRequirement[*] sysRequirements;
 	val FunctionalRequirement[*] funcRequirements;
 	val Model[*] modelBlocks;
@@ -17,6 +19,19 @@ class GlobalTraceModel
 	val Verify[*] verifyTraceLinks;
 	val Change_Request_Ticket[*] CR_Tickets;
 	
+}
+
+@gmf.node(label = "createNewCR, ltmCR", label.icon = "false", figure="rectangle", label.pattern = "Create New CR: {0} (OR) LTM CR: {1}")
+class GTMController
+{
+	attr Boolean createNewCR;
+	attr String ltmCR;	
+}
+
+@gmf.node(label = "version", label.icon = "false", figure="rectangle", label.pattern = "Build Version: {0}")
+class GTMVersion
+{
+	attr String version;	
 }
 
 @gmf.node(label = "id,summary", label.pattern = "{0} : {1}", label.icon = "false", figure = "rectangle", phantom = "true")
@@ -44,37 +59,39 @@ abstract class Artifact
 	attr Progress_Enum progress;
 	@gmf.link(label="changeRequests")
 	ref Change_Request_Ticket[*]#affectedArtifacts changeRequests;
+	attr Boolean select = false;
+	
 }
 
 @gmf.link(source = "source", target = "destination",source.constraint = "self <> oppositeEnd", source.decoration = "filledclosedarrow",
 target.constraint = "self <> oppositeEnd", target.decoration = "filledclosedarrow")
 abstract class Traceability
 {
-
+	attr Boolean valid = true;
 }
 
 @gmf.link(label = type)
 class Derive extends Traceability 
 {
 	attr String type = "DERIVE";
-	ref SystemRequirement[*]#destination source;
-	ref FunctionalRequirement[*]#source destination;
+	ref SystemRequirement#destination source;
+	ref FunctionalRequirement#source destination;
 }
 
 @gmf.link(label = type)
 class Implement extends Traceability 
 {
 	attr String type = "IMPLEMENT";
-	ref FunctionalRequirement[*]#destination source;
-	ref Model[*]#source destination;
+	ref FunctionalRequirement#destination source;
+	ref Model#source destination;
 }
 
 @gmf.link(label = type)
 class Verify extends Traceability 
 {
 	attr String type = "VERIFY";
-	ref FunctionalRequirement[*]#destination source;
-	ref Test[*]#source destination;
+	ref FunctionalRequirement#destination source;
+	ref Test#source destination;
 }
 
 

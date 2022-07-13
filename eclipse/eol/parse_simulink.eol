@@ -44,8 +44,8 @@ while (i < link.size())
 			
 			
 			var traceLink = new GTM!Derive;
-			traceLink.source.add(sourceArtifact);
-			traceLink.destination.add(destArtifact);
+			traceLink.source = sourceArtifact;
+			traceLink.destination = destArtifact;
 			gtmBoundary.deriveTraceLinks.add(traceLink);
 			
 			
@@ -81,8 +81,8 @@ while (i < link.size())
 
 			
 			var traceLink = new GTM!Implement;
-			traceLink.source.add(sourceArtifact);
-			traceLink.destination.add(destArtifact);
+			traceLink.source = sourceArtifact;
+			traceLink.destination = destArtifact;
 			gtmBoundary.implementTraceLinks.add(traceLink);
 			
 		}			
@@ -116,8 +116,8 @@ while (i < link.size())
 
 			
 			var traceLink = new GTM!Verify;
-			traceLink.source.add(sourceArtifact);
-			traceLink.destination.add(destArtifact);
+			traceLink.source = sourceArtifact;
+			traceLink.destination = destArtifact;
 			gtmBoundary.verifyTraceLinks.add(traceLink);
 			
 		}			

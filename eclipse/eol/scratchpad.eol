@@ -1,0 +1,44 @@
+"Test App ".println();
+
+GTM!GTMController.all.first().ltmCR.println();
+
+/*var implement=SLREQ!L_Implement.all;
+var derive=SLREQ!L_Derive.all;
+var relate=SLREQ!L_Relate.all;
+var refine=SLREQ!L_Refine.all;
+var confirm=SLREQ!L_Confirm.all;
+var verify=SLREQ!L_Verify.all;
+var justify=SLREQ!L_Justify.all;
+
+implement.size().println("Implement Links: ");
+derive.size().println("Derive Links: ");
+relate.size().println("Relate Links: ");
+refine.size().println("Refine Links: ");
+confirm.size().println("Confirm Links: ");
+verify.size().println("Verify Links: ");
+justify.size().println("Justify Links: ");
+
+var implement2=SLMX!L_Implement.all;
+var derive2=SLMX!L_Derive.all;
+var relate2=SLMX!L_Relate.all;
+var refine2=SLMX!L_Refine.all;
+var confirm2=SLMX!L_Confirm.all;
+var verify2=SLMX!L_Verify.all;
+var justify2=SLMX!L_Justify.all;
+
+implement2.size().println("Implement2 Links: ");
+derive2.size().println("Derive2 Links: ");
+relate2.size().println("Relate2 Links: ");
+refine2.size().println("Refine2 Links: ");
+confirm2.size().println("Confirm2 Links: ");
+verify2.size().println("Verify2 Links: ");
+justify2.size().println("Justify20 Links: ");
+
+var implement3=SLREQ2!L_Implement.all;
+var derive3=SLREQ2!L_Derive.all;
+var relate3=SLREQ2!L_Relate.all;
+var refine3=SLREQ2!L_Refine.all;
+var confirm3=SLREQ2!L_Confirm.all;
+var verify3=SLREQ2!L_Verify.all;
+var justify3=SLREQ2!L_Justify.all;*/
+

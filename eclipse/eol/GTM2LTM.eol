@@ -1,0 +1,28 @@
+var gtmBoundary = LTM!GlobalTraceModel.all.first;
+
+var deriveLinks = GTM!Derive.all;
+for(dl : GTM!Derive in deriveLinks) {	
+	 if(dl.source.select or dl.destination.select) {
+	 
+		var sourceArtifact = new LTM!SystemRequirement;
+		sourceArtifact.artifactID = dl.source.artifactID;
+		sourceArtifact.progress = LTM!Progress_Enum#ZERO;
+		gtmBoundary.sysRequirements.add(sourceArtifact);
+		
+		
+		var destArtifact = new LTM!FunctionalRequirement;
+		destArtifact.artifactID = dl.destination.artifactID;
+		destArtifact.progress = LTM!Progress_Enum#ZERO;
+		gtmBoundary.funcRequirements.add(destArtifact);
+		
+		
+		var traceLink = new LTM!Derive;
+		traceLink.source = sourceArtifact;
+		traceLink.destination = destArtifact;
+		traceLink.valid = false;
+		gtmBoundary.deriveTraceLinks.add(traceLink);
+		
+		dl.source.select = false;
+		dl.destination.select = false;
+	 	}	
+	 }

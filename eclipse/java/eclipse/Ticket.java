@@ -1,7 +1,7 @@
 package eclipse;
 
 public class Ticket {
-	String id			= 	"";
+	Integer id			= 	-1;
 	String summary		=	"";
 	String description	=	"";
 	String timFeedback	=	"";
