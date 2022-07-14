@@ -31,18 +31,69 @@ while (i < link.size())
 		var linkType = link.at(i).getProperty("Type");
 		
 		if (linkType == "Derive") {	
-			var sourceArtifact = new GTM!SystemRequirement;
-			sourceArtifact.artifactID = "crs_req.slreqx-" + link.at(i).getSource().getProperty("id").asString();	
-			sourceArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
-			gtmBoundary.sysRequirements.add(sourceArtifact);
+			var sourcePrefix = "";
+			var srcFile = link.at(i).getSource().getProperty("artifact").asString();
+			if ("crs_req.slreqx".isSubstringOf(srcFile))
+				sourcePrefix = "crs_req.slreqx-";
+			else if ("crs_req_func_spec.slreqx".isSubstringOf(srcFile)) 
+				sourcePrefix = "crs_req_func_spec.slreqx-";
+			else
+				sourcePrefix = srcFile;
+
+			var destPrefix = "";
+			var destFile = link.at(i).getDestination().getProperty("artifact").asString();
+			if ("crs_req.slreqx".isSubstringOf(destFile))
+				destPrefix = "crs_req.slreqx-";
+			else if ("crs_req_func_spec.slreqx".isSubstringOf(destFile)) 
+				destPrefix = "crs_req_func_spec.slreqx-";
+			else
+				destPrefix = destFile;			
+		
+			var artIDSysReq =   sourcePrefix + link.at(i).getSource().getProperty("id").asString();
+			var artIDFuncReq =  destPrefix + link.at(i).getDestination().getProperty("id").asString().replace("#","");
 			
+			var systemRequirement = gtmBoundary.sysRequirements.selectOne(p : GTM!SystemRequirement | p.artifactID = artIDSysReq);
+			var funcRequirement = gtmBoundary.funcRequirements.selectOne(p : GTM!FunctionalRequirement | p.artifactID = artIDFuncReq);
 			
-			var destArtifact = new GTM!FunctionalRequirement;
-			destArtifact.artifactID = "crs_req_func_spec.slreqx-" + link.at(i).getSource().getProperty("id").asString();
-			destArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
-			gtmBoundary.funcRequirements.add(destArtifact);
+			var sourceArtifact = null;
+			var destArtifact = null;
 			
+			if ((systemRequirement == null) and (funcRequirement == null)) {
+				sourceArtifact = new GTM!SystemRequirement;
+				sourceArtifact.artifactID = artIDSysReq;	
+				sourceArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				gtmBoundary.sysRequirements.add(sourceArtifact);
+				
+
+				destArtifact = new GTM!FunctionalRequirement;
+				destArtifact.artifactID = artIDFuncReq;
+				destArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				gtmBoundary.funcRequirements.add(destArtifact);
+				
+			}
+			else if ((systemRequirement != null) and (funcRequirement == null)) {
+				sourceArtifact = systemRequirement;
+				
+				destArtifact = new GTM!FunctionalRequirement;
+				destArtifact.artifactID = artIDFuncReq;
+				destArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				gtmBoundary.funcRequirements.add(destArtifact);
 			
+			} 
+			else if ((systemRequirement == null) and (funcRequirement != null)) {
+				sourceArtifact = new GTM!SystemRequirement;
+				sourceArtifact.artifactID = artIDSysReq;	
+				sourceArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				gtmBoundary.sysRequirements.add(sourceArtifact);
+				
+				destArtifact = funcRequirement;
+			} 			
+			else{
+				i = i + 1;
+				continue;
+			}
+			
+		
 			var traceLink = new GTM!Derive;
 			traceLink.source = sourceArtifact;
 			traceLink.destination = destArtifact;
@@ -60,25 +111,71 @@ while (i < link.size())
 		var linkType = link.at(i).getProperty("Type");
 		
 		if (linkType == "Implement") {
-			var artID =  "crs_req_func_spec.slreqx-" + link.at(i).getDestination().getProperty("id").asString().replace("#","");
-			var funcRequirement = gtmBoundary.funcRequirements.selectOne(p : GTM!FunctionalRequirement | p.artifactID = artID);
+		
+			var sourcePrefix = "";
+			var srcFile = link.at(i).getSource().getProperty("artifact").asString();
+			if ("crs_plant.slx".isSubstringOf(srcFile))
+				sourcePrefix = "crs_plant.slx-";
+			else if ("crs_controllerdic.sldd".isSubstringOf(srcFile)) 
+				sourcePrefix = "crs_controllerdic.sldd-";
+			else if ("crs_controller.slx".isSubstringOf(srcFile)) 
+				sourcePrefix = "crs_controller.slx-";
+
+			else
+				sourcePrefix = srcFile;
+
+			var destPrefix = "";
+			var destFile = link.at(i).getDestination().getProperty("artifact").asString();
+			if ("crs_req.slreqx".isSubstringOf(destFile))
+				destPrefix = "crs_req.slreqx-";
+			else if ("crs_req_func_spec.slreqx".isSubstringOf(destFile)) 
+				destPrefix = "crs_req_func_spec.slreqx-";
+			else
+				destPrefix = destFile;	
+				
+				
+			var funcReqartID =  destPrefix + link.at(i).getDestination().getProperty("id").asString().replace("#","");
+			var modelartID =  sourcePrefix + link.at(i).getSource().getProperty("id").asString();
+			var funcRequirement = gtmBoundary.funcRequirements.selectOne(p : GTM!FunctionalRequirement | p.artifactID = funcReqartID);
+			var smModel = gtmBoundary.modelBlocks.selectOne(p : GTM!Model | p.artifactID = modelartID);
 			
 			var sourceArtifact = null;
-			if (funcRequirement == null) {
+			var destArtifact = null;
+			
+			if ((funcRequirement == null) and (smModel == null)) {
+
 				sourceArtifact = new GTM!FunctionalRequirement;
-				sourceArtifact.artifactID = "crs_req_func_spec.slreqx-" + link.at(i).getDestination().getProperty("id").asString().replace("#","");
+				sourceArtifact.artifactID = funcReqartID;
 				sourceArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
-				gtmBoundary.funcRequirements.add(sourceArtifact);
+				gtmBoundary.funcRequirements.add(sourceArtifact);			
+				
+				destArtifact = new GTM!Model;
+				destArtifact.artifactID = modelartID;
+				destArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				gtmBoundary.modelBlocks.add(destArtifact);	
+				
+			}
+			else if ((funcRequirement != null) and (smModel == null)) {
+				sourceArtifact = funcRequirement;
+				
+				destArtifact = new GTM!Model;
+				destArtifact.artifactID = modelartID;
+				destArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				gtmBoundary.modelBlocks.add(destArtifact);	
+			
+			}
+			else if  ((funcRequirement == null) and (smModel != null)) {
+				sourceArtifact = new GTM!FunctionalRequirement;
+				sourceArtifact.artifactID = funcReqartID;
+				sourceArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				gtmBoundary.funcRequirements.add(sourceArtifact);	
+				
+				destArtifact = smModel;
 			}
 			else {
-				sourceArtifact = funcRequirement;
+				i = i + 1;
+				continue;
 			}	
-			
-			var destArtifact = new GTM!Model;
-			destArtifact.artifactID = "crs_plant.slx-" + link.at(i).getSource().getProperty("id").asString();
-			destArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
-			gtmBoundary.modelBlocks.add(destArtifact);
-
 			
 			var traceLink = new GTM!Implement;
 			traceLink.source = sourceArtifact;
@@ -95,24 +192,63 @@ while (i < link.size())
 		var linkType = link.at(i).getProperty("Type");
 		
 		if (linkType == "Verify") {
-			var artID =  "crs_req_func_spec.slreqx-" + link.at(i).getDestination().getProperty("id").asString().replace("#","");
-			var funcRequirement = gtmBoundary.funcRequirements.selectOne(p : GTM!FunctionalRequirement | p.artifactID = artID);
+
+			var sourcePrefix = "";
+			var srcFile = link.at(i).getSource().getProperty("artifact").asString();
+			if ("DriverSwRequest_Tests.mldatx".isSubstringOf(srcFile))
+				sourcePrefix = "DriverSwRequest_Tests.mldatx-";
+			else
+				sourcePrefix = srcFile;
+
+			var destPrefix = "";
+			var destFile = link.at(i).getDestination().getProperty("artifact").asString();
+			if ("crs_req.slreqx".isSubstringOf(destFile))
+				destPrefix = "crs_req.slreqx-";
+			else if ("crs_req_func_spec.slreqx".isSubstringOf(destFile)) 
+				destPrefix = "crs_req_func_spec.slreqx-";
+			else
+				destPrefix = destFile;	
+						
+			var funcReqArtID = destPrefix + link.at(i).getDestination().getProperty("id").asString().replace("#","");
+			var testArtID = sourcePrefix + link.at(i).getSource().getProperty("id").asString();
+			var funcRequirement = gtmBoundary.funcRequirements.selectOne(p : GTM!FunctionalRequirement | p.artifactID = funcReqArtID);
+			var testBlk = gtmBoundary.testBlocks.selectOne(p : GTM!Test | p.artifactID = testArtID);
 			
 			var sourceArtifact = null;
-			if (funcRequirement == null) {
+			var destArtifact = null;
+			
+			if ((funcRequirement == null) and (testBlk == null)) {
 				sourceArtifact = new GTM!FunctionalRequirement;
-				sourceArtifact.artifactID = "crs_req_func_spec.slreqx-" + link.at(i).getDestination().getProperty("id").asString().replace("#","");
+				sourceArtifact.artifactID = funcReqArtID;
 				sourceArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
 				gtmBoundary.funcRequirements.add(sourceArtifact);
+				
+				destArtifact = new GTM!Test;
+				destArtifact.artifactID = testArtID;
+				destArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				gtmBoundary.testBlocks.add(destArtifact);
 			}
-			else {
+			else if ((funcRequirement != null) and (testBlk == null)) {
 				sourceArtifact = funcRequirement;
+				
+				destArtifact = new GTM!Test;
+				destArtifact.artifactID = testArtID;
+				destArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				gtmBoundary.testBlocks.add(destArtifact);				
 			}	
-			
-			var destArtifact = new GTM!Test;
-			destArtifact.artifactID = "DriverSwRequest_Tests.mldatx-" + link.at(i).getSource().getProperty("id").asString();
-			destArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
-			gtmBoundary.testBlocks.add(destArtifact);
+			else if ((funcRequirement == null) and (testBlk != null)) {
+				sourceArtifact = new GTM!FunctionalRequirement;
+				sourceArtifact.artifactID = funcReqArtID;
+				sourceArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				gtmBoundary.funcRequirements.add(sourceArtifact);
+				
+				destArtifact = testBlk;
+			}
+			else 
+			{
+				i = i + 1;
+				continue;
+			}
 
 			
 			var traceLink = new GTM!Verify;
@@ -123,55 +259,6 @@ while (i < link.size())
 		}			
 	i = i + 1;
 }
-
-i = 0;
-while (i < link.size())
-{
-		var linkType = link.at(i).getProperty("Type");
-		
-		if (linkType == "Relate") {
-			
-			if (link.at(i).getDestination() != null)
-			{
-				link.at(i).getDestination().getProperty("id").asString().println("DID: ");
-				link.at(i).getDestination().getProperty("artifact").asString().println();	
-			}
-
-			if (link.at(i).getSource() != null)
-			{			
-				link.at(i).getSource().getProperty("id").asString().println("SID: ");
-				link.at(i).getSource().getProperty("artifact").asString().println();
-			}
-				
-				/*var artID =  "crs_req_func_spec.slreqx-" + link.at(i).getDestination().getProperty("id").asString().replace("#","");
-			var funcRequirement = gtmBoundary.funcRequirements.selectOne(p : GTM!FunctionalRequirement | p.artifactID = artID);
-			
-			var sourceArtifact = null;
-			if (funcRequirement == null) {
-				sourceArtifact = new GTM!FunctionalRequirement;
-				sourceArtifact.artifactID = "crs_req_func_spec.slreqx-" + link.at(i).getDestination().getProperty("id").asString().replace("#","");
-				sourceArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
-				gtmBoundary.funcRequirements.add(sourceArtifact);
-			}
-			else {
-				sourceArtifact = funcRequirement;
-			}	
-			
-			var destArtifact = new GTM!Test;
-			destArtifact.artifactID = "DriverSwRequest_Tests.mldatx-" + link.at(i).getSource().getProperty("id").asString();
-			destArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
-			gtmBoundary.testBlocks.add(destArtifact);
-
-			
-			var traceLink = new GTM!Verify;
-			traceLink.source.add(sourceArtifact);
-			traceLink.destination.add(destArtifact);
-			gtmBoundary.verifyTraceLinks.add(traceLink);*/
-			
-		}			
-	i = i + 1;
-}
-	
 	
 	
 "Complete".println();

@@ -1,6 +1,6 @@
 pre
 {
-	"Hello World".println();
+	"Validating Trace Links...".println();
 }
 
 context Traceability {
