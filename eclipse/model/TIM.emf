@@ -34,12 +34,17 @@ class GTMVersion
 	attr String version;	
 }
 
-@gmf.node(label = "id,summary", label.pattern = "{0} : {1}", label.icon = "false", figure = "rectangle", phantom = "true")
+@gmf.node(label = "crID", label.pattern = "{0}", label.icon = "false", figure = "rectangle", phantom = "true")
 class Change_Request_Ticket
 {
-	attr int ~id;
+	attr int crID;
 	attr String summary;
 	attr String description;
+	attr String version;
+	attr String chHelpful;
+	attr String mergeRationale;
+	attr String plannedLOE;
+	attr String actualLOE;
 	ref Artifact[*]#changeRequests affectedArtifacts;
 }
 

@@ -92,6 +92,30 @@ public class TracConnector {
 					newTicket.id = rs.getInt("id");
 					break;
 				}
+				
+				sql = "INSERT INTO ticket_custom(ticket,name,value) VALUES (?,?,?),(?,?,?),(?,?,?),(?,?,?)";
+				pstmt = dbConnection.prepareStatement(sql);
+	            pstmt.setInt(1, newTicket.id);
+	            pstmt.setString(2, "feedback_radio");
+	            pstmt.setString(3, "NO");
+	            pstmt.setInt(4, newTicket.id);
+	            pstmt.setString(5, "merge_rationale_ta");
+	            pstmt.setString(6, "");
+	            pstmt.setInt(7, newTicket.id);
+	            pstmt.setString(8, "planned_loe_tb");
+	            pstmt.setString(9, "");
+	            pstmt.setInt(10, newTicket.id);
+	            pstmt.setString(11, "actual_loe_tb");
+	            pstmt.setString(12, "");
+	            
+	            rowsInserted = pstmt.executeUpdate();            
+	            if (rowsInserted == 4) {
+	            	System.out.println("Successfully created new ticket!!");
+	            }
+	            else {
+	            	System.out.println("ERROR!");	
+	            }
+				
 				rs.close();
 				dbConnection.commit();
             }
