@@ -1,4 +1,4 @@
-var gtmBoundary = LTM!GlobalTraceModel.all.first;
+var ltmBoundary = LTM!GlobalTraceModel.all.first;
 
 var deriveLinks = GTM!Derive.all;
 for(dl : GTM!Derive in deriveLinks) {	
@@ -7,20 +7,20 @@ for(dl : GTM!Derive in deriveLinks) {
 		var sourceArtifact = new LTM!SystemRequirement;
 		sourceArtifact.artifactID = dl.source.artifactID;
 		sourceArtifact.progress = LTM!Progress_Enum#ZERO;
-		gtmBoundary.sysRequirements.add(sourceArtifact);
+		ltmBoundary.sysRequirements.add(sourceArtifact);
 		
 		
 		var destArtifact = new LTM!FunctionalRequirement;
 		destArtifact.artifactID = dl.destination.artifactID;
 		destArtifact.progress = LTM!Progress_Enum#ZERO;
-		gtmBoundary.funcRequirements.add(destArtifact);
+		ltmBoundary.funcRequirements.add(destArtifact);
 		
 		
 		var traceLink = new LTM!Derive;
 		traceLink.source = sourceArtifact;
 		traceLink.destination = destArtifact;
 		traceLink.valid = false;
-		gtmBoundary.deriveTraceLinks.add(traceLink);
+		ltmBoundary.deriveTraceLinks.add(traceLink);
 		
 		dl.source.select = false;
 		dl.destination.select = false;
@@ -33,35 +33,36 @@ for(il : GTM!Implement in implementLinks) {
 	 
 	 if(il.source.select or il.destination.select) {
 	 
-		var funcRequirement = gtmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = il.source.artifactID);	 
+		var funcRequirement = ltmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = il.source.artifactID);	 
 	 	
 		var sourceArtifact = null;
-		if (funcRequirement != null) 
+		if (funcRequirement != null){
 			sourceArtifact = funcRequirement;
 		}
 		else {
-			sourceArtifact = new LTM!SystemRequirement;
+			sourceArtifact = new LTM!FunctionalRequirement;
 			sourceArtifact.artifactID = il.source.artifactID;
 			sourceArtifact.progress = LTM!Progress_Enum#ZERO;
-			gtmBoundary.sysRequirements.add(sourceArtifact);
+			ltmBoundary.funcRequirements.add(sourceArtifact);
 		}
 		
 				
 		var destArtifact = new LTM!Model;
 		destArtifact.artifactID = il.destination.artifactID;
 		destArtifact.progress = LTM!Progress_Enum#ZERO;
-		gtmBoundary.modelBlocks.add(destArtifact);
+		ltmBoundary.modelBlocks.add(destArtifact);
 		
 		
 		var traceLink = new LTM!Implement;
 		traceLink.source = sourceArtifact;
 		traceLink.destination = destArtifact;
 		traceLink.valid = false;
-		gtmBoundary.implementTraceLinks.add(traceLink);
+		ltmBoundary.implementTraceLinks.add(traceLink);
 		
 		il.source.select = false;
 		il.destination.select = false;
  	}	
+}
 }
 
 var verifyLinks = GTM!Verify.all;
@@ -70,32 +71,137 @@ for(il : GTM!Verify in verifyLinks) {
 	 
 	 if(il.source.select or il.destination.select) {
 	 
-		var funcRequirement = gtmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = il.source.artifactID);	 
+		var funcRequirement = ltmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = il.source.artifactID);	 
 	 	
 		var sourceArtifact = null;
-		if (funcRequirement != null) 
+		if (funcRequirement != null){
 			sourceArtifact = funcRequirement;
 		}
 		else {
-			sourceArtifact = new LTM!SystemRequirement;
+			sourceArtifact = new LTM!FunctionalRequirement;
 			sourceArtifact.artifactID = il.source.artifactID;
 			sourceArtifact.progress = LTM!Progress_Enum#ZERO;
-			gtmBoundary.sysRequirements.add(sourceArtifact);
+			ltmBoundary.funcRequirements.add(sourceArtifact);
 		}
 		
 				
 		var destArtifact = new LTM!Test;
 		destArtifact.artifactID = il.destination.artifactID;
 		destArtifact.progress = LTM!Progress_Enum#ZERO;
-		gtmBoundary.testBlocks.add(destArtifact);
+		ltmBoundary.testBlocks.add(destArtifact);
 		
 		var traceLink = new LTM!Verify;
 		traceLink.source = sourceArtifact;
 		traceLink.destination = destArtifact;
 		traceLink.valid = false;
-		gtmBoundary.verifyTraceLinks.add(traceLink);
+		ltmBoundary.verifyTraceLinks.add(traceLink);
 		
 		il.source.select = false;
 		il.destination.select = false;
  	}	
 }
+}
+
+for(il : GTM!Derive in deriveLinks) {	
+	var sysRequirement = ltmBoundary.sysRequirements.selectOne(p : LTM!SystemRequirement | p.artifactID = il.source.artifactID);	 
+	var funcRequirement = ltmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = il.destination.artifactID);	 
+	
+	if (sysRequirement != null and funcRequirement == null) {
+	
+			var artifact = new LTM!FunctionalRequirement;
+			artifact.artifactID = il.destination.artifactID;
+			artifact.progress = LTM!Progress_Enum#ZERO;
+			ltmBoundary.funcRequirements.add(artifact);	
+			
+			var traceLink = new LTM!Derive;
+			traceLink.source = sysRequirement;
+			traceLink.destination = artifact;
+			traceLink.valid = false;
+			ltmBoundary.deriveTraceLinks.add(traceLink);
+	}
+	else if (sysRequirement == null and funcRequirement != null) {
+			var artifact = new LTM!SystemRequirement;
+			artifact.artifactID = il.source.artifactID;
+			artifact.progress = LTM!Progress_Enum#ZERO;
+			ltmBoundary.sysRequirements.add(artifact);	
+			
+			var traceLink = new LTM!Derive;
+			traceLink.source = artifact;
+			traceLink.destination = funcRequirement;
+			traceLink.valid = false;
+			ltmBoundary.deriveTraceLinks.add(traceLink);
+	} 
+	else
+	{
+	}
+}
+
+for(il : GTM!Implement in implementLinks) {	
+	var funcRequirement = ltmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = il.source.artifactID);
+	var models = ltmBoundary.modelBlocks.selectOne(p : LTM!Model | p.artifactID = il.destination.artifactID);	 
+		 
+	if (funcRequirement != null and models == null) {
+	
+			var artifact = new LTM!Model;
+			artifact.artifactID = il.destination.artifactID;
+			artifact.progress = LTM!Progress_Enum#ZERO;
+			ltmBoundary.modelBlocks.add(artifact);	
+			
+			var traceLink = new LTM!Implement;
+			traceLink.source = funcRequirement;
+			traceLink.destination = artifact;
+			traceLink.valid = false;
+			ltmBoundary.implementTraceLinks.add(traceLink);
+	}
+	else if (funcRequirement == null and models != null) {
+			var artifact = new LTM!FunctionalRequirement;
+			artifact.artifactID = il.source.artifactID;
+			artifact.progress = LTM!Progress_Enum#ZERO;
+			ltmBoundary.funcRequirements.add(artifact);	
+			
+			var traceLink = new LTM!Implement;
+			traceLink.source = artifact;
+			traceLink.destination = models;
+			traceLink.valid = false;
+			ltmBoundary.implementTraceLinks.add(traceLink);
+	} 
+	else
+	{
+	}
+}
+
+for(il : GTM!Verify in verifyLinks) {	
+	var funcRequirement = ltmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = il.source.artifactID);
+	var tests = ltmBoundary.modelBlocks.selectOne(p : LTM!Test | p.artifactID = il.destination.artifactID);	 
+		 
+	if (funcRequirement != null and tests == null) {
+	
+			var artifact = new LTM!Test;
+			artifact.artifactID = il.destination.artifactID;
+			artifact.progress = LTM!Progress_Enum#ZERO;
+			ltmBoundary.testBlocks.add(artifact);	
+			
+			var traceLink = new LTM!Verify;
+			traceLink.source = funcRequirement;
+			traceLink.destination = artifact;
+			traceLink.valid = false;
+			ltmBoundary.verifyTraceLinks.add(traceLink);
+	}
+	else if (funcRequirement == null and tests != null) {
+			var artifact = new LTM!FunctionalRequirement;
+			artifact.artifactID = il.source.artifactID;
+			artifact.progress = LTM!Progress_Enum#ZERO;
+			ltmBoundary.funcRequirements.add(artifact);	
+			
+			var traceLink = new LTM!Verify;
+			traceLink.source = artifact;
+			traceLink.destination = tests;
+			traceLink.valid = false;
+			ltmBoundary.verifyTraceLinks.add(traceLink);
+	} 
+	else
+	{
+	}
+}
+
+"Complete".println();
