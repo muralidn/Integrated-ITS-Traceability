@@ -66,7 +66,7 @@ public class ITSCore {
 			model.setModelFile(".\\LTM\\" + ltmFile);
 			model.setName("LTM");
 			model.setReadOnLoad(true);
-			model.setStoredOnDisposal(false);
+			model.setStoredOnDisposal(true);
 			try {
 				model.load();
 			} catch (EolModelLoadingException e) {
@@ -157,6 +157,7 @@ public class ITSCore {
 					int ltmStatus = copyGTM2LTM(strLinkedLTM, model);
 					System.out.println(ltmStatus);
 				}
+				model.close();
 				
 			} else if (args[1].equals("SYNC-CR")) {
 				tickets = tracConnector.queryTickets(tickets, true);
@@ -169,6 +170,8 @@ public class ITSCore {
 					}
 				}
 			}
+			
+			
 
 		} else {
 			System.out.println(args[0]);
