@@ -1,5 +1,7 @@
 var ltmBoundary = LTM!GlobalTraceModel.all.first;
 
+var cr = LTM!Change_Request_Ticket.all.first;
+
 var deriveLinks = GTM!Derive.all;
 for(dl : GTM!Derive in deriveLinks) {	
 	 if(dl.source.select or dl.destination.select) {
@@ -7,12 +9,16 @@ for(dl : GTM!Derive in deriveLinks) {
 		var sourceArtifact = new LTM!SystemRequirement;
 		sourceArtifact.artifactID = dl.source.artifactID;
 		sourceArtifact.progress = LTM!Progress_Enum#ZERO;
+		sourceArtifact.changeRequests.add(cr);
+		cr.affectedArtifacts.add(sourceArtifact);
 		ltmBoundary.sysRequirements.add(sourceArtifact);
 		
 		
 		var destArtifact = new LTM!FunctionalRequirement;
 		destArtifact.artifactID = dl.destination.artifactID;
 		destArtifact.progress = LTM!Progress_Enum#ZERO;
+		destArtifact.changeRequests.add(cr);
+		cr.affectedArtifacts.add(destArtifact);
 		ltmBoundary.funcRequirements.add(destArtifact);
 		
 		
@@ -43,6 +49,8 @@ for(il : GTM!Implement in implementLinks) {
 			sourceArtifact = new LTM!FunctionalRequirement;
 			sourceArtifact.artifactID = il.source.artifactID;
 			sourceArtifact.progress = LTM!Progress_Enum#ZERO;
+			sourceArtifact.changeRequests.add(cr);
+			cr.affectedArtifacts.add(sourceArtifact);
 			ltmBoundary.funcRequirements.add(sourceArtifact);
 		}
 		
@@ -50,6 +58,8 @@ for(il : GTM!Implement in implementLinks) {
 		var destArtifact = new LTM!Model;
 		destArtifact.artifactID = il.destination.artifactID;
 		destArtifact.progress = LTM!Progress_Enum#ZERO;
+		destArtifact.changeRequests.add(cr);
+		cr.affectedArtifacts.add(destArtifact);
 		ltmBoundary.modelBlocks.add(destArtifact);
 		
 		
@@ -81,6 +91,8 @@ for(il : GTM!Verify in verifyLinks) {
 			sourceArtifact = new LTM!FunctionalRequirement;
 			sourceArtifact.artifactID = il.source.artifactID;
 			sourceArtifact.progress = LTM!Progress_Enum#ZERO;
+			sourceArtifact.changeRequests.add(cr);
+			cr.affectedArtifacts.add(sourceArtifact);
 			ltmBoundary.funcRequirements.add(sourceArtifact);
 		}
 		
@@ -88,6 +100,8 @@ for(il : GTM!Verify in verifyLinks) {
 		var destArtifact = new LTM!Test;
 		destArtifact.artifactID = il.destination.artifactID;
 		destArtifact.progress = LTM!Progress_Enum#ZERO;
+		destArtifact.changeRequests.add(cr);
+		cr.affectedArtifacts.add(destArtifact);
 		ltmBoundary.testBlocks.add(destArtifact);
 		
 		var traceLink = new LTM!Verify;
@@ -111,6 +125,8 @@ for(il : GTM!Derive in deriveLinks) {
 			var artifact = new LTM!FunctionalRequirement;
 			artifact.artifactID = il.destination.artifactID;
 			artifact.progress = LTM!Progress_Enum#ZERO;
+			artifact.changeRequests.add(cr);
+			cr.affectedArtifacts.add(artifact);
 			ltmBoundary.funcRequirements.add(artifact);	
 			
 			var traceLink = new LTM!Derive;
@@ -123,6 +139,8 @@ for(il : GTM!Derive in deriveLinks) {
 			var artifact = new LTM!SystemRequirement;
 			artifact.artifactID = il.source.artifactID;
 			artifact.progress = LTM!Progress_Enum#ZERO;
+			artifact.changeRequests.add(cr);
+			cr.affectedArtifacts.add(artifact);
 			ltmBoundary.sysRequirements.add(artifact);	
 			
 			var traceLink = new LTM!Derive;
@@ -145,6 +163,8 @@ for(il : GTM!Implement in implementLinks) {
 			var artifact = new LTM!Model;
 			artifact.artifactID = il.destination.artifactID;
 			artifact.progress = LTM!Progress_Enum#ZERO;
+			artifact.changeRequests.add(cr);
+			cr.affectedArtifacts.add(artifact);
 			ltmBoundary.modelBlocks.add(artifact);	
 			
 			var traceLink = new LTM!Implement;
@@ -157,6 +177,8 @@ for(il : GTM!Implement in implementLinks) {
 			var artifact = new LTM!FunctionalRequirement;
 			artifact.artifactID = il.source.artifactID;
 			artifact.progress = LTM!Progress_Enum#ZERO;
+			artifact.changeRequests.add(cr);
+			cr.affectedArtifacts.add(artifact);
 			ltmBoundary.funcRequirements.add(artifact);	
 			
 			var traceLink = new LTM!Implement;
@@ -179,6 +201,8 @@ for(il : GTM!Verify in verifyLinks) {
 			var artifact = new LTM!Test;
 			artifact.artifactID = il.destination.artifactID;
 			artifact.progress = LTM!Progress_Enum#ZERO;
+			artifact.changeRequests.add(cr);
+			cr.affectedArtifacts.add(artifact);
 			ltmBoundary.testBlocks.add(artifact);	
 			
 			var traceLink = new LTM!Verify;
@@ -191,6 +215,8 @@ for(il : GTM!Verify in verifyLinks) {
 			var artifact = new LTM!FunctionalRequirement;
 			artifact.artifactID = il.source.artifactID;
 			artifact.progress = LTM!Progress_Enum#ZERO;
+			artifact.changeRequests.add(cr);
+			cr.affectedArtifacts.add(artifact);
 			ltmBoundary.funcRequirements.add(artifact);	
 			
 			var traceLink = new LTM!Verify;

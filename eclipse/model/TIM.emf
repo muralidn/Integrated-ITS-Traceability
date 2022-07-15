@@ -43,8 +43,8 @@ class Change_Request_Ticket
 	attr String version;
 	attr String chHelpful;
 	attr String mergeRationale;
-	attr String plannedLOE;
-	attr String actualLOE;
+	attr Float plannedLOE;
+	attr Float actualLOE;
 	ref Artifact[*]#changeRequests affectedArtifacts;
 }
 
@@ -62,7 +62,7 @@ abstract class Artifact
 {
 	attr String artifactID;
 	attr Progress_Enum progress;
-	@gmf.link(label="changeRequests")
+	//@gmf.link(label="changeRequests")
 	ref Change_Request_Ticket[*]#affectedArtifacts changeRequests;
 	attr Boolean select = false;
 	
