@@ -9,6 +9,7 @@ package TIM;
 class GlobalTraceModel
 {	
 	val GTMController gtmController;
+	val LTMController ltmController;
 	val GTMVersion gtmVersion;
 	val SystemRequirement[*] sysRequirements;
 	val FunctionalRequirement[*] funcRequirements;
@@ -28,13 +29,19 @@ class GTMController
 	attr String ltmCR;	
 }
 
+@gmf.node(label = "complete", label.icon = "false", figure="rectangle", label.pattern = "CR Complete: {0}")
+class LTMController
+{
+	attr Boolean complete;
+}
+
 @gmf.node(label = "version", label.icon = "false", figure="rectangle", label.pattern = "Build Version: {0}")
 class GTMVersion
 {
 	attr String version;	
 }
 
-@gmf.node(label = "crID", label.pattern = "{0}", label.icon = "false", figure = "rectangle", phantom = "true")
+@gmf.node(label = "crID", label.pattern = "CR - #{0}", label.icon = "false", figure = "rectangle", phantom = "true")
 class Change_Request_Ticket
 {
 	attr int crID;

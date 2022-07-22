@@ -5,7 +5,17 @@ pre
 
 context Traceability {
   constraint Validity {
-    check : self.valid == true
-    message : "Please revalidate trace links"
-}  
+	    check : self.valid == true
+	    message : "Please revalidate trace links"
+	}  
 }
+
+context Artifact {
+  constraint Progress {
+	    check : self.valid == true
+	    message : "Please revalidate trace links"
+	}  
+}
+
+
+
