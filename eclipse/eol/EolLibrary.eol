@@ -1,0 +1,40 @@
+operation modelcomparision(links : Sequence<Any>, upStreamArtifacts : OrderedSet<Any>, downStreamArtifacts : OrderedSet<Any>, msg : String) : String {
+	
+	links.println();
+	for(lnk : LTM!Traceability in links) {
+		var upstreamArtifact = upStreamArtifacts.selectOne(p : GTM!Artifact | p.artifactID = lnk.source.artifactID);	
+		var downstreamArtifact = downStreamArtifacts.selectOne(p : GTM!Artifact | p.artifactID = lnk.destination.artifactID);	 	
+
+		if (upstreamArtifact == null) 
+			msg = msg + "- New " + lnk.source.eClass().name + " " + lnk.source.artifactID + " added in the LTM.\n";
+		else if (downstreamArtifact == null) 
+			msg = msg + "- New " + lnk.source.eClass().name + " " + lnk.destination.artifactID + " added in the LTM.\n";
+		else {
+				if (lnk.source.downstreamArtifacts.size() != upstreamArtifact.downstreamArtifacts.size()){
+					msg = msg + "- Mismatch in trace links between " + lnk.source.artifactID + " and " + upstreamArtifact.artifactID + "\n";
+				}
+				else {
+					var i : Integer = 0;
+					var j : Integer = 0;
+					while (i < lnk.source.downstreamArtifacts.size()){
+						
+						var found : Boolean = false;
+						while (j < upstreamArtifact.downstreamArtifacts.size()){
+							if (lnk.source.downstreamArtifacts.at(i).traceUID == upstreamArtifact.downstreamArtifacts.at(i).traceUID) {
+								found = true;
+							}
+							j = j + 1;
+						}
+					
+					if (found == false) {
+						msg = msg + "- Mismatch in trace links between LTM and GTM for " + lnk.source.artifactID + "\n";
+						break;
+					}		
+					i = i + 1;			
+				}
+			}
+		}
+	}
+
+	return msg;
+}

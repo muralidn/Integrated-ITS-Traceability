@@ -23,10 +23,15 @@ for(dl : GTM!Derive in deriveLinks) {
 		
 		
 		var traceLink = new LTM!Derive;
+		traceLink.traceUID = dl.traceUID;
 		traceLink.source = sourceArtifact;
 		traceLink.destination = destArtifact;
 		traceLink.valid = false;
 		ltmBoundary.deriveTraceLinks.add(traceLink);
+		
+		sourceArtifact.downstreamArtifacts.add(traceLink);
+		destArtifact.upstreamArtifacts.add(traceLink);
+			
 		
 		dl.source.select = false;
 		dl.destination.select = false;
@@ -64,10 +69,14 @@ for(il : GTM!Implement in implementLinks) {
 		
 		
 		var traceLink = new LTM!Implement;
+		traceLink.traceUID = il.traceUID;
 		traceLink.source = sourceArtifact;
 		traceLink.destination = destArtifact;
 		traceLink.valid = false;
 		ltmBoundary.implementTraceLinks.add(traceLink);
+		
+		sourceArtifact.downstreamArtifacts.add(traceLink);
+		destArtifact.upstreamArtifacts.add(traceLink);
 		
 		il.source.select = false;
 		il.destination.select = false;
@@ -105,10 +114,14 @@ for(il : GTM!Verify in verifyLinks) {
 		ltmBoundary.testBlocks.add(destArtifact);
 		
 		var traceLink = new LTM!Verify;
+		traceLink.traceUID = il.traceUID;
 		traceLink.source = sourceArtifact;
 		traceLink.destination = destArtifact;
 		traceLink.valid = false;
 		ltmBoundary.verifyTraceLinks.add(traceLink);
+		
+		sourceArtifact.downstreamArtifacts.add(traceLink);
+		destArtifact.upstreamArtifacts.add(traceLink);
 		
 		il.source.select = false;
 		il.destination.select = false;
@@ -130,10 +143,15 @@ for(il : GTM!Derive in deriveLinks) {
 			ltmBoundary.funcRequirements.add(artifact);	
 			
 			var traceLink = new LTM!Derive;
+			traceLink.traceUID = il.traceUID;
 			traceLink.source = sysRequirement;
 			traceLink.destination = artifact;
 			traceLink.valid = false;
 			ltmBoundary.deriveTraceLinks.add(traceLink);
+			
+			sysRequirement.downstreamArtifacts.add(traceLink);
+			artifact.upstreamArtifacts.add(traceLink);
+		
 	}
 	else if (sysRequirement == null and funcRequirement != null) {
 			var artifact = new LTM!SystemRequirement;
@@ -144,10 +162,14 @@ for(il : GTM!Derive in deriveLinks) {
 			ltmBoundary.sysRequirements.add(artifact);	
 			
 			var traceLink = new LTM!Derive;
+			traceLink.traceUID = il.traceUID;
 			traceLink.source = artifact;
 			traceLink.destination = funcRequirement;
 			traceLink.valid = false;
 			ltmBoundary.deriveTraceLinks.add(traceLink);
+			
+			sysRequirement.downstreamArtifacts.add(traceLink);
+			artifact.upstreamArtifacts.add(traceLink);
 	} 
 	else
 	{
@@ -168,10 +190,15 @@ for(il : GTM!Implement in implementLinks) {
 			ltmBoundary.modelBlocks.add(artifact);	
 			
 			var traceLink = new LTM!Implement;
+			traceLink.traceUID = il.traceUID;
 			traceLink.source = funcRequirement;
 			traceLink.destination = artifact;
 			traceLink.valid = false;
 			ltmBoundary.implementTraceLinks.add(traceLink);
+			
+			funcRequirement.downstreamArtifacts.add(traceLink);
+			artifact.upstreamArtifacts.add(traceLink);
+			
 	}
 	else if (funcRequirement == null and models != null) {
 			var artifact = new LTM!FunctionalRequirement;
@@ -182,10 +209,14 @@ for(il : GTM!Implement in implementLinks) {
 			ltmBoundary.funcRequirements.add(artifact);	
 			
 			var traceLink = new LTM!Implement;
+			traceLink.traceUID = il.traceUID;
 			traceLink.source = artifact;
 			traceLink.destination = models;
 			traceLink.valid = false;
 			ltmBoundary.implementTraceLinks.add(traceLink);
+			
+			funcRequirement.downstreamArtifacts.add(traceLink);
+			artifact.upstreamArtifacts.add(traceLink);
 	} 
 	else
 	{
@@ -206,10 +237,14 @@ for(il : GTM!Verify in verifyLinks) {
 			ltmBoundary.testBlocks.add(artifact);	
 			
 			var traceLink = new LTM!Verify;
+			traceLink.traceUID = il.traceUID;
 			traceLink.source = funcRequirement;
 			traceLink.destination = artifact;
 			traceLink.valid = false;
 			ltmBoundary.verifyTraceLinks.add(traceLink);
+			
+			funcRequirement.downstreamArtifacts.add(traceLink);
+			artifact.upstreamArtifacts.add(traceLink);
 	}
 	else if (funcRequirement == null and tests != null) {
 			var artifact = new LTM!FunctionalRequirement;
@@ -220,10 +255,14 @@ for(il : GTM!Verify in verifyLinks) {
 			ltmBoundary.funcRequirements.add(artifact);	
 			
 			var traceLink = new LTM!Verify;
+			traceLink.traceUID = il.traceUID;
 			traceLink.source = artifact;
 			traceLink.destination = tests;
 			traceLink.valid = false;
 			ltmBoundary.verifyTraceLinks.add(traceLink);
+			
+			funcRequirement.downstreamArtifacts.add(traceLink);
+			artifact.upstreamArtifacts.add(traceLink);
 	} 
 	else
 	{

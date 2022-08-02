@@ -25,6 +25,8 @@ var total = reqs.size()+just.size()+refs.size() + link.size() + linkset.size() +
 
 var gtmBoundary = GTM!GlobalTraceModel.all.first;
 
+var traceUID : Integer = 0;
+
 var i : Integer = 0;
 while (i < link.size())
 {
@@ -58,6 +60,7 @@ while (i < link.size())
 			var sourceArtifact = null;
 			var destArtifact = null;
 			
+	
 			if ((systemRequirement == null) and (funcRequirement == null)) {
 				sourceArtifact = new GTM!SystemRequirement;
 				sourceArtifact.artifactID = artIDSysReq;	
@@ -93,13 +96,16 @@ while (i < link.size())
 				continue;
 			}
 			
-		
 			var traceLink = new GTM!Derive;
 			traceLink.source = sourceArtifact;
 			traceLink.destination = destArtifact;
 			gtmBoundary.deriveTraceLinks.add(traceLink);
 			
+			sourceArtifact.downstreamArtifacts.add(traceLink);
+			destArtifact.upstreamArtifacts.add(traceLink);
 			
+			traceLink.traceUID = traceUID;
+			traceUID = traceUID + 1; 
 	}
 	
 	i = i + 1;
@@ -174,7 +180,9 @@ while (i < link.size())
 			}
 			else {
 				i = i + 1;
+				
 				continue;
+				
 			}	
 			
 			var traceLink = new GTM!Implement;
@@ -182,6 +190,11 @@ while (i < link.size())
 			traceLink.destination = destArtifact;
 			gtmBoundary.implementTraceLinks.add(traceLink);
 			
+			sourceArtifact.downstreamArtifacts.add(traceLink);
+			destArtifact.upstreamArtifacts.add(traceLink);			
+			
+			traceLink.traceUID = traceUID;
+			traceUID = traceUID + 1; 			
 		}			
 	i = i + 1;
 }
@@ -191,8 +204,7 @@ while (i < link.size())
 {
 		var linkType = link.at(i).getProperty("Type");
 		
-		if (linkType == "Verify") {
-
+		if (linkType == "Verify") { 
 			var sourcePrefix = "";
 			var srcFile = link.at(i).getSource().getProperty("artifact").asString();
 			if ("DriverSwRequest_Tests.mldatx".isSubstringOf(srcFile))
@@ -256,6 +268,11 @@ while (i < link.size())
 			traceLink.destination = destArtifact;
 			gtmBoundary.verifyTraceLinks.add(traceLink);
 			
+			sourceArtifact.downstreamArtifacts.add(traceLink);
+			destArtifact.upstreamArtifacts.add(traceLink);		
+			
+			traceLink.traceUID = traceUID;
+			traceUID = traceUID + 1; 		
 		}			
 	i = i + 1;
 }

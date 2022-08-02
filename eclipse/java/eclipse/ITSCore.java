@@ -67,12 +67,14 @@ public class ITSCore {
 		return 0;
 	}
 
-	static void createNewLTMs(HashMap<Integer, Ticket> tickets) {
+	static HashMap<Integer, String> createNewLTMs(HashMap<Integer, Ticket> tickets) {
 		// Model Mgmt operations;
 		File ltmRoot = new File("LTM");
 		File templateModel = new File("model\\template.tim");
 		Path templateGMF = Paths.get("model\\template.tim_diagram");
-
+		
+		HashMap<Integer, String> filepathMap = new HashMap<Integer, String>();
+		
 		for (Ticket tracTicket : tickets.values()) {
 			File[] ltms = ltmRoot.listFiles();
 			boolean ltmFound = false;
@@ -84,8 +86,8 @@ public class ITSCore {
 			}
 			if (!ltmFound) {
 				try {
-
-					FileUtil.copy(templateModel, new File(".\\LTM\\" + tracTicket.id + ".tim"));
+					String ltmFileName = tracTicket.id + ".tim";
+					FileUtil.copy(templateModel, new File(".\\LTM\\" + ltmFileName));
 
 					Charset charset = StandardCharsets.UTF_8;
 					String content = new String(Files.readAllBytes(templateGMF), charset);
@@ -96,6 +98,8 @@ public class ITSCore {
 					if (status < 0) {
 						System.out.println("Sync CR failed");
 					}
+					
+					filepathMap.put(tracTicket.id, ltmFileName);
 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -103,6 +107,8 @@ public class ITSCore {
 				}
 			}
 		}
+		
+		return filepathMap;
 	}
 
 	static int copyGTM2LTM(String ltmFile, EmfModel GTM) {
@@ -213,7 +219,9 @@ public class ITSCore {
 					if (strVersion != "") {
 						Ticket ticket = tracConnector.CreateNewTicket(strVersion);
 						tickets.put(ticket.id, ticket);
-						createNewLTMs(tickets);
+						HashMap<Integer, String> fileMap = createNewLTMs(tickets);
+						int ltmStatus = copyGTM2LTM(fileMap.get(ticket.id), model);
+						System.out.println(ltmStatus);
 					}
 				} else {
 					strLinkedLTM += ".tim";

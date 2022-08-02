@@ -1,0 +1,16 @@
+import "EolLibrary.eol";
+
+var ltmBoundary = LTM!GlobalTraceModel.all.first;
+var gtmBoundary = GTM!GlobalTraceModel.all.first;
+
+var displayMsg : String = "";
+
+var deriveLinks = LTM!Derive.all;
+var implementLinks = LTM!Implement.all;
+var verifyLinks = LTM!Verify.all;
+
+displayMsg = modelcomparision(deriveLinks, gtmBoundary.sysRequirements, gtmBoundary.funcRequirements, displayMsg).println();
+displayMsg = modelcomparision(implementLinks, gtmBoundary.funcRequirements, gtmBoundary.modelBlocks, displayMsg).println();
+displayMsg = modelcomparision(verifyLinks, gtmBoundary.funcRequirements, gtmBoundary.testBlocks, displayMsg).println();
+
+System.user.inform(displayMsg);

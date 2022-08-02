@@ -79,6 +79,7 @@ abstract class Artifact
 target.constraint = "self <> oppositeEnd", target.decoration = "filledclosedarrow")
 abstract class Traceability
 {
+	attr int traceUID;
 	attr Boolean valid = true;
 }
 
@@ -110,23 +111,26 @@ class Verify extends Traceability
 @gmf.node(label.pattern = "{0}, Progress: {1}", color = "75,0,0")
 class SystemRequirement extends Artifact
 {
-	
+	ref Derive[*] downstreamArtifacts;
 }
 
 @gmf.node(label.pattern = "{0}, Progress: {1}", color = "175,0,0")
 class FunctionalRequirement extends Artifact
 {
+	ref Derive[*] upstreamArtifacts;
+	ref Implement[*] downstreamArtifacts;
 	
 }
 
 @gmf.node(label.pattern = "{0}, Progress: {1}", color = "0,125,0")
 class Model extends Artifact
 {
-	
+	ref Implement[*] upstreamArtifacts;
+	ref Verify[*] downstreamArtifacts;	
 }
 
 @gmf.node(label.pattern = "{0}, Progress: {1}", color = "0,0,125")
 class Test extends Artifact
 {
-	
+	ref Verify[*] upstreamArtifacts;
 }

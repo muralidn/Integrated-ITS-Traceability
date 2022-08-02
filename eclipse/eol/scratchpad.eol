@@ -1,6 +1,8 @@
 "Test App ".println();
 
-GTM!GTMController.all.first().ltmCR.println();
+var ff = GTM!Derive.all.first();
+var gg = ff.eClass().getInstanceClass();
+
 
 /*var implement=SLREQ!L_Implement.all;
 var derive=SLREQ!L_Derive.all;
