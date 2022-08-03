@@ -1,11 +1,3 @@
-var cr = new LTM!Change_Request_Ticket;
-cr.crID = 7;
-cr.summary = "";
-cr.description = "";
-cr.version = "";
-cr.chHelpful = "";
-cr.mergeRationale = "";
-cr.plannedLOE = "";
-cr.actualLOE = "";
-var ltmBoundary = LTM!GlobalTraceModel.all.first;
-ltmBoundary.CR_Tickets.add(cr);
+var cr = Change_Request_Ticket.all.first();
+if (cr == null)
+	"NULL".println();

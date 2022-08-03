@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<!--
+
+-->
+<plugin>
+
+   <extension point="org.eclipse.team.core.fileTypes" id="repo-ftype">
+      <?gmfgen generated="true"?>
+      <fileTypes type="text" extension="tim_diagram"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser" id="resource-factory">
+      <?gmfgen generated="true"?>
+      <parser
+         type="tim_diagram"
+         class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
+      </parser>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors" id="gmf-editor">
+      <?gmfgen generated="true"?>
+      <editor
+         id="TIM.diagram.part.TIMDiagramEditorID"
+         name="%editorName"
+         icon="icons/obj16/TIMDiagramFile.gif"
+         extensions="tim_diagram"
+         default="true"
+         class="TIM.diagram.part.TIMDiagramEditor"
+         matchingStrategy="TIM.diagram.part.TIMMatchingStrategy"
+         contributorClass="TIM.diagram.part.TIMDiagramActionBarContributor">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.contexts" id="ui-context">
+      <?gmfgen generated="true"?>
+      <context
+         description="%context.description"
+         id="TIM.diagram.ui.diagramContext"
+         name="%context.name"
+         parentId="org.eclipse.gmf.runtime.diagram.ui.diagramContext">
+      </context>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards" id="creation-wizard">
+      <?gmfgen generated="true"?>
+  	  <wizard
+  	     name="%newWizardName"
+  	     icon="icons/obj16/TIMDiagramFile.gif"
+  	     category="org.eclipse.ui.Examples"
+  	     class="TIM.diagram.part.TIMCreationWizard"
+  	     id="TIM.diagram.part.TIMCreationWizardID">
+  	  	 <description>%newWizardDesc</description>  
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            id="eclipse.diagram.InitDiagram"
+            nameFilter="*.tim"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="TIM.diagram.part.TIMInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="eclipse.diagram.InitDiagramAction">
+         </action>
+      </objectContribution>
+   </extension>
+	
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders" id="global-actions">
+      <?gmfgen generated="true"?>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
+         id="TIMPresentation">
+         <Priority name="Lowest"/>
+         <ViewId id="TIM.diagram.part.TIMDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="delete"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart">
+               <GlobalActionId actionId="save"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="save">
+               </GlobalActionId>
+            </ElementType>        
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.printing.render.providers.DiagramWithPrintGlobalActionHandlerProvider"
+         id="TIMPresentationPrint">
+         <Priority name="Lowest"/>
+         <ViewId id="TIM.diagram.part.TIMDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="print"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
+         id="TIMPresentationIDE">
+         <Priority name="Lowest"/>
+         <ViewId id="TIM.diagram.part.TIMDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="bookmark"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
+            id="TIMRender">
+         <Priority name="Lowest"/>
+         <ViewId id="TIM.diagram.part.TIMDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="cut"/>
+               <GlobalActionId actionId="copy"/>
+               <GlobalActionId actionId="paste"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+   </extension>
+
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="TIM.diagram.providers.TIMMarkerNavigationProvider">
+         <MarkerType name="eclipse.diagram.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+
+   <extension id="diagnostic" name="TIM Plugin problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+
+   <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="TIM.diagram.providers.TIMValidationDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+
+   <extension point="org.eclipse.core.runtime.preferences" id="prefs">
+      <?gmfgen generated="true"?>
+      <initializer class="TIM.diagram.preferences.DiagramPreferenceInitializer"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.preferencePages" id="prefpages">
+      <?gmfgen generated="true"?>
+      <page
+            id="eclipse.diagram.general"
+            name="%prefpage.eclipse.diagram.general"
+            class="TIM.diagram.preferences.DiagramGeneralPreferencePage">
+      </page>
+      <page
+            id="eclipse.diagram.appearance"
+            name="%prefpage.eclipse.diagram.appearance"
+            category="eclipse.diagram.general"
+            class="TIM.diagram.preferences.DiagramAppearancePreferencePage">
+      </page>
+      <page
+            id="eclipse.diagram.connections"
+            name="%prefpage.eclipse.diagram.connections"
+            category="eclipse.diagram.general"
+            class="TIM.diagram.preferences.DiagramConnectionsPreferencePage">
+      </page>
+      <page
+            id="eclipse.diagram.printing"
+            name="%prefpage.eclipse.diagram.printing"
+            category="eclipse.diagram.general"
+            class="TIM.diagram.preferences.DiagramPrintingPreferencePage">
+      </page>
+      <page
+            id="eclipse.diagram.rulersAndGrid"
+            name="%prefpage.eclipse.diagram.rulersAndGrid"
+            category="eclipse.diagram.general"
+            class="TIM.diagram.preferences.DiagramRulersAndGridPreferencePage">
+      </page>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor" id="prop-contrib">
+      <?gmfgen generated="true"?>
+      <propertyContributor
+            contributorId="eclipse.diagram"
+            labelProvider="TIM.diagram.sheet.TIMSheetLabelProvider">
+         <propertyCategory category="domain"/>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="extra"/>
+      </propertyContributor>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs" id="proptabs">
+      <?gmfgen generated="true"?>   
+      <propertyTabs contributorId="eclipse.diagram">
+         <propertyTab
+             category="visual"
+             id="property.tab.AppearancePropertySection"
+             label="%tab.appearance"/>
+          <propertyTab
+             category="visual"
+             id="property.tab.DiagramPropertySection"
+             label="%tab.diagram"/>
+          <propertyTab
+             category="domain"
+             id="property.tab.domain"
+             label="%tab.domain"/>
+      </propertyTabs>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections" id="propsections">
+      <?gmfgen generated="true"?>   
+      <propertySections contributorId="eclipse.diagram">
+         <propertySection id="property.section.ConnectorAppearancePropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ShapeColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection> 
+         <propertySection id="property.section.DiagramColorsAndFontsPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.DiagramColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>     
+         <propertySection id="property.section.RulerGridPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.grid.RulerGridPropertySection" 
+            tab="property.tab.DiagramPropertySection">
+         </propertySection>     
+         <propertySection
+            id="property.section.domain" 
+            tab="property.tab.domain"
+            class="TIM.diagram.sheet.TIMPropertySection">
+            <input type="org.eclipse.gmf.runtime.notation.View"/>
+            <input type="org.eclipse.gef.EditPart"/>
+            <input type="TIM.diagram.navigator.TIMAbstractNavigatorItem"/>
+         </propertySection>
+      </propertySections>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders" id="view-provider">
+      <?gmfgen generated="true"?>
+      <viewProvider class="TIM.diagram.providers.TIMViewProvider">
+         <Priority name="Lowest"/>
+         <object id="referencing-diagrams" class="org.eclipse.gmf.runtime.notation.Diagram">
+            <method name="getType()" value="TIM"/>
+         </object>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="TIM"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003"/>
+      </viewProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders" id="ep-provider">
+      <?gmfgen generated="true"?>
+      <editpartProvider class="TIM.diagram.providers.TIMEditPartProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.notation.Diagram" id="generated-diagram">
+            <method name="getType()" value="TIM"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
+            <method name="getType()" value="4001,4002,4003"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
+            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5008"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
+            <method name="getType()" value=""/>
+         </object>
+         <context views="generated-diagram,generated-nodes,generated-links,generated-labels,generated-compartments"/>
+      </editpartProvider>
+   </extension>
+
+   
+   <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders" id="modelassist-provider">
+      <?gmfgen generated="true"?>
+      <modelingAssistantProvider class="TIM.diagram.providers.assistants.TIMModelingAssistantProviderOfGlobalTraceModelEditPart">
+         <Priority name="Lowest"/>
+         <object class="TIM.diagram.edit.parts.GlobalTraceModelEditPart" id="GlobalTraceModel_1000"/>
+         <context elements="GlobalTraceModel_1000"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TIM.diagram.providers.assistants.TIMModelingAssistantProviderOfSystemRequirementEditPart">
+         <Priority name="Lowest"/>
+         <object class="TIM.diagram.edit.parts.SystemRequirementEditPart" id="SystemRequirement_2001"/>
+         <context elements="SystemRequirement_2001"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TIM.diagram.providers.assistants.TIMModelingAssistantProviderOfFunctionalRequirementEditPart">
+         <Priority name="Lowest"/>
+         <object class="TIM.diagram.edit.parts.FunctionalRequirementEditPart" id="FunctionalRequirement_2002"/>
+         <context elements="FunctionalRequirement_2002"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TIM.diagram.providers.assistants.TIMModelingAssistantProviderOfModelEditPart">
+         <Priority name="Lowest"/>
+         <object class="TIM.diagram.edit.parts.ModelEditPart" id="Model_2003"/>
+         <context elements="Model_2003"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TIM.diagram.providers.assistants.TIMModelingAssistantProviderOfTestEditPart">
+         <Priority name="Lowest"/>
+         <object class="TIM.diagram.edit.parts.TestEditPart" id="Test_2004"/>
+         <context elements="Test_2004"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TIM.diagram.providers.assistants.TIMModelingAssistantProviderOfGTMControllerEditPart">
+         <Priority name="Lowest"/>
+         <object class="TIM.diagram.edit.parts.GTMControllerEditPart" id="GTMController_2005"/>
+         <context elements="GTMController_2005"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TIM.diagram.providers.assistants.TIMModelingAssistantProviderOfLTMControllerEditPart">
+         <Priority name="Lowest"/>
+         <object class="TIM.diagram.edit.parts.LTMControllerEditPart" id="LTMController_2006"/>
+         <context elements="LTMController_2006"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TIM.diagram.providers.assistants.TIMModelingAssistantProviderOfGTMVersionEditPart">
+         <Priority name="Lowest"/>
+         <object class="TIM.diagram.edit.parts.GTMVersionEditPart" id="GTMVersion_2007"/>
+         <context elements="GTMVersion_2007"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TIM.diagram.providers.assistants.TIMModelingAssistantProviderOfChange_Request_TicketEditPart">
+         <Priority name="Lowest"/>
+         <object class="TIM.diagram.edit.parts.Change_Request_TicketEditPart" id="Change_Request_Ticket_2008"/>
+         <context elements="Change_Request_Ticket_2008"/>
+      </modelingAssistantProvider>
+      
+   </extension>
+
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders" id="icon-provider">
+      <?gmfgen generated="true"?>
+      <IconProvider class="TIM.diagram.providers.TIMIconProvider">
+         <Priority name="Low"/>
+      </IconProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders" id="parser-provider">
+      <?gmfgen generated="true"?>
+      <ParserProvider class="TIM.diagram.providers.TIMParserProvider">
+         <Priority name="Lowest"/>
+      </ParserProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders" id="decorator-provider">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="TIM.diagram.providers.TIMShortcutsDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008"/>
+         </object>
+         <context decoratorTargets="generated-top-nodes"/>
+      </decoratorProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
+      <?gmfgen generated="true"?>
+      <metamodel nsURI="Trace_Information_Model">
+         <metamodelType
+               id="eclipse.diagram.GlobalTraceModel_1000"
+               name="%metatype.name.GlobalTraceModel_1000"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="GlobalTraceModel"
+               edithelper="TIM.diagram.edit.helpers.GlobalTraceModelEditHelper">
+            <param name="semanticHint" value="1000"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="Trace_Information_Model">
+         <metamodelType
+               id="eclipse.diagram.SystemRequirement_2001"
+               name="%metatype.name.SystemRequirement_2001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="SystemRequirement"
+               edithelper="TIM.diagram.edit.helpers.SystemRequirementEditHelper">
+            <param name="semanticHint" value="2001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="Trace_Information_Model">
+         <metamodelType
+               id="eclipse.diagram.FunctionalRequirement_2002"
+               name="%metatype.name.FunctionalRequirement_2002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="FunctionalRequirement"
+               edithelper="TIM.diagram.edit.helpers.FunctionalRequirementEditHelper">
+            <param name="semanticHint" value="2002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="Trace_Information_Model">
+         <metamodelType
+               id="eclipse.diagram.Model_2003"
+               name="%metatype.name.Model_2003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Model"
+               edithelper="TIM.diagram.edit.helpers.ModelEditHelper">
+            <param name="semanticHint" value="2003"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="Trace_Information_Model">
+         <metamodelType
+               id="eclipse.diagram.Test_2004"
+               name="%metatype.name.Test_2004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Test"
+               edithelper="TIM.diagram.edit.helpers.TestEditHelper">
+            <param name="semanticHint" value="2004"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="Trace_Information_Model">
+         <metamodelType
+               id="eclipse.diagram.GTMController_2005"
+               name="%metatype.name.GTMController_2005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="GTMController"
+               edithelper="TIM.diagram.edit.helpers.GTMControllerEditHelper">
+            <param name="semanticHint" value="2005"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="Trace_Information_Model">
+         <metamodelType
+               id="eclipse.diagram.LTMController_2006"
+               name="%metatype.name.LTMController_2006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="LTMController"
+               edithelper="TIM.diagram.edit.helpers.LTMControllerEditHelper">
+            <param name="semanticHint" value="2006"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="Trace_Information_Model">
+         <metamodelType
+               id="eclipse.diagram.GTMVersion_2007"
+               name="%metatype.name.GTMVersion_2007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="GTMVersion"
+               edithelper="TIM.diagram.edit.helpers.GTMVersionEditHelper">
+            <param name="semanticHint" value="2007"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="Trace_Information_Model">
+         <metamodelType
+               id="eclipse.diagram.Change_Request_Ticket_2008"
+               name="%metatype.name.Change_Request_Ticket_2008"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Change_Request_Ticket"
+               edithelper="TIM.diagram.edit.helpers.Change_Request_TicketEditHelper">
+            <param name="semanticHint" value="2008"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="Trace_Information_Model">
+         <metamodelType
+               id="eclipse.diagram.Derive_4001"
+               name="%metatype.name.Derive_4001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Derive"
+               edithelper="TIM.diagram.edit.helpers.DeriveEditHelper">
+            <param name="semanticHint" value="4001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="Trace_Information_Model">
+         <metamodelType
+               id="eclipse.diagram.Implement_4002"
+               name="%metatype.name.Implement_4002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Implement"
+               edithelper="TIM.diagram.edit.helpers.ImplementEditHelper">
+            <param name="semanticHint" value="4002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="Trace_Information_Model">
+         <metamodelType
+               id="eclipse.diagram.Verify_4003"
+               name="%metatype.name.Verify_4003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Verify"
+               edithelper="TIM.diagram.edit.helpers.VerifyEditHelper">
+            <param name="semanticHint" value="4003"/>
+         </metamodelType>
+      </metamodel>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings" id="element-types-bindings">
+      <?gmfgen generated="true"?>
+      <clientContext id="eclipse.diagram.TypeContext">
+         <enablement>
+            <test
+               property="org.eclipse.gmf.runtime.emf.core.editingDomain"
+               value="eclipse.diagram.EditingDomain"/>
+         </enablement>
+      </clientContext> 
+      <binding context="eclipse.diagram.TypeContext">
+         <elementType ref="eclipse.diagram.GlobalTraceModel_1000"/>
+         <elementType ref="eclipse.diagram.SystemRequirement_2001"/>
+         <elementType ref="eclipse.diagram.FunctionalRequirement_2002"/>
+         <elementType ref="eclipse.diagram.Model_2003"/>
+         <elementType ref="eclipse.diagram.Test_2004"/>
+         <elementType ref="eclipse.diagram.GTMController_2005"/>
+         <elementType ref="eclipse.diagram.LTMController_2006"/>
+         <elementType ref="eclipse.diagram.GTMVersion_2007"/>
+         <elementType ref="eclipse.diagram.Change_Request_Ticket_2008"/>
+         <elementType ref="eclipse.diagram.Derive_4001"/>
+         <elementType ref="eclipse.diagram.Implement_4002"/>
+         <elementType ref="eclipse.diagram.Verify_4003"/>
+         <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
+      </binding>
+   </extension>
+	   <extension point="org.eclipse.core.expressions.propertyTesters" id="navigator-proptest.isURIEditorInput">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="eclipse.diagram.URIEditorInputPropertyTester"
+           type="org.eclipse.emf.common.ui.URIEditorInput"
+           namespace="eclipse.diagram"
+           properties="isURIEditorInput"
+           class="TIM.diagram.part.TIMUriEditorInputTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.core.expressions.propertyTesters" id="navigator-proptest.isShortcut">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="eclipse.diagram.ShortcutPropertyTester"
+           type="org.eclipse.gmf.runtime.notation.View"
+           namespace="eclipse.diagram"
+           properties="isShortcut"
+           class="TIM.diagram.part.TIMShortcutPropertyTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.ui.navigator.viewer" id="navigator-viewbinding">
+      <?gmfgen generated="true"?>
+      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <contentExtension pattern="eclipse.diagram.resourceContent"/>
+			<contentExtension pattern="eclipse.diagram.domainResourceContent"/>
+            <contentExtension pattern="eclipse.diagram.navigatorLinkHelper"/>
+         </includes>
+      </viewerContentBinding>
+      <viewerActionBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <actionExtension pattern="eclipse.diagram.navigatorActionProvider"/>
+         </includes>
+      </viewerActionBinding>
+   </extension>
+
+   <extension point="org.eclipse.ui.navigator.navigatorContent" id="navigator-content">
+      <?gmfgen generated="true"?>
+      <navigatorContent
+            id="eclipse.diagram.resourceContent" 
+            name="%navigatorContentName" 
+            priority="normal" 
+            contentProvider="TIM.diagram.navigator.TIMNavigatorContentProvider" 
+            labelProvider="TIM.diagram.navigator.TIMNavigatorLabelProvider"
+            icon="icons/obj16/TIMDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="tim_diagram"/>
+               </and>
+               <instanceof value="TIM.diagram.navigator.TIMAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="eclipse.diagram.isShortcut"/>
+           	   </adapt>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <or>
+         	   <instanceof value="TIM.diagram.navigator.TIMAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="eclipse.diagram.isShortcut"/>
+           	   </adapt>
+            </or>
+         </possibleChildren>
+         <commonSorter 
+               id="eclipse.diagram.navigatorSorter" 
+               class="TIM.diagram.navigator.TIMNavigatorSorter">
+            <parentExpression>
+               <or>
+	              <and>
+    	             <instanceof value="org.eclipse.core.resources.IFile"/>
+        	         <test property="org.eclipse.core.resources.extension" value="tim_diagram"/>
+                  </and>
+                  <instanceof value="TIM.diagram.navigator.TIMAbstractNavigatorItem"/>
+               </or>
+            </parentExpression>
+         </commonSorter>
+      </navigatorContent>
+      <navigatorContent
+            id="eclipse.diagram.domainResourceContent" 
+            name="%domainNavigatorContentName" 
+            priority="normal" 
+            contentProvider="TIM.diagram.navigator.TIMDomainNavigatorContentProvider" 
+            labelProvider="TIM.diagram.navigator.TIMDomainNavigatorLabelProvider"
+            icon="icons/obj16/TIMDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="tim"/>
+               </and>
+               <instanceof value="TIM.diagram.navigator.TIMDomainNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <instanceof value="TIM.diagram.navigator.TIMDomainNavigatorItem"/>
+         </possibleChildren>
+      </navigatorContent>
+      <actionProvider
+            id="eclipse.diagram.navigatorActionProvider"
+            class="TIM.diagram.navigator.TIMNavigatorActionProvider">
+         <enablement>
+            <or>
+               <instanceof value="TIM.diagram.navigator.TIMAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="eclipse.diagram.isShortcut"/>
+           	   </adapt>
+            </or>
+         </enablement>
+      </actionProvider>
+   </extension>
+   
+	   <extension point="org.eclipse.ui.navigator.linkHelper" id="navigator-linkhelper">
+      <?gmfgen generated="true"?>
+      <linkHelper
+            id="eclipse.diagram.navigatorLinkHelper"
+            class="TIM.diagram.navigator.TIMNavigatorLinkHelper">
+         <editorInputEnablement>
+            <and>
+               <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
+               <test property="eclipse.diagram.isURIEditorInput"/>
+            </and>
+         </editorInputEnablement>
+         <selectionEnablement>
+            <instanceof value="TIM.diagram.navigator.TIMAbstractNavigatorItem"/>
+         </selectionEnablement>
+      </linkHelper>
+   </extension>
+   <extension point="org.eclipse.ui.commands" id="update-cmd">
+      <?gmfgen generated="true"?>
+      <command
+         categoryId="org.eclipse.ui.category.edit"
+         defaultHandler="TIM.diagram.part.TIMDiagramUpdateCommand"
+         description="%update.diagram.description"
+         id="TIM.diagram.updateDiagram"
+         name="%update.diagram.name"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.bindings" id="update-cmd-binding">
+      <?gmfgen generated="true"?>
+      <key 
+         commandId="TIM.diagram.updateDiagram"
+         contextId="TIM.diagram.ui.diagramContext"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="F5"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.menus" id="context-menus">
+      <?gmfgen generated="true"?>
+      <!-- menuContribution locationURI="menu:org.eclipse.ui.main.menu?after=">
+      </menuContribution>
+      <menuContribution locationURI="toolbar:org.eclipse.ui.main.toolbar?after=">
+      </menuContribution -->
+      <menuContribution locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
+         <command commandId="eclipse.diagram.LoadResourceAction">
+            <visibleWhen>
+               <and>
+                  <with variable="activePartId"><equals value="TIM.diagram.part.TIMDiagramEditorID"/></with>
+                  <with variable="selection"><iterate ifEmpty="false"> 
+                     <instanceof value="TIM.diagram.edit.parts.GlobalTraceModelEditPart"/>
+                  </iterate></with>
+               </and>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+
+   <extension point="org.eclipse.ui.commands" id="menu-commands">
+      <?gmfgen generated="true"?>
+      <category id="TIM.diagram.part.TIMDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
+      <command id="eclipse.diagram.LoadResourceAction"
+         name="Load Resource"
+         categoryId="TIM.diagram.part.TIMDiagramEditorID"
+         defaultHandler="TIM.diagram.part.LoadResourceAction"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.handlers" id="menu-handlers">
+      <?gmfgen generated="true"?>
+   </extension>
+
+   <!-- optionally, specify keybindings -->
+</plugin>

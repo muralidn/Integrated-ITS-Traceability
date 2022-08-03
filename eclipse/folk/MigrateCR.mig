@@ -1,0 +1,3 @@
+migrate Change_Request_Ticket when (LTM!Change_Request_Ticket.all.)  {
+migrated.timHash = "test";
+}

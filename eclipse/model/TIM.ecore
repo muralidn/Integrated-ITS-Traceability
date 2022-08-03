@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="TIM" nsURI="Trace_Information_Model" nsPrefix="">
+  <eAnnotations source="gmf"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GlobalTraceModel">
+    <eAnnotations source="gmf.diagram"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gtmController" eType="#//GTMController"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ltmController" eType="#//LTMController"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gtmVersion" eType="#//GTMVersion"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sysRequirements" upperBound="-1"
+        eType="#//SystemRequirement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="funcRequirements" upperBound="-1"
+        eType="#//FunctionalRequirement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modelBlocks" upperBound="-1"
+        eType="#//Model" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testBlocks" upperBound="-1"
+        eType="#//Test" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deriveTraceLinks" upperBound="-1"
+        eType="#//Derive" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="implementTraceLinks" upperBound="-1"
+        eType="#//Implement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="verifyTraceLinks" upperBound="-1"
+        eType="#//Verify" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="CR_Tickets" upperBound="-1"
+        eType="#//Change_Request_Ticket" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GTMController">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="createNewCR, ltmCR"/>
+      <details key="label.icon" value="false"/>
+      <details key="figure" value="rectangle"/>
+      <details key="label.pattern" value="Create New CR: {0} (OR) LTM CR: {1}"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="createNewCR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ltmCR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LTMController">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="complete"/>
+      <details key="label.icon" value="false"/>
+      <details key="figure" value="rectangle"/>
+      <details key="label.pattern" value="CR Complete: {0}"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="complete" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GTMVersion">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="version"/>
+      <details key="label.icon" value="false"/>
+      <details key="figure" value="rectangle"/>
+      <details key="label.pattern" value="Build Version: {0}"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Change_Request_Ticket">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="crID"/>
+      <details key="label.pattern" value="CR - #{0}"/>
+      <details key="label.icon" value="false"/>
+      <details key="figure" value="rectangle"/>
+      <details key="phantom" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="crID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="summary" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="chHelpful" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mergeRationale" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="plannedLOE" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloatObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actualLOE" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloatObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="affectedArtifacts" upperBound="-1"
+        eType="#//Artifact" eOpposite="#//Artifact/changeRequests"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Progress_Enum">
+    <eLiterals name="ZERO"/>
+    <eLiterals name="TWENTY_FIVE_PERCENT" value="1"/>
+    <eLiterals name="FIFTY_PERCENT" value="2"/>
+    <eLiterals name="SEVENTY_FIVE_PERCENT" value="3"/>
+    <eLiterals name="HUNDERD_PERCENT" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Artifact" abstract="true">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="artifactID, progress"/>
+      <details key="label.icon" value="false"/>
+      <details key="figure" value="ellipse"/>
+      <details key="label.color" value="255,255,255"/>
+      <details key="label.pattern" value="{0}, Prog: {1}"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="artifactID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="progress" eType="#//Progress_Enum"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="changeRequests" upperBound="-1"
+        eType="#//Change_Request_Ticket" eOpposite="#//Change_Request_Ticket/affectedArtifacts"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="select" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Traceability" abstract="true">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="source"/>
+      <details key="target" value="destination"/>
+      <details key="source.constraint" value="self &lt;> oppositeEnd"/>
+      <details key="source.decoration" value="filledclosedarrow"/>
+      <details key="target.constraint" value="self &lt;> oppositeEnd"/>
+      <details key="target.decoration" value="filledclosedarrow"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="traceUID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Derive" eSuperTypes="#//Traceability">
+    <eAnnotations source="gmf.link">
+      <details key="label" value="type"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="DERIVE"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//SystemRequirement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//FunctionalRequirement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Implement" eSuperTypes="#//Traceability">
+    <eAnnotations source="gmf.link">
+      <details key="label" value="type"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="IMPLEMENT"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//FunctionalRequirement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//Model"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Verify" eSuperTypes="#//Traceability">
+    <eAnnotations source="gmf.link">
+      <details key="label" value="type"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="VERIFY"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//FunctionalRequirement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//Test"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SystemRequirement" eSuperTypes="#//Artifact">
+    <eAnnotations source="gmf.node">
+      <details key="label.pattern" value="{0}, Progress: {1}"/>
+      <details key="color" value="75,0,0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="downstreamArtifacts" upperBound="-1"
+        eType="#//Derive"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionalRequirement" eSuperTypes="#//Artifact">
+    <eAnnotations source="gmf.node">
+      <details key="label.pattern" value="{0}, Progress: {1}"/>
+      <details key="color" value="175,0,0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="upstreamArtifacts" upperBound="-1"
+        eType="#//Derive"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="downstreamArtifacts" upperBound="-1"
+        eType="#//Implement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//Artifact">
+    <eAnnotations source="gmf.node">
+      <details key="label.pattern" value="{0}, Progress: {1}"/>
+      <details key="color" value="0,125,0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="upstreamArtifacts" upperBound="-1"
+        eType="#//Implement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="downstreamArtifacts" upperBound="-1"
+        eType="#//Verify"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Test" eSuperTypes="#//Artifact">
+    <eAnnotations source="gmf.node">
+      <details key="label.pattern" value="{0}, Progress: {1}"/>
+      <details key="color" value="0,0,125"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="upstreamArtifacts" upperBound="-1"
+        eType="#//Verify"/>
+  </eClassifiers>
+</ecore:EPackage>

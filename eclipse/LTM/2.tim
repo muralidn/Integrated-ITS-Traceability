@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalTraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Trace_Information_Model" xsi:schemaLocation="Trace_Information_Model ./model/TIM.ecore">
+  <funcRequirements artifactID="crs_req_func_spec.slreqx-3" changeRequests="//@CR_Tickets.0" downstreamArtifacts="//@implementTraceLinks.0"/>
+  <modelBlocks artifactID="crs_controller.slx-:280" changeRequests="//@CR_Tickets.0" upstreamArtifacts="//@implementTraceLinks.0"/>
+  <implementTraceLinks traceUID="13" valid="false" source="//@funcRequirements.0" destination="//@modelBlocks.0"/>
+  <CR_Tickets crID="2" summary="Testing_Second_ticket" description="Testing the second ticket" version="1.0" chHelpful="YES" mergeRationale="null" plannedLOE="8.0" actualLOE="4.0" affectedArtifacts="//@funcRequirements.0 //@modelBlocks.0"/>
+</GlobalTraceModel>

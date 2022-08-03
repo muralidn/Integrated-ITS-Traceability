@@ -26,58 +26,63 @@ public class TracConnector {
 		return 0;
 	}
 
-	public HashMap<Integer, Ticket> queryTickets(HashMap<Integer, Ticket> tickets, boolean updateValues,
-			boolean filterClosed) {
+	private boolean checkFilter(String ticketStatus, TICKET_FILTER filter) {
+
+		if (((filter == TICKET_FILTER.CLOSED_ONLY) && (ticketStatus.equals("closed")))
+				|| ((filter == TICKET_FILTER.NO_CLOSED) && (!ticketStatus.equals("closed")))
+				|| (filter == TICKET_FILTER.ALL))
+			return true;
+		else
+			return false;
+	}
+
+	public HashMap<Integer, Ticket> queryTickets(TICKET_FILTER filter) {
 		Statement stmt = null;
+		HashMap<Integer, Ticket> tickets = new HashMap<Integer, Ticket>();
 		try {
 			stmt = dbConnection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * from ticket inner join ticket_custom WHERE\r\n"
 					+ "ticket.id = ticket_custom.ticket\r\n" + "order by ticket asc");
 
+			int currentTicketID = -1;
+			Ticket temp = null;
 			while (rs.next()) {
-
-				if (rs.getString("status").equals("closed") == false) {
-					Ticket temp = new Ticket();
+				if (checkFilter(rs.getString("status"), filter)) {
 					int ticketIDInt = rs.getInt("id");
+					if (currentTicketID != ticketIDInt) {
+						if (tickets.containsKey(ticketIDInt))
+							temp = tickets.get(ticketIDInt);
+						else {
+							temp = new Ticket();
+							tickets.put(ticketIDInt, temp);
+						}
 
-					if (tickets.containsKey(ticketIDInt) == false || (updateValues)) {
-
-						temp.id = rs.getInt("id");
+						temp.id = ticketIDInt;
 						temp.description = rs.getString("description");
 						temp.summary = rs.getString("summary");
 						temp.version = rs.getString("version");
-
-						int i = 0;
-						while (i < 3) {
-
-							String fieldType = rs.getString("name");
-							if (fieldType.equals("actual_loe_tb"))
-								temp.actualLOEHrs = rs.getFloat("value");
-							else if (fieldType.equals("feedback_radio"))
-								temp.timFeedback = rs.getString("value");
-							else if (fieldType.equals("merge_rationale_ta"))
-								temp.mergeRationale = rs.getString("value");
-							else if (fieldType.equals("planned_loe_tb"))
-								temp.plannedLOEHrs = rs.getFloat("value");
-							else
-								System.out.println("UNKNOWN FIELD!!");
-
-							rs.next();
-							i++;
-						}
-
-						if (tickets.containsKey(ticketIDInt)) {
-							if (updateValues)
-								tickets.replace(ticketIDInt, temp);
-						} else
-							tickets.put(ticketIDInt, temp);
+						currentTicketID = ticketIDInt;
 					}
+
+					String fieldType = rs.getString("name");
+					if (fieldType.equals("actual_loe_tb"))
+						temp.actualLOEHrs = rs.getFloat("value");
+					else if (fieldType.equals("feedback_radio"))
+						temp.timFeedback = rs.getString("value");
+					else if (fieldType.equals("merge_rationale_ta"))
+						temp.mergeRationale = rs.getString("value");
+					else if (fieldType.equals("planned_loe_tb"))
+						temp.plannedLOEHrs = rs.getFloat("value");
+					else
+						System.out.println("UNKNOWN FIELD!!");
+
 				}
 			}
 			rs.close();
 
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			e.printStackTrace();
 			return null;
 		}
 		return tickets;

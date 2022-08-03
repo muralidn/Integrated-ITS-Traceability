@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated TIM -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="TIM.presentation.TIMModelWizardID"
+            name="%_UI_TIMModelWizard_label"
+            class="TIM.presentation.TIMModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/TIMModelFile.gif">
+         <description>%_UI_TIMModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated TIM -->
+      <editor
+            id="TIM.presentation.TIMEditorID"
+            name="%_UI_TIMEditor_label"
+            icon="icons/full/obj16/TIMModelFile.gif"
+            extensions="tim"
+            class="TIM.presentation.TIMEditor"
+            contributorClass="TIM.presentation.TIMActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

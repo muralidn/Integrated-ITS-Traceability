@@ -38,9 +38,17 @@ public class ITSCore {
 		eol.getContext().getModelRepository().addModel(model);
 		try {
 
-			StringBuilder str = new StringBuilder();
+			eol.parse("var cr = Change_Request_Ticket.all.first();");
+			eol.execute();
 
-			str.append("var cr = new LTM!Change_Request_Ticket;\n");
+			Object cr = eol.getContext().getFrameStack().get("cr").getValue();
+
+			StringBuilder str = new StringBuilder();
+			if (cr == null)
+				str.append("var cr = new LTM!Change_Request_Ticket;\n");
+			else
+				str.append("var cr = Change_Request_Ticket.all.first();\n");
+
 			str.append("cr.crID = " + ticket.id + ";\n");
 			str.append("cr.summary = \"" + ticket.summary + "\";\n");
 			str.append("cr.description = \"" + ticket.description + "\";\n");
@@ -52,7 +60,7 @@ public class ITSCore {
 			str.append("var ltmBoundary = LTM!GlobalTraceModel.all.first;\n");
 			str.append("ltmBoundary.CR_Tickets.add(cr);\n");
 
-			System.out.println(str.toString());
+			// System.out.println(str.toString());
 			eol.parse(str.toString());
 			eol.execute();
 
@@ -72,9 +80,9 @@ public class ITSCore {
 		File ltmRoot = new File("LTM");
 		File templateModel = new File("model\\template.tim");
 		Path templateGMF = Paths.get("model\\template.tim_diagram");
-		
+
 		HashMap<Integer, String> filepathMap = new HashMap<Integer, String>();
-		
+
 		for (Ticket tracTicket : tickets.values()) {
 			File[] ltms = ltmRoot.listFiles();
 			boolean ltmFound = false;
@@ -94,11 +102,7 @@ public class ITSCore {
 					content = content.replaceAll("FILE_NAME", tracTicket.id.toString());
 					Path ltmGMF = Paths.get(".\\LTM\\" + tracTicket.id + ".tim_diagram");
 					Files.write(ltmGMF, content.getBytes(charset));
-					int status = syncCR(".\\LTM\\" + tracTicket.id + ".tim", tracTicket);
-					if (status < 0) {
-						System.out.println("Sync CR failed");
-					}
-					
+
 					filepathMap.put(tracTicket.id, ltmFileName);
 
 				} catch (IOException e) {
@@ -106,8 +110,12 @@ public class ITSCore {
 					e.printStackTrace();
 				}
 			}
+			int status = syncCR(".\\LTM\\" + tracTicket.id + ".tim", tracTicket);
+			if (status < 0) {
+				System.out.println("Sync CR failed");
+			}
 		}
-		
+
 		return filepathMap;
 	}
 
@@ -180,7 +188,42 @@ public class ITSCore {
 			if (status == -1)
 				throw new Exception("Unable to connect to the ITS repository!");
 
-			if (args[1].equals("NEW-CR-GTM")) {
+			if (args[1].equals("STRATEGY")) {
+				if (status != -1) {
+					tickets = tracConnector.queryTickets(TICKET_FILTER.CLOSED_ONLY);
+					if (tickets == null) {
+						System.out.println("No closed tickets");
+					} else {
+						int timUseful = 0;
+						int timNotUseful = 0;
+
+						for (Ticket ticket : tickets.values()) {
+							int out = syncCR(".\\LTM\\" + ticket.id + ".tim", ticket);
+							if (out < 0) {
+								System.out.println("Sync CR failed");
+							}
+
+							if (ticket.timFeedback.equals("YES"))
+								timUseful++;
+							else
+								timNotUseful++;
+
+						}
+
+						String msg = "Based on the feedback from the previous sprint, %s %.2f%% of the developers indicated that traceability was helpful in making the changes";
+						msg += "\nTIM & CR review %s NECESSARY";
+						double usefulPercent = (timUseful * 100f) / (timUseful + timNotUseful);
+						if (timUseful > timNotUseful) {
+							msg = String.format(msg, "", usefulPercent, "IS NOT");
+						} else {
+							msg = String.format(msg, "ONLY", usefulPercent, "IS");
+						}
+						System.out.println(msg);
+					}
+				}
+			}
+
+			else if (args[1].equals("NEW-CR-GTM")) {
 				EmfModel model = new EmfModel();
 				model.setMetamodelFile(".\\model\\TIM.ecore");
 				model.setModelFile(".\\GTM\\GTM.tim");
@@ -232,7 +275,7 @@ public class ITSCore {
 
 			} else if (args[1].equals("SYNC-CR")) {
 				if (status != -1) {
-					tickets = tracConnector.queryTickets(tickets, false, true);
+					tickets = tracConnector.queryTickets(TICKET_FILTER.NO_CLOSED);
 					if (tickets == null) {
 						System.out.println("Query failed");
 					} else {

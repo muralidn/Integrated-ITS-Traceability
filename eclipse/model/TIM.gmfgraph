@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="ASCII"?>
+<gmfgraph:Canvas xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gmfgraph="http://www.eclipse.org/gmf/2006/GraphicalDefinition" name="TIM">
+  <figures name="Default">
+    <figures xsi:type="gmfgraph:PolygonDecoration" name="FilledClosedArrow">
+      <template/>
+      <template x="-2" y="2"/>
+      <template x="-2" y="-2"/>
+      <template/>
+    </figures>
+    <figures xsi:type="gmfgraph:PolygonDecoration" name="FilledClosedArrow">
+      <template/>
+      <template x="-2" y="2"/>
+      <template x="-2" y="-2"/>
+      <template/>
+    </figures>
+    <figures xsi:type="gmfgraph:PolygonDecoration" name="FilledClosedArrow">
+      <template/>
+      <template x="-2" y="2"/>
+      <template x="-2" y="-2"/>
+      <template/>
+    </figures>
+    <figures xsi:type="gmfgraph:PolygonDecoration" name="FilledClosedArrow">
+      <template/>
+      <template x="-2" y="2"/>
+      <template x="-2" y="-2"/>
+      <template/>
+    </figures>
+    <figures xsi:type="gmfgraph:PolygonDecoration" name="FilledClosedArrow">
+      <template/>
+      <template x="-2" y="2"/>
+      <template x="-2" y="-2"/>
+      <template/>
+    </figures>
+    <figures xsi:type="gmfgraph:PolygonDecoration" name="FilledClosedArrow">
+      <template/>
+      <template x="-2" y="2"/>
+      <template x="-2" y="-2"/>
+      <template/>
+    </figures>
+    <descriptors name="GTMControllerFigure">
+      <actualFigure xsi:type="gmfgraph:Rectangle" name="GTMControllerFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="GTMControllerLabelFigure" text="GTMController"/>
+      </actualFigure>
+      <accessors accessor="getFigureGTMControllerLabelFigure" figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="LTMControllerFigure">
+      <actualFigure xsi:type="gmfgraph:Rectangle" name="LTMControllerFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="LTMControllerLabelFigure" text="LTMController"/>
+      </actualFigure>
+      <accessors accessor="getFigureLTMControllerLabelFigure" figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="GTMVersionFigure">
+      <actualFigure xsi:type="gmfgraph:Rectangle" name="GTMVersionFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="GTMVersionLabelFigure" text="GTMVersion"/>
+      </actualFigure>
+      <accessors accessor="getFigureGTMVersionLabelFigure" figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="Change_Request_TicketFigure">
+      <actualFigure xsi:type="gmfgraph:Rectangle" name="Change_Request_TicketFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="Change_Request_TicketLabelFigure" text="Change_Request_Ticket"/>
+      </actualFigure>
+      <accessors accessor="getFigureChange_Request_TicketLabelFigure" figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="SystemRequirementFigure">
+      <actualFigure xsi:type="gmfgraph:Ellipse" name="SystemRequirementFigure">
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="75"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="SystemRequirementLabelFigure" text="SystemRequirement">
+          <foregroundColor xsi:type="gmfgraph:RGBColor" red="255" green="255" blue="255"/>
+        </children>
+      </actualFigure>
+      <accessors accessor="getFigureSystemRequirementLabelFigure" figure="//@figures.0/@descriptors.4/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="FunctionalRequirementFigure">
+      <actualFigure xsi:type="gmfgraph:Ellipse" name="FunctionalRequirementFigure">
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="175"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="FunctionalRequirementLabelFigure" text="FunctionalRequirement">
+          <foregroundColor xsi:type="gmfgraph:RGBColor" red="255" green="255" blue="255"/>
+        </children>
+      </actualFigure>
+      <accessors accessor="getFigureFunctionalRequirementLabelFigure" figure="//@figures.0/@descriptors.5/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="ModelFigure">
+      <actualFigure xsi:type="gmfgraph:Ellipse" name="ModelFigure">
+        <backgroundColor xsi:type="gmfgraph:RGBColor" green="125"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="ModelLabelFigure" text="Model">
+          <foregroundColor xsi:type="gmfgraph:RGBColor" red="255" green="255" blue="255"/>
+        </children>
+      </actualFigure>
+      <accessors accessor="getFigureModelLabelFigure" figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="TestFigure">
+      <actualFigure xsi:type="gmfgraph:Ellipse" name="TestFigure">
+        <backgroundColor xsi:type="gmfgraph:RGBColor" blue="125"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="TestLabelFigure" text="Test">
+          <foregroundColor xsi:type="gmfgraph:RGBColor" red="255" green="255" blue="255"/>
+        </children>
+      </actualFigure>
+      <accessors accessor="getFigureTestLabelFigure" figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="DeriveFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="DeriveFigure" sourceDecoration="//@figures.0/@figures.0" targetDecoration="//@figures.0/@figures.1"/>
+    </descriptors>
+    <descriptors name="DeriveLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="DeriveLabelLabel" text="Derive"/>
+    </descriptors>
+    <descriptors name="ImplementFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="ImplementFigure" sourceDecoration="//@figures.0/@figures.2" targetDecoration="//@figures.0/@figures.3"/>
+    </descriptors>
+    <descriptors name="ImplementLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="ImplementLabelLabel" text="Implement"/>
+    </descriptors>
+    <descriptors name="VerifyFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="VerifyFigure" sourceDecoration="//@figures.0/@figures.4" targetDecoration="//@figures.0/@figures.5"/>
+    </descriptors>
+    <descriptors name="VerifyLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="VerifyLabelLabel" text="Verify"/>
+    </descriptors>
+  </figures>
+  <nodes name="GTMController" figure="GTMControllerFigure"/>
+  <nodes name="LTMController" figure="LTMControllerFigure"/>
+  <nodes name="GTMVersion" figure="GTMVersionFigure"/>
+  <nodes name="Change_Request_Ticket" figure="Change_Request_TicketFigure"/>
+  <nodes name="SystemRequirement" figure="SystemRequirementFigure"/>
+  <nodes name="FunctionalRequirement" figure="FunctionalRequirementFigure"/>
+  <nodes name="Model" figure="ModelFigure"/>
+  <nodes name="Test" figure="TestFigure"/>
+  <connections name="Derive" figure="DeriveFigure"/>
+  <connections name="Implement" figure="ImplementFigure"/>
+  <connections name="Verify" figure="VerifyFigure"/>
+  <labels name="GTMControllerLabel" figure="GTMControllerFigure" elementIcon="false" accessor="//@figures.0/@descriptors.0/@accessors.0"/>
+  <labels name="LTMControllerLabel" figure="LTMControllerFigure" elementIcon="false" accessor="//@figures.0/@descriptors.1/@accessors.0"/>
+  <labels name="GTMVersionLabel" figure="GTMVersionFigure" elementIcon="false" accessor="//@figures.0/@descriptors.2/@accessors.0"/>
+  <labels name="Change_Request_TicketLabel" figure="Change_Request_TicketFigure" elementIcon="false" accessor="//@figures.0/@descriptors.3/@accessors.0"/>
+  <labels name="SystemRequirementLabel" figure="SystemRequirementFigure" elementIcon="false" accessor="//@figures.0/@descriptors.4/@accessors.0"/>
+  <labels name="FunctionalRequirementLabel" figure="FunctionalRequirementFigure" elementIcon="false" accessor="//@figures.0/@descriptors.5/@accessors.0"/>
+  <labels name="ModelLabel" figure="ModelFigure" elementIcon="false" accessor="//@figures.0/@descriptors.6/@accessors.0"/>
+  <labels name="TestLabel" figure="TestFigure" elementIcon="false" accessor="//@figures.0/@descriptors.7/@accessors.0"/>
+  <labels name="DeriveLabel" figure="DeriveLabelFigure" elementIcon="false"/>
+  <labels name="ImplementLabel" figure="ImplementLabelFigure" elementIcon="false"/>
+  <labels name="VerifyLabel" figure="VerifyLabelFigure" elementIcon="false"/>
+</gmfgraph:Canvas>

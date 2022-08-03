@@ -10,3 +10,9 @@ public class Ticket {
 	Float plannedLOEHrs;
 	Float actualLOEHrs;
 }
+
+enum TICKET_FILTER {
+	CLOSED_ONLY,
+	NO_CLOSED,
+	ALL
+}

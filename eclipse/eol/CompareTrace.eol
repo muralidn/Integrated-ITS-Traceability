@@ -13,4 +13,12 @@ displayMsg = modelcomparision(deriveLinks, gtmBoundary.sysRequirements, gtmBound
 displayMsg = modelcomparision(implementLinks, gtmBoundary.funcRequirements, gtmBoundary.modelBlocks, displayMsg).println();
 displayMsg = modelcomparision(verifyLinks, gtmBoundary.funcRequirements, gtmBoundary.testBlocks, displayMsg).println();
 
+
+
+if (displayMsg == "") {
+	
+	
+
+}
+
 System.user.inform(displayMsg);

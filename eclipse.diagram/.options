@@ -1,0 +1,7 @@
+# Tracing options for the eclipse.diagram plug-in
+
+# Common issues
+eclipse.diagram/debug=false
+
+# Visual IDs
+eclipse.diagram/debug/visualID=false

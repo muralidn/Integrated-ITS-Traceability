@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="ASCII"?>
+<gmfmap:Mapping
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:gmfmap="http://www.eclipse.org/gmf/2008/mappings"
+    xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
+  <nodes>
+    <containmentFeature
+        href="TIM.ecore#//GlobalTraceModel/sysRequirements"/>
+    <ownedChild>
+      <domainMetaElement
+          href="TIM.ecore#//SystemRequirement"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="{0}, Progress: {1}"
+          editorPattern="{0}, Progress: {1}"
+          editPattern="{0}, Progress: {1}">
+        <diagramLabel
+            href="TIM.gmfgraph#SystemRequirementLabel"/>
+        <features
+            href="TIM.ecore#//Artifact/artifactID"/>
+        <features
+            href="TIM.ecore#//Artifact/progress"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="TIM.gmftool#//@palette/@tools.0/@tools.6"/>
+      <diagramNode
+          href="TIM.gmfgraph#SystemRequirement"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="TIM.ecore#//GlobalTraceModel/funcRequirements"/>
+    <ownedChild>
+      <domainMetaElement
+          href="TIM.ecore#//FunctionalRequirement"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="{0}, Progress: {1}"
+          editorPattern="{0}, Progress: {1}"
+          editPattern="{0}, Progress: {1}">
+        <diagramLabel
+            href="TIM.gmfgraph#FunctionalRequirementLabel"/>
+        <features
+            href="TIM.ecore#//Artifact/artifactID"/>
+        <features
+            href="TIM.ecore#//Artifact/progress"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="TIM.gmftool#//@palette/@tools.0/@tools.1"/>
+      <diagramNode
+          href="TIM.gmfgraph#FunctionalRequirement"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="TIM.ecore#//GlobalTraceModel/modelBlocks"/>
+    <ownedChild>
+      <domainMetaElement
+          href="TIM.ecore#//Model"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="{0}, Progress: {1}"
+          editorPattern="{0}, Progress: {1}"
+          editPattern="{0}, Progress: {1}">
+        <diagramLabel
+            href="TIM.gmfgraph#ModelLabel"/>
+        <features
+            href="TIM.ecore#//Artifact/artifactID"/>
+        <features
+            href="TIM.ecore#//Artifact/progress"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="TIM.gmftool#//@palette/@tools.0/@tools.5"/>
+      <diagramNode
+          href="TIM.gmfgraph#Model"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="TIM.ecore#//GlobalTraceModel/testBlocks"/>
+    <ownedChild>
+      <domainMetaElement
+          href="TIM.ecore#//Test"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="{0}, Progress: {1}"
+          editorPattern="{0}, Progress: {1}"
+          editPattern="{0}, Progress: {1}">
+        <diagramLabel
+            href="TIM.gmfgraph#TestLabel"/>
+        <features
+            href="TIM.ecore#//Artifact/artifactID"/>
+        <features
+            href="TIM.ecore#//Artifact/progress"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="TIM.gmftool#//@palette/@tools.0/@tools.7"/>
+      <diagramNode
+          href="TIM.gmfgraph#Test"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="TIM.ecore#//GlobalTraceModel/gtmController"/>
+    <ownedChild>
+      <domainMetaElement
+          href="TIM.ecore#//GTMController"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="Create New CR: {0} (OR) LTM CR: {1}"
+          editorPattern="Create New CR: {0} (OR) LTM CR: {1}"
+          editPattern="Create New CR: {0} (OR) LTM CR: {1}">
+        <diagramLabel
+            href="TIM.gmfgraph#GTMControllerLabel"/>
+        <features
+            href="TIM.ecore#//GTMController/createNewCR"/>
+        <features
+            href="TIM.ecore#//GTMController/ltmCR"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="TIM.gmftool#//@palette/@tools.0/@tools.2"/>
+      <diagramNode
+          href="TIM.gmfgraph#GTMController"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="TIM.ecore#//GlobalTraceModel/ltmController"/>
+    <ownedChild>
+      <domainMetaElement
+          href="TIM.ecore#//LTMController"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="CR Complete: {0}"
+          editorPattern="CR Complete: {0}"
+          editPattern="CR Complete: {0}">
+        <diagramLabel
+            href="TIM.gmfgraph#LTMControllerLabel"/>
+        <features
+            href="TIM.ecore#//LTMController/complete"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="TIM.gmftool#//@palette/@tools.0/@tools.4"/>
+      <diagramNode
+          href="TIM.gmfgraph#LTMController"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="TIM.ecore#//GlobalTraceModel/gtmVersion"/>
+    <ownedChild>
+      <domainMetaElement
+          href="TIM.ecore#//GTMVersion"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="Build Version: {0}"
+          editorPattern="Build Version: {0}"
+          editPattern="Build Version: {0}">
+        <diagramLabel
+            href="TIM.gmfgraph#GTMVersionLabel"/>
+        <features
+            href="TIM.ecore#//GTMVersion/version"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="TIM.gmftool#//@palette/@tools.0/@tools.3"/>
+      <diagramNode
+          href="TIM.gmfgraph#GTMVersion"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="TIM.ecore#//GlobalTraceModel/CR_Tickets"/>
+    <ownedChild>
+      <domainMetaElement
+          href="TIM.ecore#//Change_Request_Ticket"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="CR - #{0}"
+          editorPattern="CR - #{0}"
+          editPattern="CR - #{0}">
+        <diagramLabel
+            href="TIM.gmfgraph#Change_Request_TicketLabel"/>
+        <features
+            href="TIM.ecore#//Change_Request_Ticket/crID"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="TIM.gmftool#//@palette/@tools.0/@tools.0"/>
+      <diagramNode
+          href="TIM.gmfgraph#Change_Request_Ticket"/>
+    </ownedChild>
+  </nodes>
+  <links>
+    <domainMetaElement
+        href="TIM.ecore#//Derive"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping">
+      <diagramLabel
+          href="TIM.gmfgraph#DeriveLabel"/>
+      <features
+          href="TIM.ecore#//Derive/type"/>
+    </labelMappings>
+    <containmentFeature
+        href="TIM.ecore#//GlobalTraceModel/deriveTraceLinks"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="TIM.gmftool#//@palette/@tools.1/@tools.0"/>
+    <diagramLink
+        href="TIM.gmfgraph#Derive"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="TIM.ecore#//Derive/source"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="TIM.ecore#//Derive/destination"/>
+    <creationConstraints>
+      <sourceEnd
+          body="self &lt;> oppositeEnd"/>
+      <targetEnd
+          body="self &lt;> oppositeEnd"/>
+    </creationConstraints>
+  </links>
+  <links>
+    <domainMetaElement
+        href="TIM.ecore#//Implement"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping">
+      <diagramLabel
+          href="TIM.gmfgraph#ImplementLabel"/>
+      <features
+          href="TIM.ecore#//Implement/type"/>
+    </labelMappings>
+    <containmentFeature
+        href="TIM.ecore#//GlobalTraceModel/implementTraceLinks"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="TIM.gmftool#//@palette/@tools.1/@tools.1"/>
+    <diagramLink
+        href="TIM.gmfgraph#Implement"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="TIM.ecore#//Implement/source"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="TIM.ecore#//Implement/destination"/>
+    <creationConstraints>
+      <sourceEnd
+          body="self &lt;> oppositeEnd"/>
+      <targetEnd
+          body="self &lt;> oppositeEnd"/>
+    </creationConstraints>
+  </links>
+  <links>
+    <domainMetaElement
+        href="TIM.ecore#//Verify"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping">
+      <diagramLabel
+          href="TIM.gmfgraph#VerifyLabel"/>
+      <features
+          href="TIM.ecore#//Verify/type"/>
+    </labelMappings>
+    <containmentFeature
+        href="TIM.ecore#//GlobalTraceModel/verifyTraceLinks"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="TIM.gmftool#//@palette/@tools.1/@tools.2"/>
+    <diagramLink
+        href="TIM.gmfgraph#Verify"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="TIM.ecore#//Verify/source"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="TIM.ecore#//Verify/destination"/>
+    <creationConstraints>
+      <sourceEnd
+          body="self &lt;> oppositeEnd"/>
+      <targetEnd
+          body="self &lt;> oppositeEnd"/>
+    </creationConstraints>
+  </links>
+  <diagram>
+    <diagramCanvas
+        href="TIM.gmfgraph#TIM"/>
+    <domainModel
+        href="TIM.ecore#/"/>
+    <domainMetaElement
+        href="TIM.ecore#//GlobalTraceModel"/>
+    <palette
+        href="TIM.gmftool#//@palette"/>
+  </diagram>
+</gmfmap:Mapping>
