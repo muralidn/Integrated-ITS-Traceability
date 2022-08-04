@@ -168,8 +168,8 @@ for(il : GTM!Derive in deriveLinks) {
 			traceLink.valid = false;
 			ltmBoundary.deriveTraceLinks.add(traceLink);
 			
-			sysRequirement.downstreamArtifacts.add(traceLink);
-			artifact.upstreamArtifacts.add(traceLink);
+			artifact.downstreamArtifacts.add(traceLink);
+			funcRequirement.upstreamArtifacts.add(traceLink);
 	} 
 	else
 	{
@@ -215,8 +215,8 @@ for(il : GTM!Implement in implementLinks) {
 			traceLink.valid = false;
 			ltmBoundary.implementTraceLinks.add(traceLink);
 			
-			funcRequirement.downstreamArtifacts.add(traceLink);
-			artifact.upstreamArtifacts.add(traceLink);
+			artifact.downstreamArtifacts.add(traceLink);
+			models.upstreamArtifacts.add(traceLink);
 	} 
 	else
 	{
@@ -225,7 +225,7 @@ for(il : GTM!Implement in implementLinks) {
 
 for(il : GTM!Verify in verifyLinks) {	
 	var funcRequirement = ltmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = il.source.artifactID);
-	var tests = ltmBoundary.modelBlocks.selectOne(p : LTM!Test | p.artifactID = il.destination.artifactID);	 
+	var tests = ltmBoundary.testBlocks.selectOne(p : LTM!Test | p.artifactID = il.destination.artifactID);	 
 		 
 	if (funcRequirement != null and tests == null) {
 	
@@ -261,8 +261,8 @@ for(il : GTM!Verify in verifyLinks) {
 			traceLink.valid = false;
 			ltmBoundary.verifyTraceLinks.add(traceLink);
 			
-			funcRequirement.downstreamArtifacts.add(traceLink);
-			artifact.upstreamArtifacts.add(traceLink);
+			artifact.downstreamArtifacts.add(traceLink);
+			traceLink.upstreamArtifacts.add(traceLink);
 	} 
 	else
 	{

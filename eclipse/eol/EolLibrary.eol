@@ -1,4 +1,9 @@
-operation modelcomparision(links : Sequence<Any>, upStreamArtifacts : OrderedSet<Any>, downStreamArtifacts : OrderedSet<Any>, msg : String) : String {
+var DERIVE_LINK : Integer = 1;
+var IMPLEMENT_LINK : Integer = 2;
+var VERIFY_LINK : Integer = 3;
+
+
+operation modelComparision(links : Sequence<Any>, upStreamArtifacts : OrderedSet<Any>, downStreamArtifacts : OrderedSet<Any>, msg : String) : String {
 	
 	links.println();
 	for(lnk : LTM!Traceability in links) {
@@ -37,4 +42,221 @@ operation modelcomparision(links : Sequence<Any>, upStreamArtifacts : OrderedSet
 	}
 
 	return msg;
+}
+
+
+operation getFullModelID(modelID : String, modelFile : String) : String {
+
+	var sourcePrefix = "";
+	if ("crs_plant.slx".isSubstringOf(modelFile))
+		sourcePrefix = "crs_plant.slx-";
+	else if ("crs_controllerdic.sldd".isSubstringOf(modelFile)) 
+		sourcePrefix = "crs_controllerdic.sldd-";
+	else if ("crs_controller.slx".isSubstringOf(modelFile)) 
+		sourcePrefix = "crs_controller.slx-";
+
+	else
+		sourcePrefix = modelFile;
+
+	return  sourcePrefix + modelID;
+
+}
+
+operation getFullTestID(testID : String, testFile : String) : String {
+
+	var sourcePrefix = "";
+	if ("DriverSwRequest_Tests.mldatx".isSubstringOf(testFile))
+		sourcePrefix = "DriverSwRequest_Tests.mldatx-";
+	else
+		sourcePrefix = testFile;
+
+	return  sourcePrefix + testID;
+
+}
+
+operation getFullReqID(reqID : String, reqFile : String) : String {
+
+		var reqFilePrefix = "";
+		if ("crs_req.slreqx".isSubstringOf(reqFile))
+			reqFilePrefix = "crs_req.slreqx-";
+		else if ("crs_req_func_spec.slreqx".isSubstringOf(reqFile)) 
+			reqFilePrefix = "crs_req_func_spec.slreqx-";
+		else
+			reqFilePrefix = reqFile;			
+
+		return reqFilePrefix + reqID;
+		
+}
+
+
+operation createLTMSystemRequirement(reqID : String, cr : LTM!Change_Request_Ticket, ltmBoundary : LTM!GlobalTraceModel) : LTM!SystemRequirement {
+
+	var artifact = new LTM!SystemRequirement;
+	artifact.artifactID = reqID;
+	artifact.progress = LTM!Progress_Enum#ZERO;
+	artifact.changeRequests.add(cr);
+	cr.affectedArtifacts.add(artifact);
+	ltmBoundary.sysRequirements.add(artifact);
+	return artifact;
+
+} 
+
+operation createLTMFunctionalRequirement(reqID : String, cr : LTM!Change_Request_Ticket, ltmBoundary : LTM!GlobalTraceModel) : LTM!FunctionalRequirement {
+
+	var artifact = new LTM!FunctionalRequirement;
+	artifact.artifactID = reqID;
+	artifact.progress = LTM!Progress_Enum#ZERO;
+	artifact.changeRequests.add(cr);
+	cr.affectedArtifacts.add(artifact);
+	ltmBoundary.funcRequirements.add(artifact);
+	return artifact;
+
+} 
+
+operation createTraceLink(traceLink : LTM!Traceability, traceUID : Integer, source : LTM!Artifact,  dest : LTM!Artifact, validity : Boolean) {
+	traceLink.traceUID = traceUID;
+	traceLink.source = source;
+	traceLink.destination = dest;
+	traceLink.valid = validity;
+}
+
+operation createDeriveTraceLink(traceUID : Integer, source : LTM!Artifact,  dest : LTM!Artifact, validity : Boolean, ltmBoundary : LTM!GlobalTraceModel,  traceUID : Integer) : LTM!Traceability {
+	var traceLink = new LTM!Derive;
+	createTraceLink(traceLink, traceUID, source, dest, validity);
+	ltmBoundary.deriveTraceLinks.add(traceLink);
+	return traceLink;
+	
+}
+
+operation createDeriveTraceability(sysReqArtifactID : String, funcReqArtifactID : String, cr : LTM!Change_Request_Ticket, ltmBoundary : LTM!GlobalTraceModel, traceUID : Integer) {
+
+		var systemRequirement = ltmBoundary.sysRequirements.selectOne(p : LTM!SystemRequirement | p.artifactID = sysReqArtifactID);
+		var funcRequirement = ltmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = funcReqArtifactID);
+
+		var sourceArtifact = null;
+		var destArtifact = null;
+		var traceLink = null;
+		
+		if (systemRequirement == null and funcRequirement == null) {
+			
+			sourceArtifact = createLTMSystemRequirement(sysReqArtifactID, cr, ltmBoundary);
+			destArtifact = createLTMFunctionalRequirement(funcReqArtifactID, cr, ltmBoundary);			
+		}
+		else if (systemRequirement != null and funcRequirement == null) {
+		
+			sourceArtifact = systemRequirement;
+			destArtifact = createLTMFunctionalRequirement(funcReqArtifactID, cr, ltmBoundary);
+	
+			
+		}
+		else if (systemRequirement == null and funcRequirement != null) {
+			sourceArtifact = createLTMSystemRequirement(sysReqArtifactID, cr, ltmBoundary);
+			destArtifact = funcRequirement;
+		} 				
+
+		else {
+		
+			return;
+		
+		}
+		
+		traceLink = createDeriveTraceLink(traceUID, sourceArtifact, destArtifact, false, ltmBoundary, traceUID);
+		sourceArtifact.downstreamArtifacts.add(traceLink);
+		destArtifact.upstreamArtifacts.add(traceLink);			
+			
+}
+
+operation createLTMModels(artifactID : String, cr : LTM!Change_Request_Ticket, ltmBoundary : LTM!GlobalTraceModel) : LTM!Model {
+
+	var artifact = new LTM!Model;
+	artifact.artifactID = artifactID;
+	artifact.progress = LTM!Progress_Enum#ZERO;
+	artifact.changeRequests.add(cr);
+	cr.affectedArtifacts.add(artifact);
+	ltmBoundary.modelBlocks.add(artifact);
+	return artifact;
+
+} 
+
+operation createLTMTests(artifactID : String, cr : LTM!Change_Request_Ticket, ltmBoundary : LTM!GlobalTraceModel) : LTM!Test {
+
+	var artifact = new LTM!Test;
+	artifact.artifactID = artifactID;
+	artifact.progress = LTM!Progress_Enum#ZERO;
+	artifact.changeRequests.add(cr);
+	cr.affectedArtifacts.add(artifact);
+	ltmBoundary.testBlocks.add(artifact);
+	return artifact;
+
+} 
+
+
+
+operation createImplementTraceLink(traceUID : Integer, source : LTM!Artifact,  dest : LTM!Artifact, validity : Boolean, ltmBoundary : LTM!GlobalTraceModel,  traceUID : Integer) : LTM!Traceability {
+	var traceLink = new LTM!Implement;
+	createTraceLink(traceLink, traceUID, source, dest, validity);
+	ltmBoundary.implementTraceLinks.add(traceLink);
+	return traceLink;
+	
+}
+
+operation createVerifyTraceLink(traceUID : Integer, source : LTM!Artifact,  dest : LTM!Artifact, validity : Boolean, ltmBoundary : LTM!GlobalTraceModel,  traceUID : Integer) : LTM!Traceability {
+	var traceLink = new LTM!Verify;
+	createTraceLink(traceLink, traceUID, source, dest, validity);
+	ltmBoundary.verifyTraceLinks.add(traceLink);
+	return traceLink;
+	
+}
+
+operation createImplementVerifyTraceability(artifactID : String, funcReqArtifactID : String, cr : LTM!Change_Request_Ticket, ltmBoundary : LTM!GlobalTraceModel, traceUID : Integer, implementOrVerify : Integer) {
+
+
+		var funcRequirement = ltmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = funcReqArtifactID);
+		var artifact = null;
+		if (implementOrVerify == IMPLEMENT_LINK)
+			artifact = ltmBoundary.modelBlocks.selectOne(p : LTM!Model | p.artifactID = artifactID);	
+		else
+			artifact = ltmBoundary.testBlocks.selectOne(p : LTM!Test | p.artifactID = artifactID);	
+
+		var sourceArtifact = null;
+		var destArtifact = null;
+		
+		var traceLink = null;
+		
+		if (funcRequirement == null and artifact == null) {
+			sourceArtifact = createLTMFunctionalRequirement(funcReqArtifactID, cr, ltmBoundary);	
+			if (implementOrVerify == IMPLEMENT_LINK)
+				destArtifact = createLTMModels(artifactID, cr, ltmBoundary);	
+			else
+				destArtifact = createLTMTests(artifactID, cr, ltmBoundary);			
+		}
+		else if (funcRequirement != null and artifact == null) {
+		
+			sourceArtifact = funcRequirement;
+			if (implementOrVerify == IMPLEMENT_LINK)
+				destArtifact = createLTMModels(artifactID, cr, ltmBoundary);	
+			else
+				destArtifact = createLTMTests(artifactID, cr, ltmBoundary);	
+	
+			
+		}
+		else if (funcRequirement == null and artifact != null) {
+			sourceArtifact = createLTMFunctionalRequirement(funcReqArtifactID, cr, ltmBoundary);
+			destArtifact = artifact;
+		} 				
+
+		else {
+		
+			return;
+		
+		}
+		
+		if (implementOrVerify == IMPLEMENT_LINK)
+			traceLink = createImplementTraceLink(traceUID, sourceArtifact, destArtifact, false, ltmBoundary, traceUID);
+		else
+			traceLink = createVerifyTraceLink(traceUID, sourceArtifact, destArtifact, false, ltmBoundary, traceUID);
+		
+		sourceArtifact.downstreamArtifacts.add(traceLink);
+		destArtifact.upstreamArtifacts.add(traceLink);			
+			
 }

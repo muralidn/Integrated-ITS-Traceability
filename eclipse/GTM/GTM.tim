@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GlobalTraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Trace_Information_Model" xsi:schemaLocation="Trace_Information_Model ./model/TIM.ecore">
-  <gtmController ltmCR="8"/>
+  <gtmController ltmCR="5"/>
   <gtmVersion version="1.0"/>
   <sysRequirements artifactID="crs_req.slreqx-10" progress="HUNDERD_PERCENT" downstreamArtifacts="//@deriveTraceLinks.0"/>
   <sysRequirements artifactID="crs_req.slreqx-11" progress="HUNDERD_PERCENT" downstreamArtifacts="//@deriveTraceLinks.1"/>
