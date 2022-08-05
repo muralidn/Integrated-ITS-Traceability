@@ -12,7 +12,7 @@ context Traceability {
 
 context Artifact {
   constraint Progress {
-	    check : self.progress == Progress_Enum#HUNDERD_PERCENT
+	    check : self.progress == Progress_Enum#HUNDRED_PERCENT
 	    message : "Please complete the implementation"
 	}  
 }

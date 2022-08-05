@@ -97,7 +97,7 @@ operation createSystemRequirement(reqID : String, cr : MODEL!Change_Request_Tick
 	var artifact = new MODEL!SystemRequirement;
 	artifact.artifactID = reqID;
 	if (validity)
-		artifact.progress = MODEL!Progress_Enum#HUNDERD_PERCENT;
+		artifact.progress = MODEL!Progress_Enum#HUNDRED_PERCENT;
 	else
 		artifact.progress = MODEL!Progress_Enum#ZERO;
 		
@@ -113,7 +113,7 @@ operation createFunctionalRequirement(reqID : String, cr : MODEL!Change_Request_
 	var artifact = new MODEL!FunctionalRequirement;
 	artifact.artifactID = reqID;
 	if (validity)
-		artifact.progress = MODEL!Progress_Enum#HUNDERD_PERCENT;
+		artifact.progress = MODEL!Progress_Enum#HUNDRED_PERCENT;
 	else
 		artifact.progress = MODEL!Progress_Enum#ZERO;
 		
@@ -133,7 +133,7 @@ operation createModels(artifactID : String, cr : MODEL!Change_Request_Ticket, mo
 	artifact.artifactID = artifactID;
 	
 	if (validity)
-		artifact.progress = MODEL!Progress_Enum#HUNDERD_PERCENT;
+		artifact.progress = MODEL!Progress_Enum#HUNDRED_PERCENT;
 	else
 		artifact.progress = MODEL!Progress_Enum#ZERO;
 		
@@ -153,7 +153,7 @@ operation createTests(artifactID : String, cr : MODEL!Change_Request_Ticket, mod
 	artifact.artifactID = artifactID;
 
 	if (validity)
-		artifact.progress = MODEL!Progress_Enum#HUNDERD_PERCENT;
+		artifact.progress = MODEL!Progress_Enum#HUNDRED_PERCENT;
 	else
 		artifact.progress = MODEL!Progress_Enum#ZERO;
 

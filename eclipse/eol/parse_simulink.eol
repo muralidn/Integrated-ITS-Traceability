@@ -64,13 +64,13 @@ while (i < link.size())
 			if ((systemRequirement == null) and (funcRequirement == null)) {
 				sourceArtifact = new GTM!SystemRequirement;
 				sourceArtifact.artifactID = artIDSysReq;	
-				sourceArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				sourceArtifact.progress = GTM!Progress_Enum#HUNDRED_PERCENT;
 				gtmBoundary.sysRequirements.add(sourceArtifact);
 				
 
 				destArtifact = new GTM!FunctionalRequirement;
 				destArtifact.artifactID = artIDFuncReq;
-				destArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				destArtifact.progress = GTM!Progress_Enum#HUNDRED_PERCENT;
 				gtmBoundary.funcRequirements.add(destArtifact);
 				
 			}
@@ -79,14 +79,14 @@ while (i < link.size())
 				
 				destArtifact = new GTM!FunctionalRequirement;
 				destArtifact.artifactID = artIDFuncReq;
-				destArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				destArtifact.progress = GTM!Progress_Enum#HUNDRED_PERCENT;
 				gtmBoundary.funcRequirements.add(destArtifact);
 			
 			} 
 			else if ((systemRequirement == null) and (funcRequirement != null)) {
 				sourceArtifact = new GTM!SystemRequirement;
 				sourceArtifact.artifactID = artIDSysReq;	
-				sourceArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				sourceArtifact.progress = GTM!Progress_Enum#HUNDRED_PERCENT;
 				gtmBoundary.sysRequirements.add(sourceArtifact);
 				
 				destArtifact = funcRequirement;
@@ -152,12 +152,12 @@ while (i < link.size())
 
 				sourceArtifact = new GTM!FunctionalRequirement;
 				sourceArtifact.artifactID = funcReqartID;
-				sourceArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				sourceArtifact.progress = GTM!Progress_Enum#HUNDRED_PERCENT;
 				gtmBoundary.funcRequirements.add(sourceArtifact);			
 				
 				destArtifact = new GTM!Model;
 				destArtifact.artifactID = modelartID;
-				destArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				destArtifact.progress = GTM!Progress_Enum#HUNDRED_PERCENT;
 				gtmBoundary.modelBlocks.add(destArtifact);	
 				
 			}
@@ -166,14 +166,14 @@ while (i < link.size())
 				
 				destArtifact = new GTM!Model;
 				destArtifact.artifactID = modelartID;
-				destArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				destArtifact.progress = GTM!Progress_Enum#HUNDRED_PERCENT;
 				gtmBoundary.modelBlocks.add(destArtifact);	
 			
 			}
 			else if  ((funcRequirement == null) and (smModel != null)) {
 				sourceArtifact = new GTM!FunctionalRequirement;
 				sourceArtifact.artifactID = funcReqartID;
-				sourceArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				sourceArtifact.progress = GTM!Progress_Enum#HUNDRED_PERCENT;
 				gtmBoundary.funcRequirements.add(sourceArtifact);	
 				
 				destArtifact = smModel;
@@ -232,12 +232,12 @@ while (i < link.size())
 			if ((funcRequirement == null) and (testBlk == null)) {
 				sourceArtifact = new GTM!FunctionalRequirement;
 				sourceArtifact.artifactID = funcReqArtID;
-				sourceArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				sourceArtifact.progress = GTM!Progress_Enum#HUNDRED_PERCENT;
 				gtmBoundary.funcRequirements.add(sourceArtifact);
 				
 				destArtifact = new GTM!Test;
 				destArtifact.artifactID = testArtID;
-				destArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				destArtifact.progress = GTM!Progress_Enum#HUNDRED_PERCENT;
 				gtmBoundary.testBlocks.add(destArtifact);
 			}
 			else if ((funcRequirement != null) and (testBlk == null)) {
@@ -245,13 +245,13 @@ while (i < link.size())
 				
 				destArtifact = new GTM!Test;
 				destArtifact.artifactID = testArtID;
-				destArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				destArtifact.progress = GTM!Progress_Enum#HUNDRED_PERCENT;
 				gtmBoundary.testBlocks.add(destArtifact);				
 			}	
 			else if ((funcRequirement == null) and (testBlk != null)) {
 				sourceArtifact = new GTM!FunctionalRequirement;
 				sourceArtifact.artifactID = funcReqArtID;
-				sourceArtifact.progress = GTM!Progress_Enum#HUNDERD_PERCENT;
+				sourceArtifact.progress = GTM!Progress_Enum#HUNDRED_PERCENT;
 				gtmBoundary.funcRequirements.add(sourceArtifact);
 				
 				destArtifact = testBlk;

@@ -275,7 +275,7 @@ public class ITSCore {
 
 			} else if (args[1].equals("SYNC-CR")) {
 				if (status != -1) {
-					tickets = tracConnector.queryTickets(TICKET_FILTER.NO_CLOSED);
+					tickets = tracConnector.queryTickets(TICKET_FILTER.ALL);
 					if (tickets == null) {
 						System.out.println("Query failed");
 					} else {

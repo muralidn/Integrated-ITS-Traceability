@@ -59,14 +59,14 @@ public enum Progress_Enum implements Enumerator {
 	SEVENTY_FIVE_PERCENT(3, "SEVENTY_FIVE_PERCENT", "SEVENTY_FIVE_PERCENT"),
 
 	/**
-	 * The '<em><b>HUNDERD PERCENT</b></em>' literal object.
+	 * The '<em><b>HUNDRED PERCENT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #HUNDERD_PERCENT_VALUE
+	 * @see #HUNDRED_PERCENT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	HUNDERD_PERCENT(4, "HUNDERD_PERCENT", "HUNDERD_PERCENT");
+	HUNDRED_PERCENT(4, "HUNDRED_PERCENT", "HUNDRED_PERCENT");
 
 	/**
 	 * The '<em><b>ZERO</b></em>' literal value.
@@ -113,15 +113,15 @@ public enum Progress_Enum implements Enumerator {
 	public static final int SEVENTY_FIVE_PERCENT_VALUE = 3;
 
 	/**
-	 * The '<em><b>HUNDERD PERCENT</b></em>' literal value.
+	 * The '<em><b>HUNDRED PERCENT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #HUNDERD_PERCENT
+	 * @see #HUNDRED_PERCENT
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int HUNDERD_PERCENT_VALUE = 4;
+	public static final int HUNDRED_PERCENT_VALUE = 4;
 
 	/**
 	 * An array of all the '<em><b>Progress Enum</b></em>' enumerators.
@@ -135,7 +135,7 @@ public enum Progress_Enum implements Enumerator {
 			TWENTY_FIVE_PERCENT,
 			FIFTY_PERCENT,
 			SEVENTY_FIVE_PERCENT,
-			HUNDERD_PERCENT,
+			HUNDRED_PERCENT,
 		};
 
 	/**
@@ -196,7 +196,7 @@ public enum Progress_Enum implements Enumerator {
 			case TWENTY_FIVE_PERCENT_VALUE: return TWENTY_FIVE_PERCENT;
 			case FIFTY_PERCENT_VALUE: return FIFTY_PERCENT;
 			case SEVENTY_FIVE_PERCENT_VALUE: return SEVENTY_FIVE_PERCENT;
-			case HUNDERD_PERCENT_VALUE: return HUNDERD_PERCENT;
+			case HUNDRED_PERCENT_VALUE: return HUNDRED_PERCENT;
 		}
 		return null;
 	}

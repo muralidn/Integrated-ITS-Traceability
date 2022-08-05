@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: TIM.diagram.part.TIMDiagramEditorPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: TIM.diagram.edit.parts, 
+Export-Package: TIM.diagram.edit.parts,
  TIM.diagram.part,
  TIM.diagram.providers
 Require-Bundle: org.eclipse.core.runtime,

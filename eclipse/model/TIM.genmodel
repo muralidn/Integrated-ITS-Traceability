@@ -10,7 +10,7 @@
       <genEnumLiterals ecoreEnumLiteral="TIM.ecore#//Progress_Enum/TWENTY_FIVE_PERCENT"/>
       <genEnumLiterals ecoreEnumLiteral="TIM.ecore#//Progress_Enum/FIFTY_PERCENT"/>
       <genEnumLiterals ecoreEnumLiteral="TIM.ecore#//Progress_Enum/SEVENTY_FIVE_PERCENT"/>
-      <genEnumLiterals ecoreEnumLiteral="TIM.ecore#//Progress_Enum/HUNDERD_PERCENT"/>
+      <genEnumLiterals ecoreEnumLiteral="TIM.ecore#//Progress_Enum/HUNDRED_PERCENT"/>
     </genEnums>
     <genClasses ecoreClass="TIM.ecore#//GlobalTraceModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TIM.ecore#//GlobalTraceModel/gtmController"/>

@@ -8,7 +8,7 @@
   <children xmi:type="notation:Shape" xmi:id="_YgSH8BUEEe26Wufd1CSN3g" type="2005" fontName="Segoe UI">
     <children xmi:type="notation:DecorationNode" xmi:id="_YgSvABUEEe26Wufd1CSN3g" type="5005"/>
     <element xmi:type="GTMController" href="GTM.tim#//@gtmController"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YgSH8RUEEe26Wufd1CSN3g" x="91" y="452"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YgSH8RUEEe26Wufd1CSN3g" x="60" y="420"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_Fom3URUEEe26Wufd1CSN3g"/>
   <element xmi:type="GlobalTraceModel" href="GTM.tim#/"/>

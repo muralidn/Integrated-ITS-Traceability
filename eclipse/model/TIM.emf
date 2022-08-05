@@ -61,7 +61,7 @@ enum Progress_Enum
 	TWENTY_FIVE_PERCENT;
 	FIFTY_PERCENT;
 	SEVENTY_FIVE_PERCENT;
-	HUNDERD_PERCENT;
+	HUNDRED_PERCENT;
 }
 
 @gmf.node(label = "artifactID, progress", label.icon = "false", figure="ellipse", label.color = "255,255,255", label.pattern = "{0}, Prog: {1}")

@@ -1011,7 +1011,7 @@ public class TIMPackageImpl extends EPackageImpl implements TIMPackage {
 		addEEnumLiteral(progress_EnumEEnum, Progress_Enum.TWENTY_FIVE_PERCENT);
 		addEEnumLiteral(progress_EnumEEnum, Progress_Enum.FIFTY_PERCENT);
 		addEEnumLiteral(progress_EnumEEnum, Progress_Enum.SEVENTY_FIVE_PERCENT);
-		addEEnumLiteral(progress_EnumEEnum, Progress_Enum.HUNDERD_PERCENT);
+		addEEnumLiteral(progress_EnumEEnum, Progress_Enum.HUNDRED_PERCENT);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalTraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Trace_Information_Model" xsi:schemaLocation="Trace_Information_Model ./model/TIM.ecore">
+  <CR_Tickets crID="4" summary="Test ticket 4" description="testing ticket 4" version="1.0" chHelpful="YES" mergeRationale="null" plannedLOE="8.0" actualLOE="8.0"/>
+</GlobalTraceModel>

@@ -79,7 +79,7 @@
     <eLiterals name="TWENTY_FIVE_PERCENT" value="1"/>
     <eLiterals name="FIFTY_PERCENT" value="2"/>
     <eLiterals name="SEVENTY_FIVE_PERCENT" value="3"/>
-    <eLiterals name="HUNDERD_PERCENT" value="4"/>
+    <eLiterals name="HUNDRED_PERCENT" value="4"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Artifact" abstract="true">
     <eAnnotations source="gmf.node">
