@@ -1,3 +1,0 @@
-var cr = Change_Request_Ticket.all.first();
-if (cr == null)
-	"NULL".println();
