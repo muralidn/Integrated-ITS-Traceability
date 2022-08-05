@@ -43,26 +43,26 @@ public class FunctionalRequirementItemProvider extends ArtifactItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addUpstreamArtifactsPropertyDescriptor(object);
-			addDownstreamArtifactsPropertyDescriptor(object);
+			addUpstreamTraceLinksPropertyDescriptor(object);
+			addDownstreamTraceLinksPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Upstream Artifacts feature.
+	 * This adds a property descriptor for the Upstream Trace Links feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addUpstreamArtifactsPropertyDescriptor(Object object) {
+	protected void addUpstreamTraceLinksPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_FunctionalRequirement_upstreamArtifacts_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FunctionalRequirement_upstreamArtifacts_feature", "_UI_FunctionalRequirement_type"),
-				 TIMPackage.Literals.FUNCTIONAL_REQUIREMENT__UPSTREAM_ARTIFACTS,
+				 getString("_UI_FunctionalRequirement_upstreamTraceLinks_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FunctionalRequirement_upstreamTraceLinks_feature", "_UI_FunctionalRequirement_type"),
+				 TIMPackage.Literals.FUNCTIONAL_REQUIREMENT__UPSTREAM_TRACE_LINKS,
 				 true,
 				 false,
 				 true,
@@ -72,19 +72,19 @@ public class FunctionalRequirementItemProvider extends ArtifactItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Downstream Artifacts feature.
+	 * This adds a property descriptor for the Downstream Trace Links feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addDownstreamArtifactsPropertyDescriptor(Object object) {
+	protected void addDownstreamTraceLinksPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_FunctionalRequirement_downstreamArtifacts_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FunctionalRequirement_downstreamArtifacts_feature", "_UI_FunctionalRequirement_type"),
-				 TIMPackage.Literals.FUNCTIONAL_REQUIREMENT__DOWNSTREAM_ARTIFACTS,
+				 getString("_UI_FunctionalRequirement_downstreamTraceLinks_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FunctionalRequirement_downstreamTraceLinks_feature", "_UI_FunctionalRequirement_type"),
+				 TIMPackage.Literals.FUNCTIONAL_REQUIREMENT__DOWNSTREAM_TRACE_LINKS,
 				 true,
 				 false,
 				 true,

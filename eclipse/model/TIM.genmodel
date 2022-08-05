@@ -72,18 +72,17 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//Verify/destination"/>
     </genClasses>
     <genClasses ecoreClass="TIM.ecore#//SystemRequirement">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//SystemRequirement/downstreamArtifacts"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//SystemRequirement/downstreamTraceLinks"/>
     </genClasses>
     <genClasses ecoreClass="TIM.ecore#//FunctionalRequirement">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//FunctionalRequirement/upstreamArtifacts"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//FunctionalRequirement/downstreamArtifacts"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//FunctionalRequirement/upstreamTraceLinks"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//FunctionalRequirement/downstreamTraceLinks"/>
     </genClasses>
     <genClasses ecoreClass="TIM.ecore#//Model">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//Model/upstreamArtifacts"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//Model/downstreamArtifacts"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//Model/upstreamTraceLinks"/>
     </genClasses>
     <genClasses ecoreClass="TIM.ecore#//Test">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//Test/upstreamArtifacts"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//Test/upstreamTraceLinks"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

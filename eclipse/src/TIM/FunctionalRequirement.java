@@ -13,8 +13,8 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link TIM.FunctionalRequirement#getUpstreamArtifacts <em>Upstream Artifacts</em>}</li>
- *   <li>{@link TIM.FunctionalRequirement#getDownstreamArtifacts <em>Downstream Artifacts</em>}</li>
+ *   <li>{@link TIM.FunctionalRequirement#getUpstreamTraceLinks <em>Upstream Trace Links</em>}</li>
+ *   <li>{@link TIM.FunctionalRequirement#getDownstreamTraceLinks <em>Downstream Trace Links</em>}</li>
  * </ul>
  *
  * @see TIM.TIMPackage#getFunctionalRequirement()
@@ -23,27 +23,27 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface FunctionalRequirement extends Artifact {
 	/**
-	 * Returns the value of the '<em><b>Upstream Artifacts</b></em>' reference list.
+	 * Returns the value of the '<em><b>Upstream Trace Links</b></em>' reference list.
 	 * The list contents are of type {@link TIM.Derive}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Upstream Artifacts</em>' reference list.
-	 * @see TIM.TIMPackage#getFunctionalRequirement_UpstreamArtifacts()
+	 * @return the value of the '<em>Upstream Trace Links</em>' reference list.
+	 * @see TIM.TIMPackage#getFunctionalRequirement_UpstreamTraceLinks()
 	 * @model
 	 * @generated
 	 */
-	EList<Derive> getUpstreamArtifacts();
+	EList<Derive> getUpstreamTraceLinks();
 
 	/**
-	 * Returns the value of the '<em><b>Downstream Artifacts</b></em>' reference list.
-	 * The list contents are of type {@link TIM.Implement}.
+	 * Returns the value of the '<em><b>Downstream Trace Links</b></em>' reference list.
+	 * The list contents are of type {@link TIM.Traceability}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Downstream Artifacts</em>' reference list.
-	 * @see TIM.TIMPackage#getFunctionalRequirement_DownstreamArtifacts()
+	 * @return the value of the '<em>Downstream Trace Links</em>' reference list.
+	 * @see TIM.TIMPackage#getFunctionalRequirement_DownstreamTraceLinks()
 	 * @model
 	 * @generated
 	 */
-	EList<Implement> getDownstreamArtifacts();
+	EList<Traceability> getDownstreamTraceLinks();
 
 } // FunctionalRequirement

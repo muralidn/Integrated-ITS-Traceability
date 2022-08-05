@@ -43,25 +43,25 @@ public class SystemRequirementItemProvider extends ArtifactItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addDownstreamArtifactsPropertyDescriptor(object);
+			addDownstreamTraceLinksPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Downstream Artifacts feature.
+	 * This adds a property descriptor for the Downstream Trace Links feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addDownstreamArtifactsPropertyDescriptor(Object object) {
+	protected void addDownstreamTraceLinksPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_SystemRequirement_downstreamArtifacts_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SystemRequirement_downstreamArtifacts_feature", "_UI_SystemRequirement_type"),
-				 TIMPackage.Literals.SYSTEM_REQUIREMENT__DOWNSTREAM_ARTIFACTS,
+				 getString("_UI_SystemRequirement_downstreamTraceLinks_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SystemRequirement_downstreamTraceLinks_feature", "_UI_SystemRequirement_type"),
+				 TIMPackage.Literals.SYSTEM_REQUIREMENT__DOWNSTREAM_TRACE_LINKS,
 				 true,
 				 false,
 				 true,

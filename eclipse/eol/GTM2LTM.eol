@@ -1,272 +1,61 @@
-var ltmBoundary = LTM!GlobalTraceModel.all.first;
+import "EolLibrary.eol";
 
-var cr = LTM!Change_Request_Ticket.all.first;
+var DERIVE_LINK : Integer = 1;
+var IMPLEMENT_LINK : Integer = 2;
+var VERIFY_LINK : Integer = 3;
+var DERIVE_LINK_LOCAL : Integer = 4;
+var IMPLEMENT_LINK_LOCAL : Integer = 5;
+var VERIFY_LINK_LOCAL : Integer = 6;
 
+
+var ltmBoundary = MODEL!GlobalTraceModel.all.first;
+var cr = MODEL!Change_Request_Ticket.all.first;
 var deriveLinks = GTM!Derive.all;
-for(dl : GTM!Derive in deriveLinks) {	
-	 if(dl.source.select or dl.destination.select) {
-	 
-		var sourceArtifact = new LTM!SystemRequirement;
-		sourceArtifact.artifactID = dl.source.artifactID;
-		sourceArtifact.progress = LTM!Progress_Enum#ZERO;
-		sourceArtifact.changeRequests.add(cr);
-		cr.affectedArtifacts.add(sourceArtifact);
-		ltmBoundary.sysRequirements.add(sourceArtifact);
-		
-		
-		var destArtifact = new LTM!FunctionalRequirement;
-		destArtifact.artifactID = dl.destination.artifactID;
-		destArtifact.progress = LTM!Progress_Enum#ZERO;
-		destArtifact.changeRequests.add(cr);
-		cr.affectedArtifacts.add(destArtifact);
-		ltmBoundary.funcRequirements.add(destArtifact);
-		
-		
-		var traceLink = new LTM!Derive;
-		traceLink.traceUID = dl.traceUID;
-		traceLink.source = sourceArtifact;
-		traceLink.destination = destArtifact;
-		traceLink.valid = false;
-		ltmBoundary.deriveTraceLinks.add(traceLink);
-		
-		sourceArtifact.downstreamArtifacts.add(traceLink);
-		destArtifact.upstreamArtifacts.add(traceLink);
-			
-		
-		dl.source.select = false;
-		dl.destination.select = false;
- 	}	
-}
-
 var implementLinks = GTM!Implement.all;
-for(il : GTM!Implement in implementLinks) {	
-	 if(il.source.select or il.destination.select) {
-	 
-	 if(il.source.select or il.destination.select) {
-	 
-		var funcRequirement = ltmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = il.source.artifactID);	 
-	 	
-		var sourceArtifact = null;
-		if (funcRequirement != null){
-			sourceArtifact = funcRequirement;
-		}
-		else {
-			sourceArtifact = new LTM!FunctionalRequirement;
-			sourceArtifact.artifactID = il.source.artifactID;
-			sourceArtifact.progress = LTM!Progress_Enum#ZERO;
-			sourceArtifact.changeRequests.add(cr);
-			cr.affectedArtifacts.add(sourceArtifact);
-			ltmBoundary.funcRequirements.add(sourceArtifact);
-		}
-		
-				
-		var destArtifact = new LTM!Model;
-		destArtifact.artifactID = il.destination.artifactID;
-		destArtifact.progress = LTM!Progress_Enum#ZERO;
-		destArtifact.changeRequests.add(cr);
-		cr.affectedArtifacts.add(destArtifact);
-		ltmBoundary.modelBlocks.add(destArtifact);
-		
-		
-		var traceLink = new LTM!Implement;
-		traceLink.traceUID = il.traceUID;
-		traceLink.source = sourceArtifact;
-		traceLink.destination = destArtifact;
-		traceLink.valid = false;
-		ltmBoundary.implementTraceLinks.add(traceLink);
-		
-		sourceArtifact.downstreamArtifacts.add(traceLink);
-		destArtifact.upstreamArtifacts.add(traceLink);
-		
-		il.source.select = false;
-		il.destination.select = false;
- 	}	
-}
-}
-
 var verifyLinks = GTM!Verify.all;
-for(il : GTM!Verify in verifyLinks) {	
-	 if(il.source.select or il.destination.select) {
-	 
-	 if(il.source.select or il.destination.select) {
-	 
-		var funcRequirement = ltmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = il.source.artifactID);	 
-	 	
-		var sourceArtifact = null;
-		if (funcRequirement != null){
-			sourceArtifact = funcRequirement;
-		}
-		else {
-			sourceArtifact = new LTM!FunctionalRequirement;
-			sourceArtifact.artifactID = il.source.artifactID;
-			sourceArtifact.progress = LTM!Progress_Enum#ZERO;
-			sourceArtifact.changeRequests.add(cr);
-			cr.affectedArtifacts.add(sourceArtifact);
-			ltmBoundary.funcRequirements.add(sourceArtifact);
-		}
-		
-				
-		var destArtifact = new LTM!Test;
-		destArtifact.artifactID = il.destination.artifactID;
-		destArtifact.progress = LTM!Progress_Enum#ZERO;
-		destArtifact.changeRequests.add(cr);
-		cr.affectedArtifacts.add(destArtifact);
-		ltmBoundary.testBlocks.add(destArtifact);
-		
-		var traceLink = new LTM!Verify;
-		traceLink.traceUID = il.traceUID;
-		traceLink.source = sourceArtifact;
-		traceLink.destination = destArtifact;
-		traceLink.valid = false;
-		ltmBoundary.verifyTraceLinks.add(traceLink);
-		
-		sourceArtifact.downstreamArtifacts.add(traceLink);
-		destArtifact.upstreamArtifacts.add(traceLink);
-		
-		il.source.select = false;
-		il.destination.select = false;
+
+
+for(tl : GTM!Derive in deriveLinks) {	
+	 if(tl.source.select or tl.destination.select) {
+	 	createDeriveTraceability(tl.source.artifactID, tl.destination.artifactID, cr, ltmBoundary, tl.traceUID, DERIVE_LINK, false);
+		tl.source.select = false;
+		tl.destination.select = false;
  	}	
 }
+
+for(tl : GTM!Implement in implementLinks) {	
+	 if(tl.source.select or tl.destination.select) {
+		createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, cr, ltmBoundary, tl.traceUID, IMPLEMENT_LINK, false);				
+		tl.source.select = false;
+		tl.destination.select = false;
+ 	}	
 }
 
-for(il : GTM!Derive in deriveLinks) {	
-	var sysRequirement = ltmBoundary.sysRequirements.selectOne(p : LTM!SystemRequirement | p.artifactID = il.source.artifactID);	 
-	var funcRequirement = ltmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = il.destination.artifactID);	 
-	
-	if (sysRequirement != null and funcRequirement == null) {
-	
-			var artifact = new LTM!FunctionalRequirement;
-			artifact.artifactID = il.destination.artifactID;
-			artifact.progress = LTM!Progress_Enum#ZERO;
-			artifact.changeRequests.add(cr);
-			cr.affectedArtifacts.add(artifact);
-			ltmBoundary.funcRequirements.add(artifact);	
-			
-			var traceLink = new LTM!Derive;
-			traceLink.traceUID = il.traceUID;
-			traceLink.source = sysRequirement;
-			traceLink.destination = artifact;
-			traceLink.valid = false;
-			ltmBoundary.deriveTraceLinks.add(traceLink);
-			
-			sysRequirement.downstreamArtifacts.add(traceLink);
-			artifact.upstreamArtifacts.add(traceLink);
-		
-	}
-	else if (sysRequirement == null and funcRequirement != null) {
-			var artifact = new LTM!SystemRequirement;
-			artifact.artifactID = il.source.artifactID;
-			artifact.progress = LTM!Progress_Enum#ZERO;
-			artifact.changeRequests.add(cr);
-			cr.affectedArtifacts.add(artifact);
-			ltmBoundary.sysRequirements.add(artifact);	
-			
-			var traceLink = new LTM!Derive;
-			traceLink.traceUID = il.traceUID;
-			traceLink.source = artifact;
-			traceLink.destination = funcRequirement;
-			traceLink.valid = false;
-			ltmBoundary.deriveTraceLinks.add(traceLink);
-			
-			artifact.downstreamArtifacts.add(traceLink);
-			funcRequirement.upstreamArtifacts.add(traceLink);
-	} 
-	else
-	{
-	}
+for(tl : GTM!Verify in verifyLinks) {	
+	 if(tl.source.select or tl.destination.select) {
+		createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, cr, ltmBoundary, tl.traceUID, VERIFY_LINK, false);	
+		tl.source.select = false;
+		tl.destination.select = false;
+ 	}	
 }
 
-for(il : GTM!Implement in implementLinks) {	
-	var funcRequirement = ltmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = il.source.artifactID);
-	var models = ltmBoundary.modelBlocks.selectOne(p : LTM!Model | p.artifactID = il.destination.artifactID);	 
-		 
-	if (funcRequirement != null and models == null) {
+var pass : Integer = 0;
+while (pass < 12) {
+
+	for(tl : GTM!Derive in deriveLinks) {	
+		createDeriveTraceability(tl.source.artifactID, tl.destination.artifactID, cr, ltmBoundary, tl.traceUID, DERIVE_LINK_LOCAL, false);
+	}
 	
-			var artifact = new LTM!Model;
-			artifact.artifactID = il.destination.artifactID;
-			artifact.progress = LTM!Progress_Enum#ZERO;
-			artifact.changeRequests.add(cr);
-			cr.affectedArtifacts.add(artifact);
-			ltmBoundary.modelBlocks.add(artifact);	
-			
-			var traceLink = new LTM!Implement;
-			traceLink.traceUID = il.traceUID;
-			traceLink.source = funcRequirement;
-			traceLink.destination = artifact;
-			traceLink.valid = false;
-			ltmBoundary.implementTraceLinks.add(traceLink);
-			
-			funcRequirement.downstreamArtifacts.add(traceLink);
-			artifact.upstreamArtifacts.add(traceLink);
-			
+	for(tl : GTM!Implement in implementLinks) {	
+		createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, cr, ltmBoundary, tl.traceUID, IMPLEMENT_LINK_LOCAL, false);				
 	}
-	else if (funcRequirement == null and models != null) {
-			var artifact = new LTM!FunctionalRequirement;
-			artifact.artifactID = il.source.artifactID;
-			artifact.progress = LTM!Progress_Enum#ZERO;
-			artifact.changeRequests.add(cr);
-			cr.affectedArtifacts.add(artifact);
-			ltmBoundary.funcRequirements.add(artifact);	
-			
-			var traceLink = new LTM!Implement;
-			traceLink.traceUID = il.traceUID;
-			traceLink.source = artifact;
-			traceLink.destination = models;
-			traceLink.valid = false;
-			ltmBoundary.implementTraceLinks.add(traceLink);
-			
-			artifact.downstreamArtifacts.add(traceLink);
-			models.upstreamArtifacts.add(traceLink);
-	} 
-	else
-	{
+	
+	for(tl : GTM!Verify in verifyLinks) {	
+		createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, cr, ltmBoundary, tl.traceUID, VERIFY_LINK_LOCAL, false);			
 	}
+	
+	pass = pass + 1;
 }
 
-for(il : GTM!Verify in verifyLinks) {	
-	var funcRequirement = ltmBoundary.funcRequirements.selectOne(p : LTM!FunctionalRequirement | p.artifactID = il.source.artifactID);
-	var tests = ltmBoundary.testBlocks.selectOne(p : LTM!Test | p.artifactID = il.destination.artifactID);	 
-		 
-	if (funcRequirement != null and tests == null) {
-	
-			var artifact = new LTM!Test;
-			artifact.artifactID = il.destination.artifactID;
-			artifact.progress = LTM!Progress_Enum#ZERO;
-			artifact.changeRequests.add(cr);
-			cr.affectedArtifacts.add(artifact);
-			ltmBoundary.testBlocks.add(artifact);	
-			
-			var traceLink = new LTM!Verify;
-			traceLink.traceUID = il.traceUID;
-			traceLink.source = funcRequirement;
-			traceLink.destination = artifact;
-			traceLink.valid = false;
-			ltmBoundary.verifyTraceLinks.add(traceLink);
-			
-			funcRequirement.downstreamArtifacts.add(traceLink);
-			artifact.upstreamArtifacts.add(traceLink);
-	}
-	else if (funcRequirement == null and tests != null) {
-			var artifact = new LTM!FunctionalRequirement;
-			artifact.artifactID = il.source.artifactID;
-			artifact.progress = LTM!Progress_Enum#ZERO;
-			artifact.changeRequests.add(cr);
-			cr.affectedArtifacts.add(artifact);
-			ltmBoundary.funcRequirements.add(artifact);	
-			
-			var traceLink = new LTM!Verify;
-			traceLink.traceUID = il.traceUID;
-			traceLink.source = artifact;
-			traceLink.destination = tests;
-			traceLink.valid = false;
-			ltmBoundary.verifyTraceLinks.add(traceLink);
-			
-			artifact.downstreamArtifacts.add(traceLink);
-			traceLink.upstreamArtifacts.add(traceLink);
-	} 
-	else
-	{
-	}
-}
 
 "Complete".println();

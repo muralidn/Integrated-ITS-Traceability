@@ -707,7 +707,7 @@ public class TIMPackageImpl extends EPackageImpl implements TIMPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getSystemRequirement_DownstreamArtifacts() {
+	public EReference getSystemRequirement_DownstreamTraceLinks() {
 		return (EReference)systemRequirementEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -727,7 +727,7 @@ public class TIMPackageImpl extends EPackageImpl implements TIMPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getFunctionalRequirement_UpstreamArtifacts() {
+	public EReference getFunctionalRequirement_UpstreamTraceLinks() {
 		return (EReference)functionalRequirementEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -737,7 +737,7 @@ public class TIMPackageImpl extends EPackageImpl implements TIMPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getFunctionalRequirement_DownstreamArtifacts() {
+	public EReference getFunctionalRequirement_DownstreamTraceLinks() {
 		return (EReference)functionalRequirementEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -757,18 +757,8 @@ public class TIMPackageImpl extends EPackageImpl implements TIMPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getModel_UpstreamArtifacts() {
+	public EReference getModel_UpstreamTraceLinks() {
 		return (EReference)modelEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getModel_DownstreamArtifacts() {
-		return (EReference)modelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -787,7 +777,7 @@ public class TIMPackageImpl extends EPackageImpl implements TIMPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getTest_UpstreamArtifacts() {
+	public EReference getTest_UpstreamTraceLinks() {
 		return (EReference)testEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -890,18 +880,17 @@ public class TIMPackageImpl extends EPackageImpl implements TIMPackage {
 		createEReference(verifyEClass, VERIFY__DESTINATION);
 
 		systemRequirementEClass = createEClass(SYSTEM_REQUIREMENT);
-		createEReference(systemRequirementEClass, SYSTEM_REQUIREMENT__DOWNSTREAM_ARTIFACTS);
+		createEReference(systemRequirementEClass, SYSTEM_REQUIREMENT__DOWNSTREAM_TRACE_LINKS);
 
 		functionalRequirementEClass = createEClass(FUNCTIONAL_REQUIREMENT);
-		createEReference(functionalRequirementEClass, FUNCTIONAL_REQUIREMENT__UPSTREAM_ARTIFACTS);
-		createEReference(functionalRequirementEClass, FUNCTIONAL_REQUIREMENT__DOWNSTREAM_ARTIFACTS);
+		createEReference(functionalRequirementEClass, FUNCTIONAL_REQUIREMENT__UPSTREAM_TRACE_LINKS);
+		createEReference(functionalRequirementEClass, FUNCTIONAL_REQUIREMENT__DOWNSTREAM_TRACE_LINKS);
 
 		modelEClass = createEClass(MODEL);
-		createEReference(modelEClass, MODEL__UPSTREAM_ARTIFACTS);
-		createEReference(modelEClass, MODEL__DOWNSTREAM_ARTIFACTS);
+		createEReference(modelEClass, MODEL__UPSTREAM_TRACE_LINKS);
 
 		testEClass = createEClass(TEST);
-		createEReference(testEClass, TEST__UPSTREAM_ARTIFACTS);
+		createEReference(testEClass, TEST__UPSTREAM_TRACE_LINKS);
 
 		// Create enums
 		progress_EnumEEnum = createEEnum(PROGRESS_ENUM);
@@ -1004,18 +993,17 @@ public class TIMPackageImpl extends EPackageImpl implements TIMPackage {
 		initEReference(getVerify_Destination(), this.getTest(), null, "destination", null, 0, 1, Verify.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(systemRequirementEClass, SystemRequirement.class, "SystemRequirement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSystemRequirement_DownstreamArtifacts(), this.getDerive(), null, "downstreamArtifacts", null, 0, -1, SystemRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSystemRequirement_DownstreamTraceLinks(), this.getDerive(), null, "downstreamTraceLinks", null, 0, -1, SystemRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(functionalRequirementEClass, FunctionalRequirement.class, "FunctionalRequirement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFunctionalRequirement_UpstreamArtifacts(), this.getDerive(), null, "upstreamArtifacts", null, 0, -1, FunctionalRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunctionalRequirement_DownstreamArtifacts(), this.getImplement(), null, "downstreamArtifacts", null, 0, -1, FunctionalRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunctionalRequirement_UpstreamTraceLinks(), this.getDerive(), null, "upstreamTraceLinks", null, 0, -1, FunctionalRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunctionalRequirement_DownstreamTraceLinks(), this.getTraceability(), null, "downstreamTraceLinks", null, 0, -1, FunctionalRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModel_UpstreamArtifacts(), this.getImplement(), null, "upstreamArtifacts", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModel_DownstreamArtifacts(), this.getVerify(), null, "downstreamArtifacts", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModel_UpstreamTraceLinks(), this.getImplement(), null, "upstreamTraceLinks", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(testEClass, Test.class, "Test", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTest_UpstreamArtifacts(), this.getVerify(), null, "upstreamArtifacts", null, 0, -1, Test.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTest_UpstreamTraceLinks(), this.getVerify(), null, "upstreamTraceLinks", null, 0, -1, Test.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(progress_EnumEEnum, Progress_Enum.class, "Progress_Enum");

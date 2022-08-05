@@ -43,25 +43,25 @@ public class TestItemProvider extends ArtifactItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addUpstreamArtifactsPropertyDescriptor(object);
+			addUpstreamTraceLinksPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Upstream Artifacts feature.
+	 * This adds a property descriptor for the Upstream Trace Links feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addUpstreamArtifactsPropertyDescriptor(Object object) {
+	protected void addUpstreamTraceLinksPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Test_upstreamArtifacts_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Test_upstreamArtifacts_feature", "_UI_Test_type"),
-				 TIMPackage.Literals.TEST__UPSTREAM_ARTIFACTS,
+				 getString("_UI_Test_upstreamTraceLinks_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Test_upstreamTraceLinks_feature", "_UI_Test_type"),
+				 TIMPackage.Literals.TEST__UPSTREAM_TRACE_LINKS,
 				 true,
 				 false,
 				 true,

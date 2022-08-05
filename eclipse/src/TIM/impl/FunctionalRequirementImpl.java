@@ -4,8 +4,8 @@ package TIM.impl;
 
 import TIM.Derive;
 import TIM.FunctionalRequirement;
-import TIM.Implement;
 import TIM.TIMPackage;
+import TIM.Traceability;
 
 import java.util.Collection;
 
@@ -23,32 +23,32 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link TIM.impl.FunctionalRequirementImpl#getUpstreamArtifacts <em>Upstream Artifacts</em>}</li>
- *   <li>{@link TIM.impl.FunctionalRequirementImpl#getDownstreamArtifacts <em>Downstream Artifacts</em>}</li>
+ *   <li>{@link TIM.impl.FunctionalRequirementImpl#getUpstreamTraceLinks <em>Upstream Trace Links</em>}</li>
+ *   <li>{@link TIM.impl.FunctionalRequirementImpl#getDownstreamTraceLinks <em>Downstream Trace Links</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class FunctionalRequirementImpl extends ArtifactImpl implements FunctionalRequirement {
 	/**
-	 * The cached value of the '{@link #getUpstreamArtifacts() <em>Upstream Artifacts</em>}' reference list.
+	 * The cached value of the '{@link #getUpstreamTraceLinks() <em>Upstream Trace Links</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getUpstreamArtifacts()
+	 * @see #getUpstreamTraceLinks()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Derive> upstreamArtifacts;
+	protected EList<Derive> upstreamTraceLinks;
 
 	/**
-	 * The cached value of the '{@link #getDownstreamArtifacts() <em>Downstream Artifacts</em>}' reference list.
+	 * The cached value of the '{@link #getDownstreamTraceLinks() <em>Downstream Trace Links</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDownstreamArtifacts()
+	 * @see #getDownstreamTraceLinks()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Implement> downstreamArtifacts;
+	protected EList<Traceability> downstreamTraceLinks;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -75,11 +75,11 @@ public class FunctionalRequirementImpl extends ArtifactImpl implements Functiona
 	 * @generated
 	 */
 	@Override
-	public EList<Derive> getUpstreamArtifacts() {
-		if (upstreamArtifacts == null) {
-			upstreamArtifacts = new EObjectResolvingEList<Derive>(Derive.class, this, TIMPackage.FUNCTIONAL_REQUIREMENT__UPSTREAM_ARTIFACTS);
+	public EList<Derive> getUpstreamTraceLinks() {
+		if (upstreamTraceLinks == null) {
+			upstreamTraceLinks = new EObjectResolvingEList<Derive>(Derive.class, this, TIMPackage.FUNCTIONAL_REQUIREMENT__UPSTREAM_TRACE_LINKS);
 		}
-		return upstreamArtifacts;
+		return upstreamTraceLinks;
 	}
 
 	/**
@@ -88,11 +88,11 @@ public class FunctionalRequirementImpl extends ArtifactImpl implements Functiona
 	 * @generated
 	 */
 	@Override
-	public EList<Implement> getDownstreamArtifacts() {
-		if (downstreamArtifacts == null) {
-			downstreamArtifacts = new EObjectResolvingEList<Implement>(Implement.class, this, TIMPackage.FUNCTIONAL_REQUIREMENT__DOWNSTREAM_ARTIFACTS);
+	public EList<Traceability> getDownstreamTraceLinks() {
+		if (downstreamTraceLinks == null) {
+			downstreamTraceLinks = new EObjectResolvingEList<Traceability>(Traceability.class, this, TIMPackage.FUNCTIONAL_REQUIREMENT__DOWNSTREAM_TRACE_LINKS);
 		}
-		return downstreamArtifacts;
+		return downstreamTraceLinks;
 	}
 
 	/**
@@ -103,10 +103,10 @@ public class FunctionalRequirementImpl extends ArtifactImpl implements Functiona
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TIMPackage.FUNCTIONAL_REQUIREMENT__UPSTREAM_ARTIFACTS:
-				return getUpstreamArtifacts();
-			case TIMPackage.FUNCTIONAL_REQUIREMENT__DOWNSTREAM_ARTIFACTS:
-				return getDownstreamArtifacts();
+			case TIMPackage.FUNCTIONAL_REQUIREMENT__UPSTREAM_TRACE_LINKS:
+				return getUpstreamTraceLinks();
+			case TIMPackage.FUNCTIONAL_REQUIREMENT__DOWNSTREAM_TRACE_LINKS:
+				return getDownstreamTraceLinks();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -120,13 +120,13 @@ public class FunctionalRequirementImpl extends ArtifactImpl implements Functiona
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TIMPackage.FUNCTIONAL_REQUIREMENT__UPSTREAM_ARTIFACTS:
-				getUpstreamArtifacts().clear();
-				getUpstreamArtifacts().addAll((Collection<? extends Derive>)newValue);
+			case TIMPackage.FUNCTIONAL_REQUIREMENT__UPSTREAM_TRACE_LINKS:
+				getUpstreamTraceLinks().clear();
+				getUpstreamTraceLinks().addAll((Collection<? extends Derive>)newValue);
 				return;
-			case TIMPackage.FUNCTIONAL_REQUIREMENT__DOWNSTREAM_ARTIFACTS:
-				getDownstreamArtifacts().clear();
-				getDownstreamArtifacts().addAll((Collection<? extends Implement>)newValue);
+			case TIMPackage.FUNCTIONAL_REQUIREMENT__DOWNSTREAM_TRACE_LINKS:
+				getDownstreamTraceLinks().clear();
+				getDownstreamTraceLinks().addAll((Collection<? extends Traceability>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -140,11 +140,11 @@ public class FunctionalRequirementImpl extends ArtifactImpl implements Functiona
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TIMPackage.FUNCTIONAL_REQUIREMENT__UPSTREAM_ARTIFACTS:
-				getUpstreamArtifacts().clear();
+			case TIMPackage.FUNCTIONAL_REQUIREMENT__UPSTREAM_TRACE_LINKS:
+				getUpstreamTraceLinks().clear();
 				return;
-			case TIMPackage.FUNCTIONAL_REQUIREMENT__DOWNSTREAM_ARTIFACTS:
-				getDownstreamArtifacts().clear();
+			case TIMPackage.FUNCTIONAL_REQUIREMENT__DOWNSTREAM_TRACE_LINKS:
+				getDownstreamTraceLinks().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -158,10 +158,10 @@ public class FunctionalRequirementImpl extends ArtifactImpl implements Functiona
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TIMPackage.FUNCTIONAL_REQUIREMENT__UPSTREAM_ARTIFACTS:
-				return upstreamArtifacts != null && !upstreamArtifacts.isEmpty();
-			case TIMPackage.FUNCTIONAL_REQUIREMENT__DOWNSTREAM_ARTIFACTS:
-				return downstreamArtifacts != null && !downstreamArtifacts.isEmpty();
+			case TIMPackage.FUNCTIONAL_REQUIREMENT__UPSTREAM_TRACE_LINKS:
+				return upstreamTraceLinks != null && !upstreamTraceLinks.isEmpty();
+			case TIMPackage.FUNCTIONAL_REQUIREMENT__DOWNSTREAM_TRACE_LINKS:
+				return downstreamTraceLinks != null && !downstreamTraceLinks.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

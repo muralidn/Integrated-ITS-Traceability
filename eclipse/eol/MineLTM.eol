@@ -3,47 +3,111 @@ import "EolLibrary.eol";
 var DERIVE_LINK : Integer = 1;
 var IMPLEMENT_LINK : Integer = 2;
 var VERIFY_LINK : Integer = 3;
+var DERIVE_LINK_LOCAL : Integer = 4;
+var IMPLEMENT_LINK_LOCAL : Integer = 5;
+var VERIFY_LINK_LOCAL : Integer = 6;
 
-var ltmBoundary = LTM!GlobalTraceModel.all.first;
-var cr = LTM!Change_Request_Ticket.all.first;
+var modelBoundary = MODEL!GlobalTraceModel.all.first;
+var cr = MODEL!Change_Request_Ticket.all.first;
+
+if (cr == null) {
+	//Hack due to a limitation
+	cr = new MODEL!Change_Request_Ticket;
+	cr.crID = -999;
+}
+
 
 var link=SLREQ!Link.all; 
 
-var selectedRequirements = System.user.prompt("Enter functional requirement IDs separated by a comma").split(",").println();
+var selectedRequirements = System.user.prompt("Enter functional requirement IDs separated by a comma for LTM or press * for GTM").split(",").println();
+var wildCard = selectedRequirements.selectOne(r : String | r = "*");
 
-var i : Integer = 0;
+var pass : Integer = 0;
 var traceUID : Integer = 1000; 
 
+var i : Integer = 0;
 while (i < link.size()) {	
-
+	
 		var linkType = link.at(i).getProperty("Type");
 		
 		if (linkType == "Derive" or linkType == "Implement" or linkType == "Verify") {
 			var funcReqID = link.at(i).getDestination().getProperty("id").asString().replace("#","");
-			var reqSelect = selectedRequirements.selectOne(r : String | r = funcReqID);		
 			
-			if (reqSelect != null) {			
+			var reqSelect = funcReqID;
+			var validity = true;
+			if (wildCard == null) {
+				reqSelect = selectedRequirements.selectOne(r : String | r = funcReqID);
+				validity = false;	
+			}
+					
+			if (reqSelect != null) {	
 				var funcReqArtifactID = getFullReqID(funcReqID, link.at(i).getDestination().getProperty("artifact").asString());
 				
 				if (linkType == "Derive") {
-					var sysReqArtifactID = getFullModelID(link.at(i).getSource().getProperty("id").asString() , link.at(i).getSource().getProperty("artifact").asString());
-					createDeriveTraceability(sysReqArtifactID, funcReqArtifactID, cr, ltmBoundary, traceUID);
+					var sysReqArtifactID = getFullReqID(link.at(i).getSource().getProperty("id").asString() , link.at(i).getSource().getProperty("artifact").asString());
+					createDeriveTraceability(sysReqArtifactID, funcReqArtifactID, cr, modelBoundary, traceUID, DERIVE_LINK, validity);
 				}
 				else if (linkType == "Implement") {
-					var modelID = getFullModelID(link.at(i).getSource().getProperty("id").asString(), link.at(i).getSource().getProperty("artifact").asString());
-					createImplementVerifyTraceability(modelID, funcReqArtifactID, cr, ltmBoundary, traceUID, IMPLEMENT_LINK);				
+					var modelID = getFullModelID(link.at(i).getSource().getProperty("id").asString(), link.at(i).getSource().getProperty("artifact").asString());				
+					createImplementVerifyTraceability(modelID, funcReqArtifactID, cr, modelBoundary, traceUID, IMPLEMENT_LINK, validity);				
 				}
 				else {
 					var testID = getFullTestID(link.at(i).getSource().getProperty("id").asString(), link.at(i).getSource().getProperty("artifact").asString());
-					createImplementVerifyTraceability(testID, funcReqArtifactID, cr, ltmBoundary, traceUID, VERIFY_LINK);				
+					createImplementVerifyTraceability(testID, funcReqArtifactID, cr, modelBoundary, traceUID, VERIFY_LINK, validity);				
 				}
 			
 				traceUID = traceUID + 1;	
 			}
+
 		}
+
 
 		i = i + 1;
 }
 
+while (pass < 12) {
+	
+	pass.println("Pass: ");
+	while (i < link.size()) {	
+		
+			var linkType = link.at(i).getProperty("Type");
+			
+			if (linkType == "Derive" or linkType == "Implement" or linkType == "Verify") {
+				var funcReqID = link.at(i).getDestination().getProperty("id").asString().replace("#","");
+				var funcReqArtifactID = getFullReqID(funcReqID, link.at(i).getDestination().getProperty("artifact").asString());
+				
+				var validity = true;
+				if (wildCard == null) {
+					validity = false;	
+				}
+											
+				if (linkType == "Derive") {
+					var sysReqArtifactID = getFullReqID(link.at(i).getSource().getProperty("id").asString() , link.at(i).getSource().getProperty("artifact").asString());
+					createDeriveTraceability(sysReqArtifactID, funcReqArtifactID, cr, modelBoundary, traceUID, DERIVE_LINK_LOCAL, validity);
+				}
+				else if (linkType == "Implement") {
+					var modelID = getFullModelID(link.at(i).getSource().getProperty("id").asString(), link.at(i).getSource().getProperty("artifact").asString());				
+					createImplementVerifyTraceability(modelID, funcReqArtifactID, cr, modelBoundary, traceUID, IMPLEMENT_LINK_LOCAL, validity);				
+				}
+				else {
+
+					
+					var testID = getFullTestID(link.at(i).getSource().getProperty("id").asString(), link.at(i).getSource().getProperty("artifact").asString());
+					createImplementVerifyTraceability(testID, funcReqArtifactID, cr, modelBoundary, traceUID, VERIFY_LINK_LOCAL, validity);				
+				}
+			
+				traceUID = traceUID + 1;	
+			}
+				
+			i = i + 1;
+	}
+			
+	pass = pass + 1;
+}
+
+if ((cr != null) and  (cr.crID == -999)) {
+	//Hack due to a limitation
+	delete cr;
+}
 
 "Complete".println();

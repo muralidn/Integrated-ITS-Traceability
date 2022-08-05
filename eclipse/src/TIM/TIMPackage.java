@@ -699,13 +699,13 @@ public interface TIMPackage extends EPackage {
 	int SYSTEM_REQUIREMENT__SELECT = ARTIFACT__SELECT;
 
 	/**
-	 * The feature id for the '<em><b>Downstream Artifacts</b></em>' reference list.
+	 * The feature id for the '<em><b>Downstream Trace Links</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SYSTEM_REQUIREMENT__DOWNSTREAM_ARTIFACTS = ARTIFACT_FEATURE_COUNT + 0;
+	int SYSTEM_REQUIREMENT__DOWNSTREAM_TRACE_LINKS = ARTIFACT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>System Requirement</em>' class.
@@ -763,22 +763,22 @@ public interface TIMPackage extends EPackage {
 	int FUNCTIONAL_REQUIREMENT__SELECT = ARTIFACT__SELECT;
 
 	/**
-	 * The feature id for the '<em><b>Upstream Artifacts</b></em>' reference list.
+	 * The feature id for the '<em><b>Upstream Trace Links</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTIONAL_REQUIREMENT__UPSTREAM_ARTIFACTS = ARTIFACT_FEATURE_COUNT + 0;
+	int FUNCTIONAL_REQUIREMENT__UPSTREAM_TRACE_LINKS = ARTIFACT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Downstream Artifacts</b></em>' reference list.
+	 * The feature id for the '<em><b>Downstream Trace Links</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTIONAL_REQUIREMENT__DOWNSTREAM_ARTIFACTS = ARTIFACT_FEATURE_COUNT + 1;
+	int FUNCTIONAL_REQUIREMENT__DOWNSTREAM_TRACE_LINKS = ARTIFACT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Functional Requirement</em>' class.
@@ -836,22 +836,13 @@ public interface TIMPackage extends EPackage {
 	int MODEL__SELECT = ARTIFACT__SELECT;
 
 	/**
-	 * The feature id for the '<em><b>Upstream Artifacts</b></em>' reference list.
+	 * The feature id for the '<em><b>Upstream Trace Links</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__UPSTREAM_ARTIFACTS = ARTIFACT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Downstream Artifacts</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL__DOWNSTREAM_ARTIFACTS = ARTIFACT_FEATURE_COUNT + 1;
+	int MODEL__UPSTREAM_TRACE_LINKS = ARTIFACT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Model</em>' class.
@@ -860,7 +851,7 @@ public interface TIMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_FEATURE_COUNT = ARTIFACT_FEATURE_COUNT + 2;
+	int MODEL_FEATURE_COUNT = ARTIFACT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link TIM.impl.TestImpl <em>Test</em>}' class.
@@ -909,13 +900,13 @@ public interface TIMPackage extends EPackage {
 	int TEST__SELECT = ARTIFACT__SELECT;
 
 	/**
-	 * The feature id for the '<em><b>Upstream Artifacts</b></em>' reference list.
+	 * The feature id for the '<em><b>Upstream Trace Links</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEST__UPSTREAM_ARTIFACTS = ARTIFACT_FEATURE_COUNT + 0;
+	int TEST__UPSTREAM_TRACE_LINKS = ARTIFACT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Test</em>' class.
@@ -1477,15 +1468,15 @@ public interface TIMPackage extends EPackage {
 	EClass getSystemRequirement();
 
 	/**
-	 * Returns the meta object for the reference list '{@link TIM.SystemRequirement#getDownstreamArtifacts <em>Downstream Artifacts</em>}'.
+	 * Returns the meta object for the reference list '{@link TIM.SystemRequirement#getDownstreamTraceLinks <em>Downstream Trace Links</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Downstream Artifacts</em>'.
-	 * @see TIM.SystemRequirement#getDownstreamArtifacts()
+	 * @return the meta object for the reference list '<em>Downstream Trace Links</em>'.
+	 * @see TIM.SystemRequirement#getDownstreamTraceLinks()
 	 * @see #getSystemRequirement()
 	 * @generated
 	 */
-	EReference getSystemRequirement_DownstreamArtifacts();
+	EReference getSystemRequirement_DownstreamTraceLinks();
 
 	/**
 	 * Returns the meta object for class '{@link TIM.FunctionalRequirement <em>Functional Requirement</em>}'.
@@ -1498,26 +1489,26 @@ public interface TIMPackage extends EPackage {
 	EClass getFunctionalRequirement();
 
 	/**
-	 * Returns the meta object for the reference list '{@link TIM.FunctionalRequirement#getUpstreamArtifacts <em>Upstream Artifacts</em>}'.
+	 * Returns the meta object for the reference list '{@link TIM.FunctionalRequirement#getUpstreamTraceLinks <em>Upstream Trace Links</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Upstream Artifacts</em>'.
-	 * @see TIM.FunctionalRequirement#getUpstreamArtifacts()
+	 * @return the meta object for the reference list '<em>Upstream Trace Links</em>'.
+	 * @see TIM.FunctionalRequirement#getUpstreamTraceLinks()
 	 * @see #getFunctionalRequirement()
 	 * @generated
 	 */
-	EReference getFunctionalRequirement_UpstreamArtifacts();
+	EReference getFunctionalRequirement_UpstreamTraceLinks();
 
 	/**
-	 * Returns the meta object for the reference list '{@link TIM.FunctionalRequirement#getDownstreamArtifacts <em>Downstream Artifacts</em>}'.
+	 * Returns the meta object for the reference list '{@link TIM.FunctionalRequirement#getDownstreamTraceLinks <em>Downstream Trace Links</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Downstream Artifacts</em>'.
-	 * @see TIM.FunctionalRequirement#getDownstreamArtifacts()
+	 * @return the meta object for the reference list '<em>Downstream Trace Links</em>'.
+	 * @see TIM.FunctionalRequirement#getDownstreamTraceLinks()
 	 * @see #getFunctionalRequirement()
 	 * @generated
 	 */
-	EReference getFunctionalRequirement_DownstreamArtifacts();
+	EReference getFunctionalRequirement_DownstreamTraceLinks();
 
 	/**
 	 * Returns the meta object for class '{@link TIM.Model <em>Model</em>}'.
@@ -1530,26 +1521,15 @@ public interface TIMPackage extends EPackage {
 	EClass getModel();
 
 	/**
-	 * Returns the meta object for the reference list '{@link TIM.Model#getUpstreamArtifacts <em>Upstream Artifacts</em>}'.
+	 * Returns the meta object for the reference list '{@link TIM.Model#getUpstreamTraceLinks <em>Upstream Trace Links</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Upstream Artifacts</em>'.
-	 * @see TIM.Model#getUpstreamArtifacts()
+	 * @return the meta object for the reference list '<em>Upstream Trace Links</em>'.
+	 * @see TIM.Model#getUpstreamTraceLinks()
 	 * @see #getModel()
 	 * @generated
 	 */
-	EReference getModel_UpstreamArtifacts();
-
-	/**
-	 * Returns the meta object for the reference list '{@link TIM.Model#getDownstreamArtifacts <em>Downstream Artifacts</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Downstream Artifacts</em>'.
-	 * @see TIM.Model#getDownstreamArtifacts()
-	 * @see #getModel()
-	 * @generated
-	 */
-	EReference getModel_DownstreamArtifacts();
+	EReference getModel_UpstreamTraceLinks();
 
 	/**
 	 * Returns the meta object for class '{@link TIM.Test <em>Test</em>}'.
@@ -1562,15 +1542,15 @@ public interface TIMPackage extends EPackage {
 	EClass getTest();
 
 	/**
-	 * Returns the meta object for the reference list '{@link TIM.Test#getUpstreamArtifacts <em>Upstream Artifacts</em>}'.
+	 * Returns the meta object for the reference list '{@link TIM.Test#getUpstreamTraceLinks <em>Upstream Trace Links</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Upstream Artifacts</em>'.
-	 * @see TIM.Test#getUpstreamArtifacts()
+	 * @return the meta object for the reference list '<em>Upstream Trace Links</em>'.
+	 * @see TIM.Test#getUpstreamTraceLinks()
 	 * @see #getTest()
 	 * @generated
 	 */
-	EReference getTest_UpstreamArtifacts();
+	EReference getTest_UpstreamTraceLinks();
 
 	/**
 	 * Returns the meta object for enum '{@link TIM.Progress_Enum <em>Progress Enum</em>}'.
@@ -2027,12 +2007,12 @@ public interface TIMPackage extends EPackage {
 		EClass SYSTEM_REQUIREMENT = eINSTANCE.getSystemRequirement();
 
 		/**
-		 * The meta object literal for the '<em><b>Downstream Artifacts</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Downstream Trace Links</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SYSTEM_REQUIREMENT__DOWNSTREAM_ARTIFACTS = eINSTANCE.getSystemRequirement_DownstreamArtifacts();
+		EReference SYSTEM_REQUIREMENT__DOWNSTREAM_TRACE_LINKS = eINSTANCE.getSystemRequirement_DownstreamTraceLinks();
 
 		/**
 		 * The meta object literal for the '{@link TIM.impl.FunctionalRequirementImpl <em>Functional Requirement</em>}' class.
@@ -2045,20 +2025,20 @@ public interface TIMPackage extends EPackage {
 		EClass FUNCTIONAL_REQUIREMENT = eINSTANCE.getFunctionalRequirement();
 
 		/**
-		 * The meta object literal for the '<em><b>Upstream Artifacts</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Upstream Trace Links</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTIONAL_REQUIREMENT__UPSTREAM_ARTIFACTS = eINSTANCE.getFunctionalRequirement_UpstreamArtifacts();
+		EReference FUNCTIONAL_REQUIREMENT__UPSTREAM_TRACE_LINKS = eINSTANCE.getFunctionalRequirement_UpstreamTraceLinks();
 
 		/**
-		 * The meta object literal for the '<em><b>Downstream Artifacts</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Downstream Trace Links</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTIONAL_REQUIREMENT__DOWNSTREAM_ARTIFACTS = eINSTANCE.getFunctionalRequirement_DownstreamArtifacts();
+		EReference FUNCTIONAL_REQUIREMENT__DOWNSTREAM_TRACE_LINKS = eINSTANCE.getFunctionalRequirement_DownstreamTraceLinks();
 
 		/**
 		 * The meta object literal for the '{@link TIM.impl.ModelImpl <em>Model</em>}' class.
@@ -2071,20 +2051,12 @@ public interface TIMPackage extends EPackage {
 		EClass MODEL = eINSTANCE.getModel();
 
 		/**
-		 * The meta object literal for the '<em><b>Upstream Artifacts</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Upstream Trace Links</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MODEL__UPSTREAM_ARTIFACTS = eINSTANCE.getModel_UpstreamArtifacts();
-
-		/**
-		 * The meta object literal for the '<em><b>Downstream Artifacts</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MODEL__DOWNSTREAM_ARTIFACTS = eINSTANCE.getModel_DownstreamArtifacts();
+		EReference MODEL__UPSTREAM_TRACE_LINKS = eINSTANCE.getModel_UpstreamTraceLinks();
 
 		/**
 		 * The meta object literal for the '{@link TIM.impl.TestImpl <em>Test</em>}' class.
@@ -2097,12 +2069,12 @@ public interface TIMPackage extends EPackage {
 		EClass TEST = eINSTANCE.getTest();
 
 		/**
-		 * The meta object literal for the '<em><b>Upstream Artifacts</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Upstream Trace Links</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TEST__UPSTREAM_ARTIFACTS = eINSTANCE.getTest_UpstreamArtifacts();
+		EReference TEST__UPSTREAM_TRACE_LINKS = eINSTANCE.getTest_UpstreamTraceLinks();
 
 		/**
 		 * The meta object literal for the '{@link TIM.Progress_Enum <em>Progress Enum</em>}' enum.

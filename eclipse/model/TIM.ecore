@@ -141,7 +141,7 @@
       <details key="label.pattern" value="{0}, Progress: {1}"/>
       <details key="color" value="75,0,0"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="downstreamArtifacts" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="downstreamTraceLinks" upperBound="-1"
         eType="#//Derive"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionalRequirement" eSuperTypes="#//Artifact">
@@ -149,27 +149,25 @@
       <details key="label.pattern" value="{0}, Progress: {1}"/>
       <details key="color" value="175,0,0"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="upstreamArtifacts" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="upstreamTraceLinks" upperBound="-1"
         eType="#//Derive"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="downstreamArtifacts" upperBound="-1"
-        eType="#//Implement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="downstreamTraceLinks" upperBound="-1"
+        eType="#//Traceability"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//Artifact">
     <eAnnotations source="gmf.node">
       <details key="label.pattern" value="{0}, Progress: {1}"/>
       <details key="color" value="0,125,0"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="upstreamArtifacts" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="upstreamTraceLinks" upperBound="-1"
         eType="#//Implement"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="downstreamArtifacts" upperBound="-1"
-        eType="#//Verify"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Test" eSuperTypes="#//Artifact">
     <eAnnotations source="gmf.node">
       <details key="label.pattern" value="{0}, Progress: {1}"/>
       <details key="color" value="0,0,125"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="upstreamArtifacts" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="upstreamTraceLinks" upperBound="-1"
         eType="#//Verify"/>
   </eClassifiers>
 </ecore:EPackage>

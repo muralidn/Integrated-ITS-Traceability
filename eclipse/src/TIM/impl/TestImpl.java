@@ -22,21 +22,21 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link TIM.impl.TestImpl#getUpstreamArtifacts <em>Upstream Artifacts</em>}</li>
+ *   <li>{@link TIM.impl.TestImpl#getUpstreamTraceLinks <em>Upstream Trace Links</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class TestImpl extends ArtifactImpl implements Test {
 	/**
-	 * The cached value of the '{@link #getUpstreamArtifacts() <em>Upstream Artifacts</em>}' reference list.
+	 * The cached value of the '{@link #getUpstreamTraceLinks() <em>Upstream Trace Links</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getUpstreamArtifacts()
+	 * @see #getUpstreamTraceLinks()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Verify> upstreamArtifacts;
+	protected EList<Verify> upstreamTraceLinks;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,11 +63,11 @@ public class TestImpl extends ArtifactImpl implements Test {
 	 * @generated
 	 */
 	@Override
-	public EList<Verify> getUpstreamArtifacts() {
-		if (upstreamArtifacts == null) {
-			upstreamArtifacts = new EObjectResolvingEList<Verify>(Verify.class, this, TIMPackage.TEST__UPSTREAM_ARTIFACTS);
+	public EList<Verify> getUpstreamTraceLinks() {
+		if (upstreamTraceLinks == null) {
+			upstreamTraceLinks = new EObjectResolvingEList<Verify>(Verify.class, this, TIMPackage.TEST__UPSTREAM_TRACE_LINKS);
 		}
-		return upstreamArtifacts;
+		return upstreamTraceLinks;
 	}
 
 	/**
@@ -78,8 +78,8 @@ public class TestImpl extends ArtifactImpl implements Test {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TIMPackage.TEST__UPSTREAM_ARTIFACTS:
-				return getUpstreamArtifacts();
+			case TIMPackage.TEST__UPSTREAM_TRACE_LINKS:
+				return getUpstreamTraceLinks();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -93,9 +93,9 @@ public class TestImpl extends ArtifactImpl implements Test {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TIMPackage.TEST__UPSTREAM_ARTIFACTS:
-				getUpstreamArtifacts().clear();
-				getUpstreamArtifacts().addAll((Collection<? extends Verify>)newValue);
+			case TIMPackage.TEST__UPSTREAM_TRACE_LINKS:
+				getUpstreamTraceLinks().clear();
+				getUpstreamTraceLinks().addAll((Collection<? extends Verify>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -109,8 +109,8 @@ public class TestImpl extends ArtifactImpl implements Test {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TIMPackage.TEST__UPSTREAM_ARTIFACTS:
-				getUpstreamArtifacts().clear();
+			case TIMPackage.TEST__UPSTREAM_TRACE_LINKS:
+				getUpstreamTraceLinks().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -124,8 +124,8 @@ public class TestImpl extends ArtifactImpl implements Test {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TIMPackage.TEST__UPSTREAM_ARTIFACTS:
-				return upstreamArtifacts != null && !upstreamArtifacts.isEmpty();
+			case TIMPackage.TEST__UPSTREAM_TRACE_LINKS:
+				return upstreamTraceLinks != null && !upstreamTraceLinks.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -5,7 +5,6 @@ package TIM.impl;
 import TIM.Implement;
 import TIM.Model;
 import TIM.TIMPackage;
-import TIM.Verify;
 
 import java.util.Collection;
 
@@ -23,32 +22,21 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link TIM.impl.ModelImpl#getUpstreamArtifacts <em>Upstream Artifacts</em>}</li>
- *   <li>{@link TIM.impl.ModelImpl#getDownstreamArtifacts <em>Downstream Artifacts</em>}</li>
+ *   <li>{@link TIM.impl.ModelImpl#getUpstreamTraceLinks <em>Upstream Trace Links</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ModelImpl extends ArtifactImpl implements Model {
 	/**
-	 * The cached value of the '{@link #getUpstreamArtifacts() <em>Upstream Artifacts</em>}' reference list.
+	 * The cached value of the '{@link #getUpstreamTraceLinks() <em>Upstream Trace Links</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getUpstreamArtifacts()
+	 * @see #getUpstreamTraceLinks()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Implement> upstreamArtifacts;
-
-	/**
-	 * The cached value of the '{@link #getDownstreamArtifacts() <em>Downstream Artifacts</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDownstreamArtifacts()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Verify> downstreamArtifacts;
+	protected EList<Implement> upstreamTraceLinks;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -75,24 +63,11 @@ public class ModelImpl extends ArtifactImpl implements Model {
 	 * @generated
 	 */
 	@Override
-	public EList<Implement> getUpstreamArtifacts() {
-		if (upstreamArtifacts == null) {
-			upstreamArtifacts = new EObjectResolvingEList<Implement>(Implement.class, this, TIMPackage.MODEL__UPSTREAM_ARTIFACTS);
+	public EList<Implement> getUpstreamTraceLinks() {
+		if (upstreamTraceLinks == null) {
+			upstreamTraceLinks = new EObjectResolvingEList<Implement>(Implement.class, this, TIMPackage.MODEL__UPSTREAM_TRACE_LINKS);
 		}
-		return upstreamArtifacts;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<Verify> getDownstreamArtifacts() {
-		if (downstreamArtifacts == null) {
-			downstreamArtifacts = new EObjectResolvingEList<Verify>(Verify.class, this, TIMPackage.MODEL__DOWNSTREAM_ARTIFACTS);
-		}
-		return downstreamArtifacts;
+		return upstreamTraceLinks;
 	}
 
 	/**
@@ -103,10 +78,8 @@ public class ModelImpl extends ArtifactImpl implements Model {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TIMPackage.MODEL__UPSTREAM_ARTIFACTS:
-				return getUpstreamArtifacts();
-			case TIMPackage.MODEL__DOWNSTREAM_ARTIFACTS:
-				return getDownstreamArtifacts();
+			case TIMPackage.MODEL__UPSTREAM_TRACE_LINKS:
+				return getUpstreamTraceLinks();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -120,13 +93,9 @@ public class ModelImpl extends ArtifactImpl implements Model {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TIMPackage.MODEL__UPSTREAM_ARTIFACTS:
-				getUpstreamArtifacts().clear();
-				getUpstreamArtifacts().addAll((Collection<? extends Implement>)newValue);
-				return;
-			case TIMPackage.MODEL__DOWNSTREAM_ARTIFACTS:
-				getDownstreamArtifacts().clear();
-				getDownstreamArtifacts().addAll((Collection<? extends Verify>)newValue);
+			case TIMPackage.MODEL__UPSTREAM_TRACE_LINKS:
+				getUpstreamTraceLinks().clear();
+				getUpstreamTraceLinks().addAll((Collection<? extends Implement>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -140,11 +109,8 @@ public class ModelImpl extends ArtifactImpl implements Model {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TIMPackage.MODEL__UPSTREAM_ARTIFACTS:
-				getUpstreamArtifacts().clear();
-				return;
-			case TIMPackage.MODEL__DOWNSTREAM_ARTIFACTS:
-				getDownstreamArtifacts().clear();
+			case TIMPackage.MODEL__UPSTREAM_TRACE_LINKS:
+				getUpstreamTraceLinks().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -158,10 +124,8 @@ public class ModelImpl extends ArtifactImpl implements Model {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TIMPackage.MODEL__UPSTREAM_ARTIFACTS:
-				return upstreamArtifacts != null && !upstreamArtifacts.isEmpty();
-			case TIMPackage.MODEL__DOWNSTREAM_ARTIFACTS:
-				return downstreamArtifacts != null && !downstreamArtifacts.isEmpty();
+			case TIMPackage.MODEL__UPSTREAM_TRACE_LINKS:
+				return upstreamTraceLinks != null && !upstreamTraceLinks.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

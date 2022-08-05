@@ -111,26 +111,25 @@ class Verify extends Traceability
 @gmf.node(label.pattern = "{0}, Progress: {1}", color = "75,0,0")
 class SystemRequirement extends Artifact
 {
-	ref Derive[*] downstreamArtifacts;
+	ref Derive[*] downstreamTraceLinks;
 }
 
 @gmf.node(label.pattern = "{0}, Progress: {1}", color = "175,0,0")
 class FunctionalRequirement extends Artifact
 {
-	ref Derive[*] upstreamArtifacts;
-	ref Implement[*] downstreamArtifacts;
+	ref Derive[*] upstreamTraceLinks;
+	ref Traceability[*] downstreamTraceLinks;
 	
 }
 
 @gmf.node(label.pattern = "{0}, Progress: {1}", color = "0,125,0")
 class Model extends Artifact
 {
-	ref Implement[*] upstreamArtifacts;
-	ref Verify[*] downstreamArtifacts;	
+	ref Implement[*] upstreamTraceLinks;
 }
 
 @gmf.node(label.pattern = "{0}, Progress: {1}", color = "0,0,125")
 class Test extends Artifact
 {
-	ref Verify[*] upstreamArtifacts;
+	ref Verify[*] upstreamTraceLinks;
 }

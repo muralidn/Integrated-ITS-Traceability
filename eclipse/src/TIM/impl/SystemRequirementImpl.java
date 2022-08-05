@@ -22,21 +22,21 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link TIM.impl.SystemRequirementImpl#getDownstreamArtifacts <em>Downstream Artifacts</em>}</li>
+ *   <li>{@link TIM.impl.SystemRequirementImpl#getDownstreamTraceLinks <em>Downstream Trace Links</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class SystemRequirementImpl extends ArtifactImpl implements SystemRequirement {
 	/**
-	 * The cached value of the '{@link #getDownstreamArtifacts() <em>Downstream Artifacts</em>}' reference list.
+	 * The cached value of the '{@link #getDownstreamTraceLinks() <em>Downstream Trace Links</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDownstreamArtifacts()
+	 * @see #getDownstreamTraceLinks()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Derive> downstreamArtifacts;
+	protected EList<Derive> downstreamTraceLinks;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,11 +63,11 @@ public class SystemRequirementImpl extends ArtifactImpl implements SystemRequire
 	 * @generated
 	 */
 	@Override
-	public EList<Derive> getDownstreamArtifacts() {
-		if (downstreamArtifacts == null) {
-			downstreamArtifacts = new EObjectResolvingEList<Derive>(Derive.class, this, TIMPackage.SYSTEM_REQUIREMENT__DOWNSTREAM_ARTIFACTS);
+	public EList<Derive> getDownstreamTraceLinks() {
+		if (downstreamTraceLinks == null) {
+			downstreamTraceLinks = new EObjectResolvingEList<Derive>(Derive.class, this, TIMPackage.SYSTEM_REQUIREMENT__DOWNSTREAM_TRACE_LINKS);
 		}
-		return downstreamArtifacts;
+		return downstreamTraceLinks;
 	}
 
 	/**
@@ -78,8 +78,8 @@ public class SystemRequirementImpl extends ArtifactImpl implements SystemRequire
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TIMPackage.SYSTEM_REQUIREMENT__DOWNSTREAM_ARTIFACTS:
-				return getDownstreamArtifacts();
+			case TIMPackage.SYSTEM_REQUIREMENT__DOWNSTREAM_TRACE_LINKS:
+				return getDownstreamTraceLinks();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -93,9 +93,9 @@ public class SystemRequirementImpl extends ArtifactImpl implements SystemRequire
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TIMPackage.SYSTEM_REQUIREMENT__DOWNSTREAM_ARTIFACTS:
-				getDownstreamArtifacts().clear();
-				getDownstreamArtifacts().addAll((Collection<? extends Derive>)newValue);
+			case TIMPackage.SYSTEM_REQUIREMENT__DOWNSTREAM_TRACE_LINKS:
+				getDownstreamTraceLinks().clear();
+				getDownstreamTraceLinks().addAll((Collection<? extends Derive>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -109,8 +109,8 @@ public class SystemRequirementImpl extends ArtifactImpl implements SystemRequire
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TIMPackage.SYSTEM_REQUIREMENT__DOWNSTREAM_ARTIFACTS:
-				getDownstreamArtifacts().clear();
+			case TIMPackage.SYSTEM_REQUIREMENT__DOWNSTREAM_TRACE_LINKS:
+				getDownstreamTraceLinks().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -124,8 +124,8 @@ public class SystemRequirementImpl extends ArtifactImpl implements SystemRequire
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TIMPackage.SYSTEM_REQUIREMENT__DOWNSTREAM_ARTIFACTS:
-				return downstreamArtifacts != null && !downstreamArtifacts.isEmpty();
+			case TIMPackage.SYSTEM_REQUIREMENT__DOWNSTREAM_TRACE_LINKS:
+				return downstreamTraceLinks != null && !downstreamTraceLinks.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

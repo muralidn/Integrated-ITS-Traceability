@@ -132,7 +132,7 @@ public class ITSCore {
 			EmfModel model = new EmfModel();
 			model.setMetamodelFile(".\\model\\TIM.ecore");
 			model.setModelFile(".\\LTM\\" + ltmFile);
-			model.setName("LTM");
+			model.setName("MODEL");
 			model.setReadOnLoad(true);
 			model.setStoredOnDisposal(true);
 			try {

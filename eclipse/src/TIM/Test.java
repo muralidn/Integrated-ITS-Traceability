@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link TIM.Test#getUpstreamArtifacts <em>Upstream Artifacts</em>}</li>
+ *   <li>{@link TIM.Test#getUpstreamTraceLinks <em>Upstream Trace Links</em>}</li>
  * </ul>
  *
  * @see TIM.TIMPackage#getTest()
@@ -22,15 +22,15 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Test extends Artifact {
 	/**
-	 * Returns the value of the '<em><b>Upstream Artifacts</b></em>' reference list.
+	 * Returns the value of the '<em><b>Upstream Trace Links</b></em>' reference list.
 	 * The list contents are of type {@link TIM.Verify}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Upstream Artifacts</em>' reference list.
-	 * @see TIM.TIMPackage#getTest_UpstreamArtifacts()
+	 * @return the value of the '<em>Upstream Trace Links</em>' reference list.
+	 * @see TIM.TIMPackage#getTest_UpstreamTraceLinks()
 	 * @model
 	 * @generated
 	 */
-	EList<Verify> getUpstreamArtifacts();
+	EList<Verify> getUpstreamTraceLinks();
 
 } // Test

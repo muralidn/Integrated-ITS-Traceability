@@ -43,48 +43,25 @@ public class ModelItemProvider extends ArtifactItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addUpstreamArtifactsPropertyDescriptor(object);
-			addDownstreamArtifactsPropertyDescriptor(object);
+			addUpstreamTraceLinksPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Upstream Artifacts feature.
+	 * This adds a property descriptor for the Upstream Trace Links feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addUpstreamArtifactsPropertyDescriptor(Object object) {
+	protected void addUpstreamTraceLinksPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Model_upstreamArtifacts_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Model_upstreamArtifacts_feature", "_UI_Model_type"),
-				 TIMPackage.Literals.MODEL__UPSTREAM_ARTIFACTS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Downstream Artifacts feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDownstreamArtifactsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Model_downstreamArtifacts_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Model_downstreamArtifacts_feature", "_UI_Model_type"),
-				 TIMPackage.Literals.MODEL__DOWNSTREAM_ARTIFACTS,
+				 getString("_UI_Model_upstreamTraceLinks_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Model_upstreamTraceLinks_feature", "_UI_Model_type"),
+				 TIMPackage.Literals.MODEL__UPSTREAM_TRACE_LINKS,
 				 true,
 				 false,
 				 true,
