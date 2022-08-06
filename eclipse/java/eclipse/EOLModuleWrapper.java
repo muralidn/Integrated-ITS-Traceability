@@ -10,9 +10,21 @@ public class EOLModuleWrapper {
 		eolModule = new EolModule();		
 	}
 	
-	public void addEMFModel (EMFModelWrapper model) {
+	private void addEMFModel (EMFModelWrapper model) {
 		eolModule.getContext().getModelRepository().addModel(model.getmodel());
 	}
+	
+	private void addSimulinkModel (SLREQWrapper model) {
+		eolModule.getContext().getModelRepository().addModel(model.getmodel());
+	}
+	
+	public void addModel (EMFModelWrapper model) {
+		addEMFModel(model);
+	}
+
+	public void addModel (SLREQWrapper model) {
+		addSimulinkModel(model);
+	}	
 	
 	private int parseEOLString (String eolStatements) {
 		try {
