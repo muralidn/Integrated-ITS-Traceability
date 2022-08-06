@@ -1,21 +1,46 @@
 pre
 {
 	"Validating Trace Links...".println();
+	var validationFail : Boolean = false;
 }
 
 context Traceability {
   constraint Validity {
-	    check : self.valid == true
+	    check {
+	    	if (self.valid == false) {
+	    		validationFail = true;
+	    		return false;
+	    	}
+	    	else
+	    		return true;
+	    
+	    }
 	    message : "Please revalidate trace links"
 	}  
 }
 
 context Artifact {
   constraint Progress {
-	    check : self.progress == Progress_Enum#HUNDRED_PERCENT
+	    check {
+	    
+	    	if (self.progress != Progress_Enum#HUNDRED_PERCENT) {
+	    		validationFail = true;
+	    		return false;	    	
+	    	
+	    	}
+	    	else
+	    		return true;	    	
+	    
+	    }
 	    message : "Please complete the implementation"
 	}  
 }
 
+post
+{
+
+validationFail.println("Validation Fail: ");
+
+}
 
 

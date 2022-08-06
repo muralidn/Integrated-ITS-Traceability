@@ -1,10 +1,6 @@
 package eclipse;
 
 import org.eclipse.epsilon.common.util.FileUtil;
-import org.eclipse.epsilon.emc.emf.EmfModel;
-import org.eclipse.epsilon.eol.EolModule;
-import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
-import org.eclipse.epsilon.evl.EvlModule;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,73 +10,97 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class ITSCore {
+	
+	class Constants {
+		public static final String METAMODEL = ".\\model\\TIM.ecore";
+		public static final String LTM_STR = "LTM";
+		public static final String GTM_STR = "GTM";
+		public static final String TEMPLATE_TIM_FILE = "model\\template.tim";
+		public static final String TEMPLATE_TIM_DIAG_FILE = "model\\template.tim_diagram";
+		public static final String TEMPLATE_FILE_EXT = ".tim";
+		public static final String TEMPLATE_TIM_DIAG_FILE_EXT =".tim_diagram";		
+		public static final String TEMPLATE_FILE_NAME_PLACEHOLDER = "FILE_NAME";
+		public static final String LTM_ROOT = ".\\LTM\\";
+		public static final String LTM_GENERIC_NAME = "MODEL";
+		public static final String EOL_GTM2LTM = ".\\eol\\GTM2LTM.eol";		
+		public static final String EVL_VALIDATE_TL = "..\\eclipse.validation\\evl\\LTMTraceLinks.evl";	
+		public static final String TRAC_ROOT = ".\\..\\Trac";
+		public static final String GTM_FILE_PATH = ".\\GTM\\GTM.tim";
+		
+	}
 
 	static int syncCR(String ltmFile, Ticket ticket) {
 
-		EmfModel model = new EmfModel();
-		model.setMetamodelFile(".\\model\\TIM.ecore");
-		model.setModelFile(ltmFile);
-		model.setName("LTM");
-		model.setReadOnLoad(true);
-		model.setStoredOnDisposal(true);
-		try {
-			model.load();
-		} catch (EolModelLoadingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			model.close();
-			return -1;
+		EMFModelWrapper model = new EMFModelWrapper(ltmFile, Constants.METAMODEL, Constants.LTM_STR);
+		int epStatus = model.loadModel();
+		if (epStatus != 0) {
+			System.out.println("Failed to load: " + ltmFile);
+			return epStatus;
 		}
 
-		EolModule eol = new EolModule();
-		eol.getContext().getModelRepository().addModel(model);
-		try {
+		EOLModuleWrapper eolModule = new EOLModuleWrapper();
+		eolModule.addEMFModel(model);
 
-			eol.parse("var cr = Change_Request_Ticket.all.first();");
-			eol.execute();
-
-			Object cr = eol.getContext().getFrameStack().get("cr").getValue();
-
-			StringBuilder str = new StringBuilder();
-			if (cr == null)
-				str.append("var cr = new LTM!Change_Request_Ticket;\n");
-			else
-				str.append("var cr = Change_Request_Ticket.all.first();\n");
-
-			str.append("cr.crID = " + ticket.id + ";\n");
-			str.append("cr.summary = \"" + ticket.summary + "\";\n");
-			str.append("cr.description = \"" + ticket.description + "\";\n");
-			str.append("cr.version = \"" + ticket.version + "\";\n");
-			str.append("cr.chHelpful = \"" + ticket.timFeedback + "\";\n");
-			str.append("cr.mergeRationale = \"" + ticket.mergeRationale + "\";\n");
-			str.append("cr.plannedLOE = " + ticket.plannedLOEHrs + ";\n");
-			str.append("cr.actualLOE = " + ticket.actualLOEHrs + ";\n");
-			str.append("cr.status = \"" + ticket.status + "\";\n");
-			str.append("var ltmBoundary = LTM!GlobalTraceModel.all.first;\n");
-			str.append("ltmBoundary.CR_Tickets.add(cr);\n");
-
-			//System.out.println(str.toString());
-			eol.parse(str.toString());
-			eol.execute();
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			model.close();
-			return -2;
+		String eolCommand = "var cr = Change_Request_Ticket.all.first();";
+		epStatus = eolModule.parseEOL(eolCommand);
+		if (epStatus != 0) {
+			System.out.println("Failed to parse eol command: " + eolCommand);
+			return epStatus;
 		}
 
-		model.close();
+		epStatus = eolModule.executeEOL();
+		if (epStatus != 0) {
+			System.out.println("Failed to execute eol command: " + eolCommand);
+			return epStatus;
+		}
+
+		Object cr = eolModule.getEOLVariable("cr");
+
+		StringBuilder str = new StringBuilder();
+		if (cr == null)
+			str.append("var cr = new LTM!Change_Request_Ticket;\n");
+		else
+			str.append("var cr = Change_Request_Ticket.all.first();\n");
+
+		str.append("cr.crID = " + ticket.id + ";\n");
+		str.append("cr.summary = \"" + ticket.summary + "\";\n");
+		str.append("cr.description = \"" + ticket.description + "\";\n");
+		str.append("cr.version = \"" + ticket.version + "\";\n");
+		str.append("cr.chHelpful = \"" + ticket.timFeedback + "\";\n");
+		str.append("cr.mergeRationale = \"" + ticket.mergeRationale + "\";\n");
+		str.append("cr.plannedLOE = " + ticket.plannedLOEHrs + ";\n");
+		str.append("cr.actualLOE = " + ticket.actualLOEHrs + ";\n");
+		str.append("cr.status = \"" + ticket.status + "\";\n");
+		str.append("var ltmBoundary = LTM!GlobalTraceModel.all.first;\n");
+		str.append("ltmBoundary.CR_Tickets.add(cr);\n");
+
+		// System.out.println(str.toString());
+		epStatus = eolModule.parseEOL(str.toString());
+		if (epStatus != 0) {
+			System.out.println("Failed to parse eol command: " + str.toString());
+			return epStatus;
+		}
+
+		epStatus = eolModule.executeEOL();
+		if (epStatus != 0) {
+			System.out.println("Failed to execute eol command: " + str.toString());
+			return epStatus;
+		}
+
+		model.closeModel();
+
 		return 0;
 	}
 
 	static HashMap<Integer, String> createNewLTMs(HashMap<Integer, Ticket> tickets) {
 		// Model Mgmt operations;
-		File ltmRoot = new File("LTM");
-		File templateModel = new File("model\\template.tim");
-		Path templateGMF = Paths.get("model\\template.tim_diagram");
+		File ltmRoot = new File(Constants.LTM_STR);
+		File templateModel = new File(Constants.TEMPLATE_TIM_FILE);
+		Path templateGMF = Paths.get(Constants.TEMPLATE_TIM_DIAG_FILE);
 
 		HashMap<Integer, String> filepathMap = new HashMap<Integer, String>();
 
@@ -88,7 +108,7 @@ public class ITSCore {
 			File[] ltms = ltmRoot.listFiles();
 			boolean ltmFound = false;
 			for (File ltm : ltms) {
-				if (ltm.getName().equals(tracTicket.id + ".tim")) {
+				if (ltm.getName().equals(tracTicket.id + Constants.TEMPLATE_FILE_EXT)) {
 					ltmFound = true;
 					break;
 				}
@@ -96,12 +116,12 @@ public class ITSCore {
 			if (!ltmFound) {
 				try {
 					String ltmFileName = tracTicket.id + ".tim";
-					FileUtil.copy(templateModel, new File(".\\LTM\\" + ltmFileName));
+					FileUtil.copy(templateModel, new File(Constants.LTM_ROOT + ltmFileName));
 
 					Charset charset = StandardCharsets.UTF_8;
 					String content = new String(Files.readAllBytes(templateGMF), charset);
-					content = content.replaceAll("FILE_NAME", tracTicket.id.toString());
-					Path ltmGMF = Paths.get(".\\LTM\\" + tracTicket.id + ".tim_diagram");
+					content = content.replaceAll(Constants.TEMPLATE_FILE_NAME_PLACEHOLDER, tracTicket.id.toString());
+					Path ltmGMF = Paths.get(Constants.LTM_ROOT + tracTicket.id + Constants.TEMPLATE_TIM_DIAG_FILE_EXT);
 					Files.write(ltmGMF, content.getBytes(charset));
 
 					filepathMap.put(tracTicket.id, ltmFileName);
@@ -111,7 +131,7 @@ public class ITSCore {
 					e.printStackTrace();
 				}
 			}
-			int status = syncCR(".\\LTM\\" + tracTicket.id + ".tim", tracTicket);
+			int status = syncCR(Constants.LTM_ROOT + tracTicket.id + Constants.TEMPLATE_FILE_EXT, tracTicket);
 			if (status < 0) {
 				System.out.println("Sync CR failed");
 			}
@@ -120,9 +140,9 @@ public class ITSCore {
 		return filepathMap;
 	}
 
-	static int copyGTM2LTM(String ltmFile, EmfModel GTM) {
+	static int copyGTM2LTM(String ltmFile, EMFModelWrapper GTM) {
 
-		File[] ltms = new File("LTM").listFiles();
+		File[] ltms = new File(Constants.LTM_STR).listFiles();
 		boolean ltmFound = false;
 		for (File ltm : ltms)
 			if (ltm.getName().equals(ltmFile)) {
@@ -130,47 +150,49 @@ public class ITSCore {
 				break;
 			}
 		if (ltmFound) {
-			EmfModel model = new EmfModel();
-			model.setMetamodelFile(".\\model\\TIM.ecore");
-			model.setModelFile(".\\LTM\\" + ltmFile);
-			model.setName("MODEL");
-			model.setReadOnLoad(true);
-			model.setStoredOnDisposal(true);
-			try {
-				model.load();
-			} catch (EolModelLoadingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				model.close();
-				return -2;
+			
+			EMFModelWrapper model = new EMFModelWrapper(ltmFile, Constants.METAMODEL, Constants.LTM_GENERIC_NAME);
+			int epStatus = model.loadModel();
+			if (epStatus != 0) {
+				System.out.println("Failed to load: " + ltmFile);
+				return epStatus;
+			}
+			
+			EOLModuleWrapper eolModule = new EOLModuleWrapper();
+			eolModule.addEMFModel(GTM);
+			eolModule.addEMFModel(model);
+
+			epStatus = eolModule.parseEOL(new File(Constants.EOL_GTM2LTM));
+			if (epStatus != 0) {
+				System.out.println("Failed to parse eol file: " + Constants.EOL_GTM2LTM);
+				return epStatus;
 			}
 
-			EolModule eol = new EolModule();
-			eol.getContext().getModelRepository().addModel(GTM);
-			eol.getContext().getModelRepository().addModel(model);
-			try {
-				eol.parse(new File(".\\eol\\GTM2LTM.eol"));
-				eol.execute();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				model.close();
-				return -3;
+			epStatus = eolModule.executeEOL();
+			if (epStatus != 0) {
+				System.out.println("Failed to execute eol file: " + Constants.EOL_GTM2LTM);
+				return epStatus;
+			}
+			
+			
+			EVLModuleWrapper evlModule = new EVLModuleWrapper();
+			evlModule.addEMFModel(model);
+				
+			epStatus = evlModule.parseEVL(new File(Constants.EVL_VALIDATE_TL));
+			if (epStatus != 0) {
+				System.out.println("Failed to parse evl file: " + Constants.EVL_VALIDATE_TL);
+				return epStatus;
 			}
 
-			EvlModule evlModule = new EvlModule();
-			evlModule.getContext().getModelRepository().addModel(model);
-
-			try {
-				evlModule.parse(new File("..\\eclipse.validation\\evl\\LTMTraceLinks.evl"));
-				evlModule.execute();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			epStatus = evlModule.executeEVL();
+			if (epStatus != 0) {
+				System.out.println("Failed to execute evl file: " + Constants.EVL_VALIDATE_TL);
+				return epStatus;
 			}
 
-			model.close();
 
+			model.closeModel();
+			
 			return 0;
 		} else
 			return -1;
@@ -186,7 +208,7 @@ public class ITSCore {
 			HashMap<Integer, Ticket> tickets = new HashMap<Integer, Ticket>();
 
 			TracConnector tracConnector = new TracConnector();
-			int status = tracConnector.trac_Connect(".\\..\\Trac");
+			int status = tracConnector.trac_Connect(Constants.TRAC_ROOT);
 
 			if (status == -1)
 				throw new Exception("Unable to connect to the ITS repository!");
@@ -201,7 +223,7 @@ public class ITSCore {
 						int timNotUseful = 0;
 
 						for (Ticket ticket : tickets.values()) {
-							int out = syncCR(".\\LTM\\" + ticket.id + ".tim", ticket);
+							int out = syncCR(Constants.LTM_ROOT + ticket.id + Constants.TEMPLATE_FILE_EXT, ticket);
 							if (out < 0) {
 								System.out.println("Sync CR failed");
 							}
@@ -227,36 +249,45 @@ public class ITSCore {
 			}
 
 			else if (args[1].equals("NEW-CR-GTM")) {
-				EmfModel model = new EmfModel();
-				model.setMetamodelFile(".\\model\\TIM.ecore");
-				model.setModelFile(".\\GTM\\GTM.tim");
-				model.setName("GTM");
-				model.setReadOnLoad(true);
-				model.setStoredOnDisposal(true);
-				model.load();
+				
+				EMFModelWrapper model = new EMFModelWrapper(Constants.GTM_FILE_PATH, Constants.METAMODEL, Constants.GTM_STR);
+				int epStatus = model.loadModel();
+				if (epStatus != 0) {
+					System.out.println("Failed to load: " + Constants.GTM_FILE_PATH);
+				}
 
-				EolModule eol = new EolModule();
-				eol.getContext().getModelRepository().addModel(model);
-				eol.parse("var createNewCR = GTMController.all.first().createNewCR;"
-						+ "var ltmCR = GTMController.all.first().ltmCR;"
-						+ "var buildVersion = GTMVersion.all.first().version;");
+				EOLModuleWrapper eolModule = new EOLModuleWrapper();
+				eolModule.addEMFModel(model);
 
-				eol.execute();
+				StringBuilder eolCommand = new StringBuilder();
+				eolCommand.append("var createNewCR = GTMController.all.first().createNewCR;\n");
+				eolCommand.append("var ltmCR = GTMController.all.first().ltmCR;\n");
+				eolCommand.append("var buildVersion = GTMVersion.all.first().version;");
+				
+				epStatus = eolModule.parseEOL(eolCommand.toString());
+				if (epStatus != 0) {
+					System.out.println("Failed to parse eol command: " + eolCommand.toString());
+				}
 
+				epStatus = eolModule.executeEOL();
+				if (epStatus != 0) {
+					System.out.println("Failed to execute eol command: " + eolCommand.toString());
+				}
+				
 				Boolean boolNewCR = false;
-				Object objNewCR = eol.getContext().getFrameStack().get("createNewCR").getValue();
+				Object objNewCR = eolModule.getEOLVariable("createNewCR");
 				if (objNewCR != null) {
 					boolNewCR = (Boolean) objNewCR;
 				}
 
 				String strLinkedLTM = "";
-				Object objLinkedLTM = eol.getContext().getFrameStack().get("ltmCR").getValue();
+				Object objLinkedLTM = eolModule.getEOLVariable("ltmCR");
 				if (objLinkedLTM != null) {
 					strLinkedLTM = objLinkedLTM.toString();
 				}
 
 				String strVersion = "";
-				Object objVersion = eol.getContext().getFrameStack().get("buildVersion").getValue();
+				Object objVersion = eolModule.getEOLVariable("buildVersion");
 				if (objVersion != null) {
 					strVersion = objVersion.toString();
 				}
@@ -270,11 +301,12 @@ public class ITSCore {
 						System.out.println(ltmStatus);
 					}
 				} else {
-					strLinkedLTM += ".tim";
+					strLinkedLTM += Constants.TEMPLATE_FILE_EXT;
 					int ltmStatus = copyGTM2LTM(strLinkedLTM, model);
 					System.out.println(ltmStatus);
 				}
-				model.close();
+				
+				model.closeModel();
 
 			} else if (args[1].equals("SYNC-CR")) {
 				if (status != -1) {
@@ -285,7 +317,21 @@ public class ITSCore {
 						createNewLTMs(tickets);
 					}
 				}
+			} else if ( (args[1].equals("MINE-LTM")) || (args[1].equals("MERGE-LTM"))) {
+			    JFileChooser fileChooser = new JFileChooser(".\\LTM\\");
+			    FileNameExtensionFilter ltmFilter = new FileNameExtensionFilter(
+			        "TIM Model", "tim");
+			    fileChooser.setFileFilter(ltmFilter);
+			    int fileStatus = fileChooser.showOpenDialog(null);
+			    if(fileStatus == JFileChooser.APPROVE_OPTION) {
+			    	String ltmFile = fileChooser.getSelectedFile().getName();
+			    	
+			    }
+				
+			} else if (args[1].equals("IMPACT-ANALYSIS")) {
+				
 			}
+			
 
 		} else {
 			System.out.println(args[0]);
