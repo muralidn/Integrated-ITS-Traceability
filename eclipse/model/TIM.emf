@@ -52,6 +52,7 @@ class Change_Request_Ticket
 	attr String mergeRationale;
 	attr Float plannedLOE;
 	attr Float actualLOE;
+	attr String status;
 	ref Artifact[*]#changeRequests affectedArtifacts;
 }
 

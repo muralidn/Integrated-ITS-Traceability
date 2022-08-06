@@ -61,6 +61,7 @@ public class TracConnector {
 						temp.description = rs.getString("description");
 						temp.summary = rs.getString("summary");
 						temp.version = rs.getString("version");
+						temp.status = rs.getString("status");
 						currentTicketID = ticketIDInt;
 					}
 
@@ -92,6 +93,7 @@ public class TracConnector {
 	public Ticket CreateNewTicket(String version) {
 		String sql = "INSERT INTO ticket(type,time,changetime,version, status,summary,description) VALUES (?,?,?,?,?,?,?)";
 		Ticket newTicket = new Ticket();
+		newTicket.status = "new";
 
 		try {
 

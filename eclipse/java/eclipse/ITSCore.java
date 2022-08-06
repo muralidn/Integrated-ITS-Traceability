@@ -57,10 +57,11 @@ public class ITSCore {
 			str.append("cr.mergeRationale = \"" + ticket.mergeRationale + "\";\n");
 			str.append("cr.plannedLOE = " + ticket.plannedLOEHrs + ";\n");
 			str.append("cr.actualLOE = " + ticket.actualLOEHrs + ";\n");
+			str.append("cr.status = \"" + ticket.status + "\";\n");
 			str.append("var ltmBoundary = LTM!GlobalTraceModel.all.first;\n");
 			str.append("ltmBoundary.CR_Tickets.add(cr);\n");
 
-			// System.out.println(str.toString());
+			//System.out.println(str.toString());
 			eol.parse(str.toString());
 			eol.execute();
 
@@ -180,6 +181,8 @@ public class ITSCore {
 		// TODO Auto-generated method stub
 
 		if (args[0].toString().equals("--mode")) {
+			
+			System.out.println(args[1]);
 			HashMap<Integer, Ticket> tickets = new HashMap<Integer, Ticket>();
 
 			TracConnector tracConnector = new TracConnector();
@@ -288,5 +291,7 @@ public class ITSCore {
 			System.out.println(args[0]);
 			throw new IllegalArgumentException("Invalid Command\nProgram Usage: ITSCore.java --mode MODE");
 		}
+		
+		System.out.println("Complete!");
 	}
 }

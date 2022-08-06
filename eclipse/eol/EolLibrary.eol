@@ -9,7 +9,7 @@ var VERIFY_LINK_LOCAL : Integer = 6;
 operation modelComparision(links : Sequence<Any>, upstreamArtifacts : OrderedSet<Any>, downstreamArtifacts : OrderedSet<Any>, msg : String) : String {
 	
 	links.println();
-	for(lnk : MODEL!Traceability in links) {
+	for(lnk : LTM!Traceability in links) {
 		var upstreamArtifact = upstreamArtifacts.selectOne(p : GTM!Artifact | p.artifactID = lnk.source.artifactID);	
 		var downstreamArtifact = downstreamArtifacts.selectOne(p : GTM!Artifact | p.artifactID = lnk.destination.artifactID);	 	
 
@@ -21,28 +21,12 @@ operation modelComparision(links : Sequence<Any>, upstreamArtifacts : OrderedSet
 				if (lnk.source.downstreamTraceLinks.size() != upstreamArtifact.downstreamTraceLinks.size()){
 					msg = msg + "- Mismatch in trace links between " + lnk.source.artifactID + " and " + upstreamArtifact.artifactID + "\n";
 				}
-				else {
-					var i : Integer = 0;
-					var j : Integer = 0;
-					while (i < lnk.source.downstreamTraceLinks.size()){
-						
-						var found : Boolean = false;
-						while (j < upstreamArtifact.downstreamTraceLinks.size()){
-							if (lnk.source.downstreamTraceLinks.at(i).traceUID == upstreamArtifact.downstreamTraceLinks.at(i).traceUID) {
-								found = true;
-							}
-							j = j + 1;
-						}
-					
-					if (found == false) {
-						msg = msg + "- Mismatch in trace links between LTM and GTM for " + lnk.source.artifactID + "\n";
-						break;
-					}		
-					i = i + 1;			
-				}
+
+				if (lnk.destination.upstreamTraceLinks.size() != downstreamArtifact.upstreamTraceLinks.size()){
+					msg = msg + "- Mismatch in trace links between " + lnk.destination.artifactID + " and " + downstreamArtifact.artifactID + "\n";
+				}				
 			}
 		}
-	}
 
 	return msg;
 }
@@ -91,18 +75,28 @@ operation getFullReqID(reqID : String, reqFile : String) : String {
 		
 }
 
-
-operation createSystemRequirement(reqID : String, cr : MODEL!Change_Request_Ticket, modelBoundary : MODEL!GlobalTraceModel, validity : Boolean) : MODEL!SystemRequirement {
-
-	var artifact = new MODEL!SystemRequirement;
-	artifact.artifactID = reqID;
+operation createArtifact(artifact : MODEL!Artifact,  artifactID : String, cr : MODEL!Change_Request_Ticket, modelBoundary : MODEL!GlobalTraceModel,  validity : Boolean) : MODEL!Artifact {
+	artifact.artifactID = artifactID;
 	if (validity)
 		artifact.progress = MODEL!Progress_Enum#HUNDRED_PERCENT;
 	else
 		artifact.progress = MODEL!Progress_Enum#ZERO;
 		
-	artifact.changeRequests.add(cr);
-	cr.affectedArtifacts.add(artifact);
+	//Hack due to a limitation
+	if (cr.crID != -999) {
+		artifact.changeRequests.add(cr);
+		cr.affectedArtifacts.add(artifact);
+	}
+	return artifact;
+
+}
+
+
+
+operation createSystemRequirement(reqID : String, cr : MODEL!Change_Request_Ticket, modelBoundary : MODEL!GlobalTraceModel, validity : Boolean) : MODEL!SystemRequirement {
+
+	var artifact = new MODEL!SystemRequirement;
+	artifact = createArtifact(artifact, reqID, cr, modelBoundary, validity);
 	modelBoundary.sysRequirements.add(artifact);
 	return artifact;
 
@@ -111,17 +105,7 @@ operation createSystemRequirement(reqID : String, cr : MODEL!Change_Request_Tick
 operation createFunctionalRequirement(reqID : String, cr : MODEL!Change_Request_Ticket, modelBoundary : MODEL!GlobalTraceModel, validity : Boolean) : MODEL!FunctionalRequirement {
 
 	var artifact = new MODEL!FunctionalRequirement;
-	artifact.artifactID = reqID;
-	if (validity)
-		artifact.progress = MODEL!Progress_Enum#HUNDRED_PERCENT;
-	else
-		artifact.progress = MODEL!Progress_Enum#ZERO;
-		
-	//Hack due to a limitation
-	if (cr.crID != -999) {
-		artifact.changeRequests.add(cr);
-		cr.affectedArtifacts.add(artifact);
-	}
+	artifact = createArtifact(artifact, reqID, cr, modelBoundary, validity);
 	modelBoundary.funcRequirements.add(artifact);
 	return artifact;
 
@@ -130,18 +114,7 @@ operation createFunctionalRequirement(reqID : String, cr : MODEL!Change_Request_
 operation createModels(artifactID : String, cr : MODEL!Change_Request_Ticket, modelBoundary : MODEL!GlobalTraceModel, validity : Boolean) : MODEL!Model {
 
 	var artifact = new MODEL!Model;
-	artifact.artifactID = artifactID;
-	
-	if (validity)
-		artifact.progress = MODEL!Progress_Enum#HUNDRED_PERCENT;
-	else
-		artifact.progress = MODEL!Progress_Enum#ZERO;
-		
-	//Hack due to a limitation
-	if (cr.crID != -999) {
-		artifact.changeRequests.add(cr);
-		cr.affectedArtifacts.add(artifact);
-	}
+	artifact = createArtifact(artifact, artifactID, cr, modelBoundary, validity);
 	modelBoundary.modelBlocks.add(artifact);
 	return artifact;
 
@@ -150,23 +123,11 @@ operation createModels(artifactID : String, cr : MODEL!Change_Request_Ticket, mo
 operation createTests(artifactID : String, cr : MODEL!Change_Request_Ticket, modelBoundary : MODEL!GlobalTraceModel, validity : Boolean) : MODEL!Test {
 
 	var artifact = new MODEL!Test;
-	artifact.artifactID = artifactID;
-
-	if (validity)
-		artifact.progress = MODEL!Progress_Enum#HUNDRED_PERCENT;
-	else
-		artifact.progress = MODEL!Progress_Enum#ZERO;
-
-	//Hack due to a limitation
-	if (cr.crID != -999) {
-		artifact.changeRequests.add(cr);
-		cr.affectedArtifacts.add(artifact);
-	}
+	artifact = createArtifact(artifact, artifactID, cr, modelBoundary, validity);
 	modelBoundary.testBlocks.add(artifact);
 	return artifact;
 
 } 
-
 
 
 operation getSystemRequirement(sysReqArtifactID : String, modelBoundary : MODEL!GlobalTraceModel) : MODEL!SystemRequirement {
@@ -175,9 +136,6 @@ operation getSystemRequirement(sysReqArtifactID : String, modelBoundary : MODEL!
 
 }
 
-
-
-
 operation createDeriveTraceLink(source : MODEL!SystemRequirement,  dest : MODEL!FunctionalRequirement, validity : Boolean, modelBoundary : MODEL!GlobalTraceModel,  traceUID : Integer) : MODEL!Traceability {
 	var traceLink = new MODEL!Derive;
 	
@@ -185,7 +143,7 @@ operation createDeriveTraceLink(source : MODEL!SystemRequirement,  dest : MODEL!
 	traceLink.source = source;
 	traceLink.destination = dest;
 	traceLink.valid = validity;
-	
+		
 	modelBoundary.deriveTraceLinks.add(traceLink);
 	return traceLink;
 	
@@ -217,7 +175,7 @@ operation createVerifyTraceLink(source : MODEL!FunctionalRequirement,  dest : MO
 	
 }
 
-operation createDeriveTraceability(sysReqArtifactID : String, funcReqArtifactID : String, cr : MODEL!Change_Request_Ticket, modelBoundary : MODEL!GlobalTraceModel, traceUID : Integer, mode : Integer, validity : Boolean) {
+operation createDeriveTraceability(sysReqArtifactID : String, funcReqArtifactID : String, cr : MODEL!Change_Request_Ticket, modelBoundary : MODEL!GlobalTraceModel, traceUID : Integer, mode : Integer, validity : Boolean) : MODEL!Traceability {
 
 		var systemRequirement = getSystemRequirement(sysReqArtifactID, modelBoundary);
 		var funcRequirement = modelBoundary.funcRequirements.selectOne(p : MODEL!FunctionalRequirement | p.artifactID = funcReqArtifactID);
@@ -269,11 +227,13 @@ operation createDeriveTraceability(sysReqArtifactID : String, funcReqArtifactID 
 				
 		traceLink = createDeriveTraceLink(sourceArtifact, destArtifact, validity, modelBoundary, traceUID);
 		sourceArtifact.downstreamTraceLinks.add(traceLink);
-		destArtifact.upstreamTraceLinks.add(traceLink);			
+		destArtifact.upstreamTraceLinks.add(traceLink);		
+		
+		return traceLink;
 			
 }
 
-operation createImplementVerifyTraceability(artifactID : String, funcReqArtifactID : String, cr : MODEL!Change_Request_Ticket, modelBoundary : MODEL!GlobalTraceModel, traceUID : Integer, mode : Integer, validity : Boolean) {
+operation createImplementVerifyTraceability(artifactID : String, funcReqArtifactID : String, cr : MODEL!Change_Request_Ticket, modelBoundary : MODEL!GlobalTraceModel, traceUID : Integer, mode : Integer, validity : Boolean) : MODEL!Traceability {
 
 
 		var funcRequirement = modelBoundary.funcRequirements.selectOne(p : MODEL!FunctionalRequirement | p.artifactID = funcReqArtifactID);
@@ -345,5 +305,39 @@ operation createImplementVerifyTraceability(artifactID : String, funcReqArtifact
 		sourceArtifact.downstreamTraceLinks.add(traceLink);
 		destArtifact.upstreamTraceLinks.add(traceLink);	
 		
+		return traceLink;
 			
+}
+
+operation copyGTMCR(gtmArtifact : GTM!Artifact, ltmArtifact : MODEL!Artifact, modelBoundary : MODEL!GlobalTraceModel) {
+
+	var i : Integer = 0;
+	while (i < gtmArtifact.changeRequests.size) {
+		
+		
+		var crGTM = gtmArtifact.changeRequests.at(i);
+		var crLTM = modelBoundary.CR_Tickets.selectOne(p : MODEL!Change_Request_Ticket | p.crID = crGTM.crID);
+		
+		if (crLTM == null) {
+			crLTM = new MODEL!Change_Request_Ticket;
+
+			crLTM.crID = crGTM.crID;
+			crLTM.summary = crGTM.summary;
+			crLTM.description = crGTM.description;
+			crLTM.version = crGTM.version;
+			crLTM.chHelpful = crGTM.chHelpful;
+			crLTM.mergeRationale = crGTM.mergeRationale;
+			crLTM.plannedLOE = crGTM.plannedLOE;
+			crLTM.actualLOE = crGTM.actualLOE;
+			crLTM.status = crGTM.status;
+			
+			modelBoundary.CR_Tickets.add(crLTM);
+		}
+		
+		ltmArtifact.changeRequests.add(crLTM);
+		crLTM.affectedArtifacts.add(ltmArtifact);
+		
+		i = i + 1;
+	}	
+
 }

@@ -487,8 +487,18 @@ public class TIMPackageImpl extends EPackageImpl implements TIMPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getChange_Request_Ticket_Status() {
+		return (EAttribute)change_Request_TicketEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EReference getChange_Request_Ticket_AffectedArtifacts() {
-		return (EReference)change_Request_TicketEClass.getEStructuralFeatures().get(8);
+		return (EReference)change_Request_TicketEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -852,6 +862,7 @@ public class TIMPackageImpl extends EPackageImpl implements TIMPackage {
 		createEAttribute(change_Request_TicketEClass, CHANGE_REQUEST_TICKET__MERGE_RATIONALE);
 		createEAttribute(change_Request_TicketEClass, CHANGE_REQUEST_TICKET__PLANNED_LOE);
 		createEAttribute(change_Request_TicketEClass, CHANGE_REQUEST_TICKET__ACTUAL_LOE);
+		createEAttribute(change_Request_TicketEClass, CHANGE_REQUEST_TICKET__STATUS);
 		createEReference(change_Request_TicketEClass, CHANGE_REQUEST_TICKET__AFFECTED_ARTIFACTS);
 
 		artifactEClass = createEClass(ARTIFACT);
@@ -965,6 +976,7 @@ public class TIMPackageImpl extends EPackageImpl implements TIMPackage {
 		initEAttribute(getChange_Request_Ticket_MergeRationale(), ecorePackage.getEString(), "mergeRationale", null, 0, 1, Change_Request_Ticket.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getChange_Request_Ticket_PlannedLOE(), ecorePackage.getEFloatObject(), "plannedLOE", null, 0, 1, Change_Request_Ticket.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getChange_Request_Ticket_ActualLOE(), ecorePackage.getEFloatObject(), "actualLOE", null, 0, 1, Change_Request_Ticket.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getChange_Request_Ticket_Status(), ecorePackage.getEString(), "status", null, 0, 1, Change_Request_Ticket.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getChange_Request_Ticket_AffectedArtifacts(), this.getArtifact(), this.getArtifact_ChangeRequests(), "affectedArtifacts", null, 0, -1, Change_Request_Ticket.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(artifactEClass, Artifact.class, "Artifact", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

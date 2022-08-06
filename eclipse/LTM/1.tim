@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GlobalTraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Trace_Information_Model" xsi:schemaLocation="Trace_Information_Model ./model/TIM.ecore">
-  <CR_Tickets crID="1" summary="Testing_First_ticket" description="This is the first test ticket for this project" version="1.0" chHelpful="YES" mergeRationale="null" plannedLOE="8.0" actualLOE="6.0"/>
+  <CR_Tickets crID="1" summary="Testing_First_ticket" description="This is the first test ticket for this project" version="1.0" chHelpful="YES" mergeRationale="null" plannedLOE="8.0" actualLOE="6.0" status="closed"/>
 </GlobalTraceModel>

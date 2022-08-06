@@ -9,16 +9,42 @@ var deriveLinks = LTM!Derive.all;
 var implementLinks = LTM!Implement.all;
 var verifyLinks = LTM!Verify.all;
 
-displayMsg = modelcomparision(deriveLinks, gtmBoundary.sysRequirements, gtmBoundary.funcRequirements, displayMsg).println();
-displayMsg = modelcomparision(implementLinks, gtmBoundary.funcRequirements, gtmBoundary.modelBlocks, displayMsg).println();
-displayMsg = modelcomparision(verifyLinks, gtmBoundary.funcRequirements, gtmBoundary.testBlocks, displayMsg).println();
+var cr = LTM!Change_Request_Ticket.all.selectOne(p : LTM!Change_Request_Ticket | p.status != "closed");
 
+displayMsg = modelComparision(deriveLinks, gtmBoundary.sysRequirements, gtmBoundary.funcRequirements, displayMsg);
+displayMsg = modelComparision(implementLinks, gtmBoundary.funcRequirements, gtmBoundary.modelBlocks, displayMsg);
+displayMsg = modelComparision(verifyLinks, gtmBoundary.funcRequirements, gtmBoundary.testBlocks, displayMsg);
 
-
-if (displayMsg == "") {
+if (displayMsg == "") {	
+	var ltmArtifacts = LTM!Artifact.all;
+	var gtmArtifacts = GTM!Artifact.all;
+	var gtmCRs = GTM!Change_Request_Ticket.all;
+	for(artf : LTM!Artifact in ltmArtifacts)	
+	{
+		var gtmCopy  = gtmArtifacts.selectOne(p : GTM!Artifact | p.artifactID = artf.artifactID);	
+		
+		var gtmCR = null;
+		gtmCR = gtmCRs.selectOne(p : GTM!Change_Request_Ticket | p.crID == cr.crID);
+		if (gtmCR == null) {
+			gtmCR = new GTM!Change_Request_Ticket;
+			
+			gtmCR.crID = cr.crID;
+			gtmCR.summary = cr.summary;
+			gtmCR.description = cr.description;
+			gtmCR.version = cr.version;
+			gtmCR.chHelpful = cr.chHelpful;
+			gtmCR.mergeRationale = cr.mergeRationale;
+			gtmCR.plannedLOE = cr.plannedLOE;
+			gtmCR.actualLOE = cr.actualLOE;
+			gtmCR.status = cr.status;
+			
+			gtmBoundary.CR_Tickets.add(gtmCR);
+		}
+		
+		gtmCopy.changeRequests.add(gtmCR);
+	}	
 	
-	
-
+	System.user.inform("Merge complete!");
 }
-
-System.user.inform(displayMsg);
+else
+	System.user.inform(displayMsg);

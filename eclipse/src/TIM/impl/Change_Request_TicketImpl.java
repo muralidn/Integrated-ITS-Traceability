@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link TIM.impl.Change_Request_TicketImpl#getMergeRationale <em>Merge Rationale</em>}</li>
  *   <li>{@link TIM.impl.Change_Request_TicketImpl#getPlannedLOE <em>Planned LOE</em>}</li>
  *   <li>{@link TIM.impl.Change_Request_TicketImpl#getActualLOE <em>Actual LOE</em>}</li>
+ *   <li>{@link TIM.impl.Change_Request_TicketImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link TIM.impl.Change_Request_TicketImpl#getAffectedArtifacts <em>Affected Artifacts</em>}</li>
  * </ul>
  *
@@ -203,6 +204,26 @@ public class Change_Request_TicketImpl extends EObjectImpl implements Change_Req
 	 * @ordered
 	 */
 	protected Float actualLOE = ACTUAL_LOE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String STATUS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected String status = STATUS_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getAffectedArtifacts() <em>Affected Artifacts</em>}' reference list.
@@ -423,6 +444,29 @@ public class Change_Request_TicketImpl extends EObjectImpl implements Change_Req
 	 * @generated
 	 */
 	@Override
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setStatus(String newStatus) {
+		String oldStatus = status;
+		status = newStatus;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TIMPackage.CHANGE_REQUEST_TICKET__STATUS, oldStatus, status));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<Artifact> getAffectedArtifacts() {
 		if (affectedArtifacts == null) {
 			affectedArtifacts = new EObjectWithInverseResolvingEList.ManyInverse<Artifact>(Artifact.class, this, TIMPackage.CHANGE_REQUEST_TICKET__AFFECTED_ARTIFACTS, TIMPackage.ARTIFACT__CHANGE_REQUESTS);
@@ -483,6 +527,8 @@ public class Change_Request_TicketImpl extends EObjectImpl implements Change_Req
 				return getPlannedLOE();
 			case TIMPackage.CHANGE_REQUEST_TICKET__ACTUAL_LOE:
 				return getActualLOE();
+			case TIMPackage.CHANGE_REQUEST_TICKET__STATUS:
+				return getStatus();
 			case TIMPackage.CHANGE_REQUEST_TICKET__AFFECTED_ARTIFACTS:
 				return getAffectedArtifacts();
 		}
@@ -521,6 +567,9 @@ public class Change_Request_TicketImpl extends EObjectImpl implements Change_Req
 				return;
 			case TIMPackage.CHANGE_REQUEST_TICKET__ACTUAL_LOE:
 				setActualLOE((Float)newValue);
+				return;
+			case TIMPackage.CHANGE_REQUEST_TICKET__STATUS:
+				setStatus((String)newValue);
 				return;
 			case TIMPackage.CHANGE_REQUEST_TICKET__AFFECTED_ARTIFACTS:
 				getAffectedArtifacts().clear();
@@ -562,6 +611,9 @@ public class Change_Request_TicketImpl extends EObjectImpl implements Change_Req
 			case TIMPackage.CHANGE_REQUEST_TICKET__ACTUAL_LOE:
 				setActualLOE(ACTUAL_LOE_EDEFAULT);
 				return;
+			case TIMPackage.CHANGE_REQUEST_TICKET__STATUS:
+				setStatus(STATUS_EDEFAULT);
+				return;
 			case TIMPackage.CHANGE_REQUEST_TICKET__AFFECTED_ARTIFACTS:
 				getAffectedArtifacts().clear();
 				return;
@@ -593,6 +645,8 @@ public class Change_Request_TicketImpl extends EObjectImpl implements Change_Req
 				return PLANNED_LOE_EDEFAULT == null ? plannedLOE != null : !PLANNED_LOE_EDEFAULT.equals(plannedLOE);
 			case TIMPackage.CHANGE_REQUEST_TICKET__ACTUAL_LOE:
 				return ACTUAL_LOE_EDEFAULT == null ? actualLOE != null : !ACTUAL_LOE_EDEFAULT.equals(actualLOE);
+			case TIMPackage.CHANGE_REQUEST_TICKET__STATUS:
+				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
 			case TIMPackage.CHANGE_REQUEST_TICKET__AFFECTED_ARTIFACTS:
 				return affectedArtifacts != null && !affectedArtifacts.isEmpty();
 		}
@@ -625,6 +679,8 @@ public class Change_Request_TicketImpl extends EObjectImpl implements Change_Req
 		result.append(plannedLOE);
 		result.append(", actualLOE: ");
 		result.append(actualLOE);
+		result.append(", status: ");
+		result.append(status);
 		result.append(')');
 		return result.toString();
 	}

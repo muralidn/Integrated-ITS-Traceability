@@ -68,6 +68,7 @@ public class Change_Request_TicketItemProvider
 			addMergeRationalePropertyDescriptor(object);
 			addPlannedLOEPropertyDescriptor(object);
 			addActualLOEPropertyDescriptor(object);
+			addStatusPropertyDescriptor(object);
 			addAffectedArtifactsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -250,6 +251,28 @@ public class Change_Request_TicketItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Status feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStatusPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Change_Request_Ticket_status_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Change_Request_Ticket_status_feature", "_UI_Change_Request_Ticket_type"),
+				 TIMPackage.Literals.CHANGE_REQUEST_TICKET__STATUS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Affected Artifacts feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -315,6 +338,7 @@ public class Change_Request_TicketItemProvider
 			case TIMPackage.CHANGE_REQUEST_TICKET__MERGE_RATIONALE:
 			case TIMPackage.CHANGE_REQUEST_TICKET__PLANNED_LOE:
 			case TIMPackage.CHANGE_REQUEST_TICKET__ACTUAL_LOE:
+			case TIMPackage.CHANGE_REQUEST_TICKET__STATUS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

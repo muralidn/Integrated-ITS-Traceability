@@ -351,13 +351,22 @@ public interface TIMPackage extends EPackage {
 	int CHANGE_REQUEST_TICKET__ACTUAL_LOE = 7;
 
 	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE_REQUEST_TICKET__STATUS = 8;
+
+	/**
 	 * The feature id for the '<em><b>Affected Artifacts</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHANGE_REQUEST_TICKET__AFFECTED_ARTIFACTS = 8;
+	int CHANGE_REQUEST_TICKET__AFFECTED_ARTIFACTS = 9;
 
 	/**
 	 * The number of structural features of the '<em>Change Request Ticket</em>' class.
@@ -366,7 +375,7 @@ public interface TIMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CHANGE_REQUEST_TICKET_FEATURE_COUNT = 9;
+	int CHANGE_REQUEST_TICKET_FEATURE_COUNT = 10;
 
 	/**
 	 * The meta object id for the '{@link TIM.impl.ArtifactImpl <em>Artifact</em>}' class.
@@ -1232,6 +1241,17 @@ public interface TIMPackage extends EPackage {
 	EAttribute getChange_Request_Ticket_ActualLOE();
 
 	/**
+	 * Returns the meta object for the attribute '{@link TIM.Change_Request_Ticket#getStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status</em>'.
+	 * @see TIM.Change_Request_Ticket#getStatus()
+	 * @see #getChange_Request_Ticket()
+	 * @generated
+	 */
+	EAttribute getChange_Request_Ticket_Status();
+
+	/**
 	 * Returns the meta object for the reference list '{@link TIM.Change_Request_Ticket#getAffectedArtifacts <em>Affected Artifacts</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1817,6 +1837,14 @@ public interface TIMPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CHANGE_REQUEST_TICKET__ACTUAL_LOE = eINSTANCE.getChange_Request_Ticket_ActualLOE();
+
+		/**
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CHANGE_REQUEST_TICKET__STATUS = eINSTANCE.getChange_Request_Ticket_Status();
 
 		/**
 		 * The meta object literal for the '<em><b>Affected Artifacts</b></em>' reference list feature.

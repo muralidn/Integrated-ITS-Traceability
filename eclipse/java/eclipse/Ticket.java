@@ -7,6 +7,7 @@ public class Ticket {
 	String timFeedback = "";
 	String version = "";
 	String mergeRationale = "";
+	String status = "";
 	Float plannedLOEHrs;
 	Float actualLOEHrs;
 }

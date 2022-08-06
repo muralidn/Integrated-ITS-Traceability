@@ -44,6 +44,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TIM.ecore#//Change_Request_Ticket/mergeRationale"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TIM.ecore#//Change_Request_Ticket/plannedLOE"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TIM.ecore#//Change_Request_Ticket/actualLOE"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TIM.ecore#//Change_Request_Ticket/status"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//Change_Request_Ticket/affectedArtifacts"/>
     </genClasses>
     <genClasses image="false" ecoreClass="TIM.ecore#//Artifact">

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="Trace_Information_Model" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmi:id="_Fom3UBUEEe26Wufd1CSN3g" type="TIM" name="GTM.tim_diagram" measurementUnit="Pixel">
-  <children xmi:type="notation:Shape" xmi:id="_WbatMBUEEe26Wufd1CSN3g" type="2007" fontName="Segoe UI">
-    <children xmi:type="notation:DecorationNode" xmi:id="_WbbUQBUEEe26Wufd1CSN3g" type="5007"/>
-    <element xmi:type="GTMVersion" href="GTM.tim#//@gtmVersion"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WbatMRUEEe26Wufd1CSN3g" x="66" y="343"/>
-  </children>
-  <children xmi:type="notation:Shape" xmi:id="_YgSH8BUEEe26Wufd1CSN3g" type="2005" fontName="Segoe UI">
-    <children xmi:type="notation:DecorationNode" xmi:id="_YgSvABUEEe26Wufd1CSN3g" type="5005"/>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="Trace_Information_Model" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmi:id="_MnUCsBWwEe2G6ps6JtOS_w" type="TIM" name="GTM.tim_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_SiWdwBWwEe2G6ps6JtOS_w" type="2005" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_SiWdwhWwEe2G6ps6JtOS_w" type="5005"/>
     <element xmi:type="GTMController" href="GTM.tim#//@gtmController"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YgSH8RUEEe26Wufd1CSN3g" x="60" y="420"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_SiWdwRWwEe2G6ps6JtOS_w" x="48" y="408"/>
   </children>
-  <styles xmi:type="notation:DiagramStyle" xmi:id="_Fom3URUEEe26Wufd1CSN3g"/>
+  <children xmi:type="notation:Shape" xmi:id="_TLN0kBWwEe2G6ps6JtOS_w" type="2007" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_TLN0khWwEe2G6ps6JtOS_w" type="5007"/>
+    <element xmi:type="GTMVersion" href="GTM.tim#//@gtmVersion"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TLN0kRWwEe2G6ps6JtOS_w" x="48" y="348"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_MnUCsRWwEe2G6ps6JtOS_w"/>
   <element xmi:type="GlobalTraceModel" href="GTM.tim#/"/>
 </notation:Diagram>

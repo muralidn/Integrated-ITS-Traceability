@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link TIM.Change_Request_Ticket#getMergeRationale <em>Merge Rationale</em>}</li>
  *   <li>{@link TIM.Change_Request_Ticket#getPlannedLOE <em>Planned LOE</em>}</li>
  *   <li>{@link TIM.Change_Request_Ticket#getActualLOE <em>Actual LOE</em>}</li>
+ *   <li>{@link TIM.Change_Request_Ticket#getStatus <em>Status</em>}</li>
  *   <li>{@link TIM.Change_Request_Ticket#getAffectedArtifacts <em>Affected Artifacts</em>}</li>
  * </ul>
  *
@@ -206,6 +207,28 @@ public interface Change_Request_Ticket extends EObject {
 	 * @generated
 	 */
 	void setActualLOE(Float value);
+
+	/**
+	 * Returns the value of the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Status</em>' attribute.
+	 * @see #setStatus(String)
+	 * @see TIM.TIMPackage#getChange_Request_Ticket_Status()
+	 * @model
+	 * @generated
+	 */
+	String getStatus();
+
+	/**
+	 * Sets the value of the '{@link TIM.Change_Request_Ticket#getStatus <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Status</em>' attribute.
+	 * @see #getStatus()
+	 * @generated
+	 */
+	void setStatus(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Affected Artifacts</b></em>' reference list.
