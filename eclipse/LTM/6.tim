@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GlobalTraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Trace_Information_Model" xsi:schemaLocation="Trace_Information_Model ./model/TIM.ecore">
-  <CR_Tickets crID="6" summary="Test ticket no 5" description="Test ticket" version="1.0" chHelpful="NO" mergeRationale="null" plannedLOE="0.0" actualLOE="0.0" status="accepted"/>
+  <sysRequirements artifactID="crs_req.slreqx-23" changeRequests="//@CR_Tickets.0" downstreamTraceLinks="//@deriveTraceLinks.0 //@deriveTraceLinks.1"/>
+  <funcRequirements artifactID="crs_req_func_spec.slreqx-6" changeRequests="//@CR_Tickets.0" downstreamTraceLinks="//@implementTraceLinks.0 //@implementTraceLinks.1"/>
+  <funcRequirements artifactID="crs_req_func_spec.slreqx-18" changeRequests="//@CR_Tickets.0" upstreamTraceLinks="//@deriveTraceLinks.0" downstreamTraceLinks="//@implementTraceLinks.2"/>
+  <funcRequirements artifactID="crs_req_func_spec.slreqx-17" changeRequests="//@CR_Tickets.0" upstreamTraceLinks="//@deriveTraceLinks.1" downstreamTraceLinks="//@implementTraceLinks.3 //@verifyTraceLinks.0"/>
+  <funcRequirements artifactID="crs_req_func_spec.slreqx-4" changeRequests="//@CR_Tickets.0" downstreamTraceLinks="//@implementTraceLinks.4"/>
+  <modelBlocks artifactID="crs_controller.slx-:272" changeRequests="//@CR_Tickets.0" upstreamTraceLinks="//@implementTraceLinks.0"/>
+  <modelBlocks artifactID="crs_controller.slx-:266" changeRequests="//@CR_Tickets.0" upstreamTraceLinks="//@implementTraceLinks.1 //@implementTraceLinks.2"/>
+  <modelBlocks artifactID="crs_controller.slx-:265" changeRequests="//@CR_Tickets.0" upstreamTraceLinks="//@implementTraceLinks.3 //@implementTraceLinks.4"/>
+  <testBlocks artifactID="DriverSwRequest_Tests.mldatx-cf638d7b-110b-461c-b447-1a045613ac3f" changeRequests="//@CR_Tickets.0" upstreamTraceLinks="//@verifyTraceLinks.0"/>
+  <deriveTraceLinks traceUID="1011" valid="false" source="//@sysRequirements.0" destination="//@funcRequirements.1"/>
+  <deriveTraceLinks traceUID="1010" valid="false" source="//@sysRequirements.0" destination="//@funcRequirements.2"/>
+  <implementTraceLinks traceUID="1030" valid="false" source="//@funcRequirements.0" destination="//@modelBlocks.0"/>
+  <implementTraceLinks traceUID="1031" valid="false" source="//@funcRequirements.0" destination="//@modelBlocks.1"/>
+  <implementTraceLinks traceUID="1043" valid="false" source="//@funcRequirements.1" destination="//@modelBlocks.1"/>
+  <implementTraceLinks traceUID="1041" valid="false" source="//@funcRequirements.2" destination="//@modelBlocks.2"/>
+  <implementTraceLinks traceUID="1029" valid="false" source="//@funcRequirements.3" destination="//@modelBlocks.2"/>
+  <verifyTraceLinks traceUID="1018" valid="false" source="//@funcRequirements.2" destination="//@testBlocks.0"/>
+  <CR_Tickets crID="6" summary="Test ticket no 5" description="Test ticket" version="1.0" chHelpful="NO" mergeRationale="null" plannedLOE="0.0" actualLOE="0.0" status="accepted" affectedArtifacts="//@funcRequirements.0 //@modelBlocks.0 //@modelBlocks.1 //@funcRequirements.1 //@sysRequirements.0 //@funcRequirements.2 //@modelBlocks.2 //@testBlocks.0 //@funcRequirements.3"/>
 </GlobalTraceModel>

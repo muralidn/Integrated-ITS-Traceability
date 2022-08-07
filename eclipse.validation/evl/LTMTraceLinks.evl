@@ -38,9 +38,10 @@ context Artifact {
 
 post
 {
-
-validationFail.println("Validation Fail: ");
-
+	if (validationFail)
+ 		"LTM Validation Failed".println();
+	else
+		"LTM Validation Pass".println();	
 }
 
 

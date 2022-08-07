@@ -8,7 +8,7 @@ var VERIFY_LINK_LOCAL : Integer = 6;
 
 operation modelComparision(links : Sequence<Any>, upstreamArtifacts : OrderedSet<Any>, downstreamArtifacts : OrderedSet<Any>, msg : String) : String {
 	
-	links.println();
+	//links.println();
 	for(lnk : LTM!Traceability in links) {
 		var upstreamArtifact = upstreamArtifacts.selectOne(p : GTM!Artifact | p.artifactID = lnk.source.artifactID);	
 		var downstreamArtifact = downstreamArtifacts.selectOne(p : GTM!Artifact | p.artifactID = lnk.destination.artifactID);	 	
@@ -313,7 +313,6 @@ operation copyGTMCR(gtmArtifact : GTM!Artifact, ltmArtifact : MODEL!Artifact, mo
 
 	var i : Integer = 0;
 	while (i < gtmArtifact.changeRequests.size) {
-		
 		
 		var crGTM = gtmArtifact.changeRequests.at(i);
 		var crLTM = modelBoundary.CR_Tickets.selectOne(p : MODEL!Change_Request_Ticket | p.crID = crGTM.crID);
