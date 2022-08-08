@@ -123,6 +123,7 @@
     <eAnnotations source="gmf.link">
       <details key="label" value="type"/>
     </eAnnotations>
+    <eAnnotations/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="IMPLEMENT"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//FunctionalRequirement"/>
@@ -132,6 +133,7 @@
     <eAnnotations source="gmf.link">
       <details key="label" value="type"/>
     </eAnnotations>
+    <eAnnotations/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="VERIFY"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//FunctionalRequirement"/>

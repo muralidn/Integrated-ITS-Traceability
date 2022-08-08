@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GlobalTraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Trace_Information_Model" xsi:schemaLocation="Trace_Information_Model ./model/TIM.ecore">
+<GlobalTraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="Trace_Information_Model">
   <gtmController ltmCR="6"/>
   <gtmVersion version="1.0"/>
   <sysRequirements artifactID="crs_req.slreqx-10" progress="HUNDRED_PERCENT" changeRequests="//@CR_Tickets.0 //@CR_Tickets.1" downstreamTraceLinks="//@deriveTraceLinks.0"/>
@@ -10,7 +10,7 @@
   <sysRequirements artifactID="crs_req.slreqx-21" progress="HUNDRED_PERCENT" downstreamTraceLinks="//@deriveTraceLinks.5 //@deriveTraceLinks.6"/>
   <sysRequirements artifactID="crs_req.slreqx-22" progress="HUNDRED_PERCENT" downstreamTraceLinks="//@deriveTraceLinks.8 //@deriveTraceLinks.9"/>
   <sysRequirements artifactID="crs_req.slreqx-23" progress="HUNDRED_PERCENT" downstreamTraceLinks="//@deriveTraceLinks.10 //@deriveTraceLinks.11"/>
-  <funcRequirements artifactID="crs_req_func_spec.slreqx-9" progress="HUNDRED_PERCENT" changeRequests="//@CR_Tickets.0 //@CR_Tickets.1" upstreamTraceLinks="//@deriveTraceLinks.0" downstreamTraceLinks="//@verifyTraceLinks.0 //@implementTraceLinks.14 //@implementTraceLinks.24"/>
+  <funcRequirements artifactID="crs_req_func_spec.slreqx-9" progress="HUNDRED_PERCENT" changeRequests="//@CR_Tickets.0 //@CR_Tickets.1" select="true" upstreamTraceLinks="//@deriveTraceLinks.0" downstreamTraceLinks="//@verifyTraceLinks.0 //@implementTraceLinks.14 //@implementTraceLinks.24"/>
   <funcRequirements artifactID="crs_req_func_spec.slreqx-7" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@deriveTraceLinks.1" downstreamTraceLinks="//@verifyTraceLinks.1 //@implementTraceLinks.12 //@implementTraceLinks.27"/>
   <funcRequirements artifactID="crs_req_func_spec.slreqx-8" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@deriveTraceLinks.2 //@deriveTraceLinks.3" downstreamTraceLinks="//@implementTraceLinks.13 //@implementTraceLinks.26"/>
   <funcRequirements artifactID="crs_req_func_spec.slreqx-11" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@deriveTraceLinks.4" downstreamTraceLinks="//@verifyTraceLinks.2 //@implementTraceLinks.16"/>
@@ -72,7 +72,7 @@
   <modelBlocks artifactID="crs_controller.slx-:266" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@implementTraceLinks.11 //@implementTraceLinks.23"/>
   <modelBlocks artifactID="crs_controller.slx-:254" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@implementTraceLinks.12"/>
   <modelBlocks artifactID="crs_controller.slx-:256" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@implementTraceLinks.13"/>
-  <modelBlocks artifactID="crs_controller.slx-:255" progress="HUNDRED_PERCENT" changeRequests="//@CR_Tickets.0 //@CR_Tickets.1" upstreamTraceLinks="//@implementTraceLinks.14"/>
+  <modelBlocks artifactID="crs_controller.slx-:255" progress="HUNDRED_PERCENT" changeRequests="//@CR_Tickets.0 //@CR_Tickets.1" select="true" upstreamTraceLinks="//@implementTraceLinks.14"/>
   <modelBlocks artifactID="crs_controller.slx-:257" progress="HUNDRED_PERCENT" changeRequests="//@CR_Tickets.3" upstreamTraceLinks="//@implementTraceLinks.15"/>
   <modelBlocks artifactID="crs_controller.slx-:297" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@implementTraceLinks.16"/>
   <modelBlocks artifactID="crs_controller.slx-:258" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@implementTraceLinks.17"/>
@@ -80,7 +80,7 @@
   <modelBlocks artifactID="crs_controller.slx-:304" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@implementTraceLinks.19"/>
   <modelBlocks artifactID="crs_controller.slx-:305" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@implementTraceLinks.20"/>
   <modelBlocks artifactID="crs_controller.slx-:262" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@implementTraceLinks.22"/>
-  <modelBlocks artifactID="crs_controller.slx-:250" progress="HUNDRED_PERCENT" changeRequests="//@CR_Tickets.0 //@CR_Tickets.1" upstreamTraceLinks="//@implementTraceLinks.24"/>
+  <modelBlocks artifactID="crs_controller.slx-:250" progress="HUNDRED_PERCENT" changeRequests="//@CR_Tickets.0 //@CR_Tickets.1" select="true" upstreamTraceLinks="//@implementTraceLinks.24"/>
   <modelBlocks artifactID="crs_controller.slx-:252" progress="HUNDRED_PERCENT" changeRequests="//@CR_Tickets.4" upstreamTraceLinks="//@implementTraceLinks.25"/>
   <modelBlocks artifactID="crs_controller.slx-:251" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@implementTraceLinks.26"/>
   <modelBlocks artifactID="crs_controller.slx-:249" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@implementTraceLinks.27"/>
@@ -129,7 +129,7 @@
   <modelBlocks artifactID="crs_controller.slx-:360" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@implementTraceLinks.71 //@implementTraceLinks.72"/>
   <modelBlocks artifactID="crs_controller.slx-:377" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@implementTraceLinks.73"/>
   <modelBlocks artifactID="crs_controller.slx-:376" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@implementTraceLinks.74"/>
-  <testBlocks artifactID="DriverSwRequest_Tests.mldatx-3b7651c7-826b-431c-928b-f1f80a674351" progress="HUNDRED_PERCENT" changeRequests="//@CR_Tickets.0 //@CR_Tickets.1" upstreamTraceLinks="//@verifyTraceLinks.0"/>
+  <testBlocks artifactID="DriverSwRequest_Tests.mldatx-3b7651c7-826b-431c-928b-f1f80a674351" progress="HUNDRED_PERCENT" changeRequests="//@CR_Tickets.0 //@CR_Tickets.1" select="true" upstreamTraceLinks="//@verifyTraceLinks.0"/>
   <testBlocks artifactID="DriverSwRequest_Tests.mldatx-ec133a6e-dc45-4caa-8f29-1730aa78505a" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@verifyTraceLinks.1"/>
   <testBlocks artifactID="DriverSwRequest_Tests.mldatx-03de6c03-1f01-4a2e-bd03-c5f830c1ca29" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@verifyTraceLinks.2 //@verifyTraceLinks.7"/>
   <testBlocks artifactID="DriverSwRequest_Tests.mldatx-2f700377-88e1-485f-99ce-4b98b21ca5a9" progress="HUNDRED_PERCENT" upstreamTraceLinks="//@verifyTraceLinks.3"/>
