@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GlobalTraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Trace_Information_Model" xsi:schemaLocation="Trace_Information_Model ./model/TIM.ecore">
-  <CR_Tickets crID="4" summary="Test ticket 4" description="testing ticket 4" version="1.0" chHelpful="YES" mergeRationale="null" plannedLOE="8.0" actualLOE="8.0" status="closed"/>
+  <sysRequirements artifactID="crs_req.slreqx-11" progress="HUNDRED_PERCENT" changeRequests="//@CR_Tickets.0" downstreamTraceLinks="//@deriveTraceLinks.0"/>
+  <funcRequirements artifactID="crs_req_func_spec.slreqx-7" progress="HUNDRED_PERCENT" changeRequests="//@CR_Tickets.0" upstreamTraceLinks="//@deriveTraceLinks.0" downstreamTraceLinks="//@implementTraceLinks.0 //@implementTraceLinks.1 //@verifyTraceLinks.0"/>
+  <modelBlocks artifactID="crs_controller.slx-:254" progress="HUNDRED_PERCENT" changeRequests="//@CR_Tickets.0" upstreamTraceLinks="//@implementTraceLinks.0"/>
+  <modelBlocks artifactID="crs_controller.slx-:249" progress="SEVENTY_FIVE_PERCENT" changeRequests="//@CR_Tickets.0" upstreamTraceLinks="//@implementTraceLinks.1"/>
+  <testBlocks artifactID="DriverSwRequest_Tests.mldatx-ec133a6e-dc45-4caa-8f29-1730aa78505a" changeRequests="//@CR_Tickets.0" upstreamTraceLinks="//@verifyTraceLinks.0"/>
+  <deriveTraceLinks traceUID="1001" source="//@sysRequirements.0" destination="//@funcRequirements.0"/>
+  <implementTraceLinks traceUID="1032" source="//@funcRequirements.0" destination="//@modelBlocks.0"/>
+  <implementTraceLinks traceUID="1047" valid="false" source="//@funcRequirements.0" destination="//@modelBlocks.1"/>
+  <verifyTraceLinks traceUID="1013" valid="false" source="//@funcRequirements.0" destination="//@testBlocks.0"/>
+  <CR_Tickets crID="4" summary="Test ticket 4" description="testing ticket 4" version="1.0" chHelpful="YES" mergeRationale="null" plannedLOE="8.0" actualLOE="8.0" status="closed" affectedArtifacts="//@sysRequirements.0 //@funcRequirements.0 //@modelBlocks.0 //@modelBlocks.1 //@testBlocks.0"/>
 </GlobalTraceModel>

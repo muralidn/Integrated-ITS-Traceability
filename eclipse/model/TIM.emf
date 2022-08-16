@@ -87,7 +87,7 @@ abstract class Traceability
 @gmf.link(label = type)
 class Derive extends Traceability 
 {
-	attr String type = "DERIVE";
+	readonly attr String type = "DERIVE";
 	ref SystemRequirement#destination source;
 	ref FunctionalRequirement#source destination;
 }
@@ -95,7 +95,7 @@ class Derive extends Traceability
 @gmf.link(label = type)
 class Implement extends Traceability 
 {
-	attr String type = "IMPLEMENT";
+	readonly attr String type = "IMPLEMENT";
 	ref FunctionalRequirement#destination source;
 	ref Model#source destination;
 }
@@ -103,7 +103,7 @@ class Implement extends Traceability
 @gmf.link(label = type)
 class Verify extends Traceability 
 {
-	attr String type = "VERIFY";
+	readonly attr String type = "VERIFY";
 	ref FunctionalRequirement#destination source;
 	ref Test#source destination;
 }

@@ -1,0 +1,99 @@
+//Mode-1 analysis
+var userPrompt = System.user.confirm("Select affected artifacts in the GTM and press OK");
+if (userPrompt == true)
+{
+	var allTraces = GTM!Traceability.all;
+	// Uniquely affected artifacts,
+	// CRs
+	// diff in planeed vs actual
+	
+	//query all selected artifacts
+	
+	var pass : Integer = 0;
+	while (pass < 12) {
+	//pass.println("Pass: ");
+	for (t : GTM!Traceability in allTraces ) {
+		if (t.source.select == true or t.destination.select == true) {
+			//t.traceUID.println();
+			t.source.select = true;
+			t.destination.select = true;
+		}
+	}
+	
+	pass = pass + 1;
+}
+	var sysReqs : Set = new Set;
+	var functionalReqs : Set = new Set;
+	var models : Set = new Set;
+	var tests : Set = new Set;
+	var crs : List = new List;
+	
+	var riskRealized : Integer = 0;
+	var riskNOTRealized : Integer = 0;
+	
+	var selectedArtifacts = GTM!Artifact.all.select(p : GTM!Artifact | p.select == true);
+	
+	var crSummary : String = "\nRELEVANT CRS: \n";
+	
+
+	for (a : GTM!Artifact in selectedArtifacts ) {
+		//a.artifactID.println();
+		
+		if (a.eClass.name == "SystemRequirement")
+			sysReqs.add(a.artifactID);
+		else if (a.eClass.name == "FunctionalRequirement")
+			functionalReqs.add(a.artifactID);
+		else if (a.eClass.name == "Model")
+			models.add(a.artifactID);
+		else
+			tests.add(a.artifactID);
+			
+		for (cr : GTM!Change_Request_Ticket in a.changeRequests) {
+				if (crs.includes(cr.crID) == false) {
+					
+					crSummary += "    CR ID: " + cr.crID.asString() + "\n";
+					crSummary += "    Planned Hours: " + cr.plannedLOE.asString() + "\n";
+					crSummary += "    Actual Hours: " + cr.actualLOE.asString() + "\n";
+					
+					if (cr.actualLOE - cr.plannedLOE > 0) {
+						crSummary += "    Risk Realized!";
+						riskRealized++;	
+					}
+					else {
+						crSummary += "    Risk NOT Realized!";
+						riskNOTRealized++;
+					}
+					crs.add(cr.crID);
+				}
+		}
+			
+		a.select = false;
+	}	
+	
+	"ARTIFACT SUMMARY".println();
+	sysReqs.println("\nAffected System Requirements: ");
+	sysReqs.size.println("Total: ");
+	
+	functionalReqs.println("\nAffected Functional Requirements: ");
+	functionalReqs.size.println("Total: ");
+	
+	models.println("\nAffected Models: ");
+	models.size.println("Total: ");
+	
+	tests.println("\nAffected Tests: ");
+	tests.size.println("Total: ");
+
+	var totAffectedArtifacts : Integer = sysReqs.size  + functionalReqs.size + models.size + tests.size;
+	totAffectedArtifacts.println("\nTotal Artifacts: ");
+	
+	crSummary.println();
+	
+	if (riskNOTRealized > 0 or riskRealized > 0)
+	{
+		var por = (riskRealized/(riskRealized + riskNOTRealized)) * 100.0;
+		por.print("Probability of realizing risk:  ");		
+		" %".println();
+	}
+}
+else
+	"Aborting Impact Analysis".println();

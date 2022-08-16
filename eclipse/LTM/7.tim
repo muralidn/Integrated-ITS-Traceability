@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Trace_Information_Model" xsi:schemaLocation="Trace_Information_Model ./model/TIM.ecore">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="Trace_Information_Model">
   <GlobalTraceModel>
-    <sysRequirements artifactID="crs_req.slreqx-10" changeRequests="/0/@CR_Tickets.0 /0/@CR_Tickets.1" downstreamTraceLinks="/0/@deriveTraceLinks.0"/>
+    <sysRequirements artifactID="crs_req.slreqx-10" progress="HUNDRED_PERCENT" changeRequests="/0/@CR_Tickets.0 /0/@CR_Tickets.1" downstreamTraceLinks="/0/@deriveTraceLinks.0"/>
     <sysRequirements artifactID="crs_req.slreqx-23" changeRequests="/0/@CR_Tickets.0" downstreamTraceLinks="/0/@deriveTraceLinks.1 /0/@deriveTraceLinks.2"/>
-    <funcRequirements artifactID="crs_req_func_spec.slreqx-9" changeRequests="/0/@CR_Tickets.0 /0/@CR_Tickets.1" upstreamTraceLinks="/0/@deriveTraceLinks.0" downstreamTraceLinks="/0/@verifyTraceLinks.0 /0/@implementTraceLinks.0 /0/@implementTraceLinks.1"/>
+    <funcRequirements artifactID="crs_req_func_spec.slreqx-9" progress="HUNDRED_PERCENT" changeRequests="/0/@CR_Tickets.0 /0/@CR_Tickets.1" upstreamTraceLinks="/0/@deriveTraceLinks.0" downstreamTraceLinks="/0/@verifyTraceLinks.0 /0/@implementTraceLinks.0 /0/@implementTraceLinks.1"/>
     <funcRequirements artifactID="crs_req_func_spec.slreqx-6" changeRequests="/0/@CR_Tickets.0" downstreamTraceLinks="/0/@implementTraceLinks.2 /0/@implementTraceLinks.3"/>
     <funcRequirements artifactID="crs_req_func_spec.slreqx-18" changeRequests="/0/@CR_Tickets.0" upstreamTraceLinks="/0/@deriveTraceLinks.1" downstreamTraceLinks="/0/@implementTraceLinks.4"/>
     <funcRequirements artifactID="crs_req_func_spec.slreqx-17" changeRequests="/0/@CR_Tickets.0" upstreamTraceLinks="/0/@deriveTraceLinks.2" downstreamTraceLinks="/0/@implementTraceLinks.5 /0/@verifyTraceLinks.1"/>
     <funcRequirements artifactID="crs_req_func_spec.slreqx-4" changeRequests="/0/@CR_Tickets.0" downstreamTraceLinks="/0/@implementTraceLinks.6"/>
-    <modelBlocks artifactID="crs_controller.slx-:255" changeRequests="/0/@CR_Tickets.0 /0/@CR_Tickets.1" upstreamTraceLinks="/0/@implementTraceLinks.0"/>
-    <modelBlocks artifactID="crs_controller.slx-:250" changeRequests="/0/@CR_Tickets.0 /0/@CR_Tickets.1" upstreamTraceLinks="/0/@implementTraceLinks.1"/>
+    <modelBlocks artifactID="crs_controller.slx-:255" progress="FIFTY_PERCENT" changeRequests="/0/@CR_Tickets.0 /0/@CR_Tickets.1" upstreamTraceLinks="/0/@implementTraceLinks.0"/>
+    <modelBlocks artifactID="crs_controller.slx-:250" progress="SEVENTY_FIVE_PERCENT" changeRequests="/0/@CR_Tickets.0 /0/@CR_Tickets.1" upstreamTraceLinks="/0/@implementTraceLinks.1"/>
     <modelBlocks artifactID="crs_controller.slx-:272" changeRequests="/0/@CR_Tickets.0" upstreamTraceLinks="/0/@implementTraceLinks.2"/>
     <modelBlocks artifactID="crs_controller.slx-:266" changeRequests="/0/@CR_Tickets.0" upstreamTraceLinks="/0/@implementTraceLinks.3 /0/@implementTraceLinks.4"/>
     <modelBlocks artifactID="crs_controller.slx-:265" changeRequests="/0/@CR_Tickets.0" upstreamTraceLinks="/0/@implementTraceLinks.5 /0/@implementTraceLinks.6"/>
     <testBlocks artifactID="DriverSwRequest_Tests.mldatx-3b7651c7-826b-431c-928b-f1f80a674351" changeRequests="/0/@CR_Tickets.0 /0/@CR_Tickets.1" upstreamTraceLinks="/0/@verifyTraceLinks.0"/>
     <testBlocks artifactID="DriverSwRequest_Tests.mldatx-cf638d7b-110b-461c-b447-1a045613ac3f" changeRequests="/0/@CR_Tickets.0" upstreamTraceLinks="/0/@verifyTraceLinks.1"/>
-    <deriveTraceLinks traceUID="1000" valid="false" source="/0/@sysRequirements.0" destination="/0/@funcRequirements.0"/>
+    <deriveTraceLinks traceUID="1000" source="/0/@sysRequirements.0" destination="/0/@funcRequirements.0"/>
     <deriveTraceLinks traceUID="1011" valid="false" source="/0/@sysRequirements.1" destination="/0/@funcRequirements.2"/>
     <deriveTraceLinks traceUID="1010" valid="false" source="/0/@sysRequirements.1" destination="/0/@funcRequirements.3"/>
-    <implementTraceLinks traceUID="1034" valid="false" source="/0/@funcRequirements.0" destination="/0/@modelBlocks.0"/>
+    <implementTraceLinks traceUID="1034" source="/0/@funcRequirements.0" destination="/0/@modelBlocks.0"/>
     <implementTraceLinks traceUID="1044" valid="false" source="/0/@funcRequirements.0" destination="/0/@modelBlocks.1"/>
     <implementTraceLinks traceUID="1030" valid="false" source="/0/@funcRequirements.1" destination="/0/@modelBlocks.2"/>
     <implementTraceLinks traceUID="1031" valid="false" source="/0/@funcRequirements.1" destination="/0/@modelBlocks.3"/>
