@@ -66,7 +66,7 @@ public class DeriveItemProvider extends TraceabilityItemProvider {
 				 getString("_UI_Derive_type_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Derive_type_feature", "_UI_Derive_type"),
 				 TIMPackage.Literals.DERIVE__TYPE,
-				 true,
+				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,

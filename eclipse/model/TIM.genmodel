@@ -11,6 +11,7 @@
       <genEnumLiterals ecoreEnumLiteral="TIM.ecore#//Progress_Enum/FIFTY_PERCENT"/>
       <genEnumLiterals ecoreEnumLiteral="TIM.ecore#//Progress_Enum/SEVENTY_FIVE_PERCENT"/>
       <genEnumLiterals ecoreEnumLiteral="TIM.ecore#//Progress_Enum/HUNDRED_PERCENT"/>
+      <genEnumLiterals ecoreEnumLiteral="TIM.ecore#//Progress_Enum/NO_CHANGE"/>
     </genEnums>
     <genClasses ecoreClass="TIM.ecore#//GlobalTraceModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TIM.ecore#//GlobalTraceModel/gtmController"/>
@@ -58,17 +59,17 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TIM.ecore#//Traceability/valid"/>
     </genClasses>
     <genClasses ecoreClass="TIM.ecore#//Derive">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TIM.ecore#//Derive/type"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute TIM.ecore#//Derive/type"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//Derive/source"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//Derive/destination"/>
     </genClasses>
     <genClasses ecoreClass="TIM.ecore#//Implement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TIM.ecore#//Implement/type"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute TIM.ecore#//Implement/type"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//Implement/source"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//Implement/destination"/>
     </genClasses>
     <genClasses ecoreClass="TIM.ecore#//Verify">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TIM.ecore#//Verify/type"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute TIM.ecore#//Verify/type"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//Verify/source"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TIM.ecore#//Verify/destination"/>
     </genClasses>

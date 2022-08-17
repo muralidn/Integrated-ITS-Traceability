@@ -22,11 +22,11 @@ if (userPrompt == true)
 	
 	pass = pass + 1;
 }
-	var sysReqs : Set = new Set;
-	var functionalReqs : Set = new Set;
-	var models : Set = new Set;
-	var tests : Set = new Set;
-	var crs : List = new List;
+	var sysReqs : Set 			= new Set;
+	var functionalReqs : Set 	= new Set;
+	var models : Set 			= new Set;
+	var tests : Set 			= new Set;
+	var crs : List 				= new List;
 	
 	var riskRealized : Integer = 0;
 	var riskNOTRealized : Integer = 0;

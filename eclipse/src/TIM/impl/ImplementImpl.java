@@ -105,19 +105,6 @@ public class ImplementImpl extends TraceabilityImpl implements Implement {
 	 * @generated
 	 */
 	@Override
-	public void setType(String newType) {
-		String oldType = type;
-		type = newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TIMPackage.IMPLEMENT__TYPE, oldType, type));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public FunctionalRequirement getSource() {
 		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
@@ -220,9 +207,6 @@ public class ImplementImpl extends TraceabilityImpl implements Implement {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TIMPackage.IMPLEMENT__TYPE:
-				setType((String)newValue);
-				return;
 			case TIMPackage.IMPLEMENT__SOURCE:
 				setSource((FunctionalRequirement)newValue);
 				return;
@@ -241,9 +225,6 @@ public class ImplementImpl extends TraceabilityImpl implements Implement {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TIMPackage.IMPLEMENT__TYPE:
-				setType(TYPE_EDEFAULT);
-				return;
 			case TIMPackage.IMPLEMENT__SOURCE:
 				setSource((FunctionalRequirement)null);
 				return;

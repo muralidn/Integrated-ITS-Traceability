@@ -66,7 +66,17 @@ public enum Progress_Enum implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	HUNDRED_PERCENT(4, "HUNDRED_PERCENT", "HUNDRED_PERCENT");
+	HUNDRED_PERCENT(4, "HUNDRED_PERCENT", "HUNDRED_PERCENT"),
+
+	/**
+	 * The '<em><b>NO CHANGE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NO_CHANGE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	NO_CHANGE(5, "NO_CHANGE", "NO_CHANGE");
 
 	/**
 	 * The '<em><b>ZERO</b></em>' literal value.
@@ -124,6 +134,17 @@ public enum Progress_Enum implements Enumerator {
 	public static final int HUNDRED_PERCENT_VALUE = 4;
 
 	/**
+	 * The '<em><b>NO CHANGE</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NO_CHANGE
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NO_CHANGE_VALUE = 5;
+
+	/**
 	 * An array of all the '<em><b>Progress Enum</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -136,6 +157,7 @@ public enum Progress_Enum implements Enumerator {
 			FIFTY_PERCENT,
 			SEVENTY_FIVE_PERCENT,
 			HUNDRED_PERCENT,
+			NO_CHANGE,
 		};
 
 	/**
@@ -197,6 +219,7 @@ public enum Progress_Enum implements Enumerator {
 			case FIFTY_PERCENT_VALUE: return FIFTY_PERCENT;
 			case SEVENTY_FIVE_PERCENT_VALUE: return SEVENTY_FIVE_PERCENT;
 			case HUNDRED_PERCENT_VALUE: return HUNDRED_PERCENT;
+			case NO_CHANGE_VALUE: return NO_CHANGE;
 		}
 		return null;
 	}

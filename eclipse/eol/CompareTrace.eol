@@ -1,7 +1,15 @@
 import "EolLibrary.eol";
 
+var DERIVE_LINK : Integer = 1;
+var IMPLEMENT_LINK : Integer = 2;
+var VERIFY_LINK : Integer = 3;
+var DERIVE_LINK_LOCAL : Integer = 4;
+var IMPLEMENT_LINK_LOCAL : Integer = 5;
+var VERIFY_LINK_LOCAL : Integer = 6;
+
+
 var ltmBoundary = LTM!GlobalTraceModel.all.first;
-var gtmBoundary = GTM!GlobalTraceModel.all.first;
+var gtmBoundary = MODEL!GlobalTraceModel.all.first;
 
 var displayMsg : String = "";
 
@@ -9,42 +17,69 @@ var deriveLinks = LTM!Derive.all;
 var implementLinks = LTM!Implement.all;
 var verifyLinks = LTM!Verify.all;
 
-var cr = LTM!Change_Request_Ticket.all.selectOne(p : LTM!Change_Request_Ticket | p.status != "closed");
+var ltmFile = new Native("java.io.File")(LTM.modelFile);
+var ltmCR = ltmFile.getName().replace(".tim","").asInteger();
 
+//var ltmCR = LTM.modelFile.replace("platform:/resource/eclipse/LTM/", "").replace(".tim", "").asInteger();
+var cr = LTM!Change_Request_Ticket.all.selectOne(p : LTM!Change_Request_Ticket | p.crID == ltmCR);
+
+if (cr.status != "closed")
+{	
+	var msg = "CR-" + ltmCR + " is not closed. Merge will not proceed!";
+	System.user.inform(msg);
+}
+else
+{
 displayMsg = modelComparision(deriveLinks, gtmBoundary.sysRequirements, gtmBoundary.funcRequirements, displayMsg);
 displayMsg = modelComparision(implementLinks, gtmBoundary.funcRequirements, gtmBoundary.modelBlocks, displayMsg);
 displayMsg = modelComparision(verifyLinks, gtmBoundary.funcRequirements, gtmBoundary.testBlocks, displayMsg);
 
 if (displayMsg == "") {	
 	var ltmArtifacts = LTM!Artifact.all;
-	var gtmArtifacts = GTM!Artifact.all;
-	var gtmCRs = GTM!Change_Request_Ticket.all;
-	for(artf : LTM!Artifact in ltmArtifacts)	
-	{
-		var gtmCopy  = gtmArtifacts.selectOne(p : GTM!Artifact | p.artifactID = artf.artifactID);	
-		
-		var gtmCR = null;
-		gtmCR = gtmCRs.selectOne(p : GTM!Change_Request_Ticket | p.crID == cr.crID);
-		if (gtmCR == null) {
-			gtmCR = new GTM!Change_Request_Ticket;
-			
-			gtmCR.crID = cr.crID;
-			gtmCR.summary = cr.summary;
-			gtmCR.description = cr.description;
-			gtmCR.version = cr.version;
-			gtmCR.chHelpful = cr.chHelpful;
-			gtmCR.mergeRationale = cr.mergeRationale;
-			gtmCR.plannedLOE = cr.plannedLOE;
-			gtmCR.actualLOE = cr.actualLOE;
-			gtmCR.status = cr.status;
-			
-			gtmBoundary.CR_Tickets.add(gtmCR);
-		}
-		
-		gtmCopy.changeRequests.add(gtmCR);
-	}	
-	
-	System.user.inform("Merge complete!");
+	var gtmArtifacts = MODEL!Artifact.all;
+	copyLTMCRs(ltmArtifacts, gtmArtifacts, cr, gtmBoundary);
+
 }
 else
+{
 	System.user.inform(displayMsg);
+	
+	var userPrompt = System.user.confirm("Assuming the merge rationale is filled, and do you want to force merge?");
+	if (userPrompt == true) {
+	
+	//Hack due to a limitation
+	var crDummy = new MODEL!Change_Request_Ticket;
+	crDummy.crID = -999;
+	
+	
+	var pass : Integer = 0;
+	while (pass < 12) {
+		
+		var traceLinks = LTM!Traceability.all;
+		for(tl : LTM!Traceability in traceLinks) {	
+			
+			if (tl.eClass.name == "Derive")
+				createDeriveTraceability(tl.source.artifactID, tl.destination.artifactID, crDummy, gtmBoundary, tl.traceUID, DERIVE_LINK_LOCAL, false);
+			else if (tl.eClass.name == "Implement")
+				createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, crDummy, gtmBoundary, tl.traceUID, IMPLEMENT_LINK_LOCAL, false);	
+			else
+				createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, crDummy, gtmBoundary, tl.traceUID, VERIFY_LINK_LOCAL, false);		
+		 	
+		}
+		pass = pass + 1;
+	}
+	
+	var ltmArtifacts = LTM!Artifact.all;
+	var gtmArtifacts = MODEL!Artifact.all;
+	copyLTMCRs(ltmArtifacts, gtmArtifacts, cr, gtmBoundary);
+	
+	delete crDummy;
+		
+	}	
+	else
+		"Force Merge Aborted".println();
+}
+	System.user.inform("Complete Merge!");
+}
+
+		

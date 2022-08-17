@@ -105,19 +105,6 @@ public class DeriveImpl extends TraceabilityImpl implements Derive {
 	 * @generated
 	 */
 	@Override
-	public void setType(String newType) {
-		String oldType = type;
-		type = newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TIMPackage.DERIVE__TYPE, oldType, type));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public SystemRequirement getSource() {
 		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
@@ -220,9 +207,6 @@ public class DeriveImpl extends TraceabilityImpl implements Derive {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TIMPackage.DERIVE__TYPE:
-				setType((String)newValue);
-				return;
 			case TIMPackage.DERIVE__SOURCE:
 				setSource((SystemRequirement)newValue);
 				return;
@@ -241,9 +225,6 @@ public class DeriveImpl extends TraceabilityImpl implements Derive {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TIMPackage.DERIVE__TYPE:
-				setType(TYPE_EDEFAULT);
-				return;
 			case TIMPackage.DERIVE__SOURCE:
 				setSource((SystemRequirement)null);
 				return;

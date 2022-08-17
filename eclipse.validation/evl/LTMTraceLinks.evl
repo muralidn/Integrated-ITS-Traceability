@@ -23,7 +23,8 @@ context Artifact {
   constraint Progress {
 	    check {
 	    
-	    	if (self.progress != Progress_Enum#HUNDRED_PERCENT) {
+	    	if ((self.progress != Progress_Enum#HUNDRED_PERCENT) and 
+	    			(self.progress != Progress_Enum#NO_CHANGE))  {
 	    		validationFail = true;
 	    		return false;	    	
 	    	

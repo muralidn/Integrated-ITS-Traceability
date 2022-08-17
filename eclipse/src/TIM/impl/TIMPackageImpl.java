@@ -990,17 +990,17 @@ public class TIMPackageImpl extends EPackageImpl implements TIMPackage {
 		initEAttribute(getTraceability_Valid(), ecorePackage.getEBooleanObject(), "valid", "true", 0, 1, Traceability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(deriveEClass, Derive.class, "Derive", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDerive_Type(), ecorePackage.getEString(), "type", "DERIVE", 0, 1, Derive.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDerive_Type(), ecorePackage.getEString(), "type", "DERIVE", 0, 1, Derive.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDerive_Source(), this.getSystemRequirement(), null, "source", null, 0, 1, Derive.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDerive_Destination(), this.getFunctionalRequirement(), null, "destination", null, 0, 1, Derive.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(implementEClass, Implement.class, "Implement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getImplement_Type(), ecorePackage.getEString(), "type", "IMPLEMENT", 0, 1, Implement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImplement_Type(), ecorePackage.getEString(), "type", "IMPLEMENT", 0, 1, Implement.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getImplement_Source(), this.getFunctionalRequirement(), null, "source", null, 0, 1, Implement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getImplement_Destination(), this.getModel(), null, "destination", null, 0, 1, Implement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(verifyEClass, Verify.class, "Verify", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getVerify_Type(), ecorePackage.getEString(), "type", "VERIFY", 0, 1, Verify.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVerify_Type(), ecorePackage.getEString(), "type", "VERIFY", 0, 1, Verify.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVerify_Source(), this.getFunctionalRequirement(), null, "source", null, 0, 1, Verify.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVerify_Destination(), this.getTest(), null, "destination", null, 0, 1, Verify.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1024,6 +1024,7 @@ public class TIMPackageImpl extends EPackageImpl implements TIMPackage {
 		addEEnumLiteral(progress_EnumEEnum, Progress_Enum.FIFTY_PERCENT);
 		addEEnumLiteral(progress_EnumEEnum, Progress_Enum.SEVENTY_FIVE_PERCENT);
 		addEEnumLiteral(progress_EnumEEnum, Progress_Enum.HUNDRED_PERCENT);
+		addEEnumLiteral(progress_EnumEEnum, Progress_Enum.NO_CHANGE);
 
 		// Create resource
 		createResource(eNS_URI);

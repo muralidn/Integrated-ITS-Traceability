@@ -81,6 +81,7 @@
     <eLiterals name="FIFTY_PERCENT" value="2"/>
     <eLiterals name="SEVENTY_FIVE_PERCENT" value="3"/>
     <eLiterals name="HUNDRED_PERCENT" value="4"/>
+    <eLiterals name="NO_CHANGE" value="5"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Artifact" abstract="true">
     <eAnnotations source="gmf.node">
@@ -115,7 +116,7 @@
       <details key="label" value="type"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="DERIVE"/>
+        changeable="false" defaultValueLiteral="DERIVE"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//SystemRequirement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//FunctionalRequirement"/>
   </eClassifiers>
@@ -123,9 +124,8 @@
     <eAnnotations source="gmf.link">
       <details key="label" value="type"/>
     </eAnnotations>
-    <eAnnotations/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="IMPLEMENT"/>
+        changeable="false" defaultValueLiteral="IMPLEMENT"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//FunctionalRequirement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//Model"/>
   </eClassifiers>
@@ -133,9 +133,8 @@
     <eAnnotations source="gmf.link">
       <details key="label" value="type"/>
     </eAnnotations>
-    <eAnnotations/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="VERIFY"/>
+        changeable="false" defaultValueLiteral="VERIFY"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//FunctionalRequirement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//Test"/>
   </eClassifiers>

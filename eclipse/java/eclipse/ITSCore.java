@@ -25,7 +25,7 @@ public class ITSCore {
 		public static final String TEMPLATE_TIM_DIAG_FILE_EXT = ".tim_diagram";
 		public static final String TEMPLATE_FILE_NAME_PLACEHOLDER = "FILE_NAME";
 		public static final String LTM_ROOT = ".\\LTM\\";
-		public static final String LTM_GENERIC_NAME = "MODEL";
+		public static final String MODEL_GENERIC_NAME = "MODEL";
 		public static final String EVL_VALIDATE_TL = "..\\eclipse.validation\\evl\\LTMTraceLinks.evl";
 		public static final String TRAC_ROOT = ".\\..\\Trac";
 		public static final String GTM_FILE_PATH = ".\\GTM\\GTM.tim";
@@ -158,7 +158,7 @@ public class ITSCore {
 		}
 			if (ltmFound) {
 
-				EMFModelWrapper model = new EMFModelWrapper(Constants.LTM_ROOT + ltmFile, Constants.METAMODEL, Constants.LTM_GENERIC_NAME);
+				EMFModelWrapper model = new EMFModelWrapper(Constants.LTM_ROOT + ltmFile, Constants.METAMODEL, Constants.MODEL_GENERIC_NAME);
 				int methodStatus = model.loadModel();
 				if (methodStatus != 0) {
 					System.out.println("Failed to load: " + ltmFile);
@@ -194,7 +194,6 @@ public class ITSCore {
 	}
 
 	static int validateLTM(EMFModelWrapper model) {
-
 		EVLModuleWrapper evlModule = new EVLModuleWrapper();
 		evlModule.addEMFModel(model);
 
@@ -220,7 +219,7 @@ public class ITSCore {
 
 	static int mineLTM(String ltmPath) {
 
-		EMFModelWrapper model = new EMFModelWrapper(ltmPath, Constants.METAMODEL, Constants.LTM_GENERIC_NAME);
+		EMFModelWrapper model = new EMFModelWrapper(ltmPath, Constants.METAMODEL, Constants.MODEL_GENERIC_NAME);
 		int methodStatus = model.loadModel();
 		if (methodStatus != 0) {
 			System.out.println("Failed to load: " + ltmPath);
@@ -271,9 +270,9 @@ public class ITSCore {
 		if (methodStatus == 1)
 			System.out.println("LTM Validation Failed. Aborting merge of " + ltmPath);
 		else {
-			System.out.println("LTM Validation Pass: " + ltmPath);
+			System.out.println("Proceeding to merge:  " + ltmPath);
 
-			EMFModelWrapper gtm = new EMFModelWrapper(Constants.GTM_FILE_PATH, Constants.METAMODEL, Constants.GTM_STR);
+			EMFModelWrapper gtm = new EMFModelWrapper(Constants.GTM_FILE_PATH, Constants.METAMODEL, Constants.MODEL_GENERIC_NAME);
 			methodStatus = gtm.loadModel();
 			if (methodStatus != 0) {
 				System.out.println("Failed to load: " + Constants.GTM_FILE_PATH);
@@ -445,9 +444,8 @@ public class ITSCore {
 				model.closeModel();
 
 			} else if (args[1].equals("SYNC-CR")) {
-				if (status != -1) {
-					syncCR(tracConnector);
-				}
+					syncCRs(tracConnector);
+	
 			} else if ((args[1].equals("MINE-LTM")) || (args[1].equals("MERGE-LTM"))) {
 				JFileChooser fileChooser = new JFileChooser(Constants.LTM_ROOT);
 				FileNameExtensionFilter ltmFilter = new FileNameExtensionFilter("TIM Model", "tim");
@@ -458,7 +456,10 @@ public class ITSCore {
 					if (args[1].equals("MINE-LTM"))
 						mineLTM(fileChooser.getSelectedFile().getAbsolutePath());
 					else
+					{
+						syncCRs(tracConnector);
 						mergeLTM(fileChooser.getSelectedFile().getAbsolutePath());
+					}
 				}
 
 			} else if (args[1].equals("IMPACT-ANALYSIS")) {
@@ -470,10 +471,10 @@ public class ITSCore {
 			throw new IllegalArgumentException("Invalid Command\nProgram Usage: ITSCore.java --mode MODE");
 		}
 
-		System.out.println("Complete!");
+		System.out.println("Complete program execution!");
 	}
 
-	private static int syncCR(TracConnector tracConnector) {
+	private static int syncCRs(TracConnector tracConnector) {
 		HashMap<Integer, Ticket> tickets;
 		tickets = tracConnector.queryTickets(TICKET_FILTER.ALL);
 		if (tickets == null) {

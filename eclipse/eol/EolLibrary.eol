@@ -10,20 +10,20 @@ operation modelComparision(links : Sequence<Any>, upstreamArtifacts : OrderedSet
 	
 	//links.println();
 	for(lnk : LTM!Traceability in links) {
-		var upstreamArtifact = upstreamArtifacts.selectOne(p : GTM!Artifact | p.artifactID = lnk.source.artifactID);	
-		var downstreamArtifact = downstreamArtifacts.selectOne(p : GTM!Artifact | p.artifactID = lnk.destination.artifactID);	 	
+		var upstreamArtifact = upstreamArtifacts.selectOne(p : MODEL!Artifact | p.artifactID = lnk.source.artifactID);	
+		var downstreamArtifact = downstreamArtifacts.selectOne(p : MODEL!Artifact | p.artifactID = lnk.destination.artifactID);	 	
 
 		if (upstreamArtifact == null) 
-			msg = msg + "- New " + lnk.source.eClass().name + " " + lnk.source.artifactID + " added in the LTM.\n";
+			msg = msg + "- New " + lnk.source.eClass().name + " found in the LTM: " + lnk.source.artifactID + "\n";
 		else if (downstreamArtifact == null) 
-			msg = msg + "- New " + lnk.source.eClass().name + " " + lnk.destination.artifactID + " added in the LTM.\n";
+			msg = msg + "- New " + lnk.destination.eClass().name + " found in the LTM: " + lnk.destination.artifactID + "\n";
 		else {
 				if (lnk.source.downstreamTraceLinks.size() != upstreamArtifact.downstreamTraceLinks.size()){
-					msg = msg + "- Mismatch in trace links between " + lnk.source.artifactID + " and " + upstreamArtifact.artifactID + "\n";
+					msg = msg + "- Mismatch in trace links between " + lnk.source.eClass().name + "s " + lnk.source.artifactID + " and " + upstreamArtifact.artifactID + "\n";
 				}
 
 				if (lnk.destination.upstreamTraceLinks.size() != downstreamArtifact.upstreamTraceLinks.size()){
-					msg = msg + "- Mismatch in trace links between " + lnk.destination.artifactID + " and " + downstreamArtifact.artifactID + "\n";
+					msg = msg + "- Mismatch in trace links between " + lnk.destination.eClass().name + "s " + lnk.destination.artifactID + " and " + downstreamArtifact.artifactID + "\n";
 				}				
 			}
 		}
@@ -337,6 +337,40 @@ operation copyGTMCR(gtmArtifact : GTM!Artifact, ltmArtifact : MODEL!Artifact, mo
 		crLTM.affectedArtifacts.add(ltmArtifact);
 		
 		i = i + 1;
+	}	
+
+}
+
+operation copyLTMCRs(ltmArtifacts : Collection<LTM!Artifact>, gtmArtifacts : Collection<MODEL!Artifact>, cr : LTM!Change_Request_Ticket, gtmBoundary : MODEL!GlobalTraceModel)
+{
+	for(artf : LTM!Artifact in ltmArtifacts)	
+	{
+		var gtmCopy  = gtmArtifacts.selectOne(p : MODEL!Artifact | p.artifactID = artf.artifactID);	
+		
+		// Hack as the orig function was written for LTM 
+		gtmCopy.progress = MODEL!Progress_Enum#HUNDRED_PERCENT;
+		
+		
+		var gtmCR = null;
+		gtmCR = MODEL!Change_Request_Ticket.all.selectOne(p : MODEL!Change_Request_Ticket | p.crID == cr.crID);
+		
+		if (gtmCR == null) {
+			gtmCR = new MODEL!Change_Request_Ticket;
+			
+			gtmCR.crID = cr.crID;
+			gtmCR.summary = cr.summary;
+			gtmCR.description = cr.description;
+			gtmCR.version = cr.version;
+			gtmCR.chHelpful = cr.chHelpful;
+			gtmCR.mergeRationale = cr.mergeRationale;
+			gtmCR.plannedLOE = cr.plannedLOE;
+			gtmCR.actualLOE = cr.actualLOE;
+			gtmCR.status = cr.status;
+			
+			gtmBoundary.CR_Tickets.add(gtmCR);
+		}
+		
+		gtmCopy.changeRequests.add(gtmCR);
 	}	
 
 }

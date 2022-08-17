@@ -66,7 +66,7 @@ public class ImplementItemProvider extends TraceabilityItemProvider {
 				 getString("_UI_Implement_type_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Implement_type_feature", "_UI_Implement_type"),
 				 TIMPackage.Literals.IMPLEMENT__TYPE,
-				 true,
+				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,

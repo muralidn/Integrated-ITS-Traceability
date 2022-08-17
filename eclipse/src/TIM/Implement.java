@@ -28,22 +28,11 @@ public interface Implement extends Traceability {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' attribute.
-	 * @see #setType(String)
 	 * @see TIM.TIMPackage#getImplement_Type()
-	 * @model default="IMPLEMENT"
+	 * @model default="IMPLEMENT" changeable="false"
 	 * @generated
 	 */
 	String getType();
-
-	/**
-	 * Sets the value of the '{@link TIM.Implement#getType <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' attribute.
-	 * @see #getType()
-	 * @generated
-	 */
-	void setType(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' reference.

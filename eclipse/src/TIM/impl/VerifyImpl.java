@@ -105,19 +105,6 @@ public class VerifyImpl extends TraceabilityImpl implements Verify {
 	 * @generated
 	 */
 	@Override
-	public void setType(String newType) {
-		String oldType = type;
-		type = newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TIMPackage.VERIFY__TYPE, oldType, type));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public FunctionalRequirement getSource() {
 		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
@@ -220,9 +207,6 @@ public class VerifyImpl extends TraceabilityImpl implements Verify {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TIMPackage.VERIFY__TYPE:
-				setType((String)newValue);
-				return;
 			case TIMPackage.VERIFY__SOURCE:
 				setSource((FunctionalRequirement)newValue);
 				return;
@@ -241,9 +225,6 @@ public class VerifyImpl extends TraceabilityImpl implements Verify {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TIMPackage.VERIFY__TYPE:
-				setType(TYPE_EDEFAULT);
-				return;
 			case TIMPackage.VERIFY__SOURCE:
 				setSource((FunctionalRequirement)null);
 				return;

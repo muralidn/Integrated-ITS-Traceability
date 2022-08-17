@@ -36,4 +36,12 @@ public class EMFModelWrapper {
 		model.close();
 		
 	}
+	
+	public void setModelName(String modelName) {
+		model.setName(modelName);
+	}
+	
+	public String getModelName() {
+		return model.getName();
+	}
 }
