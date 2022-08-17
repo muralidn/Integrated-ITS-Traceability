@@ -9,88 +9,100 @@ var VERIFY_LINK_LOCAL : Integer = 6;
 
 
 var ltmBoundary = MODEL!GlobalTraceModel.all.first;
-var cr = MODEL!Change_Request_Ticket.all.first;
+
 var deriveLinks = GTM!Derive.all;
 var implementLinks = GTM!Implement.all;
 var verifyLinks = GTM!Verify.all;
 
+var ltmFile = new Native("java.io.File")(MODEL.modelFile);
+var ltmCR = ltmFile.getName().replace(".tim","").asInteger();
 
-for(tl : GTM!Derive in deriveLinks) {	
-	 if(tl.source.select or tl.destination.select) {
-	 	var newTL = createDeriveTraceability(tl.source.artifactID, tl.destination.artifactID, cr, ltmBoundary, tl.traceUID, DERIVE_LINK, false);
-	 	
-	 	if (newTL != null) {
-	 		copyGTMCR(tl.source, newTL.source, ltmBoundary);
-	 		copyGTMCR(tl.destination, newTL.destination, ltmBoundary);
-	 	}
-	 	
-		tl.source.select = false;
-		tl.destination.select = false;
- 	}	
+var cr = MODEL!Change_Request_Ticket.all.selectOne(p : MODEL!Change_Request_Ticket | p.crID == ltmCR);
+
+if (cr.status == "closed")
+{	
+	var msg = "CR-" + ltmCR + " is closed. Copy will not proceed!";
+	System.user.inform(msg);
 }
-
-for(tl : GTM!Implement in implementLinks) {	
-	 if(tl.source.select or tl.destination.select) {
-		var newTL = createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, cr, ltmBoundary, tl.traceUID, IMPLEMENT_LINK, false);	
-		
-	 	if (newTL != null) {
-	 		copyGTMCR(tl.source, newTL.source, ltmBoundary);
-	 		copyGTMCR(tl.destination, newTL.destination, ltmBoundary);
-	 	}
-	 				
-		tl.source.select = false;
-		tl.destination.select = false;
- 	}	
-}
-
-for(tl : GTM!Verify in verifyLinks) {	
-	 if(tl.source.select or tl.destination.select) {
-		var newTL = createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, cr, ltmBoundary, tl.traceUID, VERIFY_LINK, false);	
-		
-	 	if (newTL != null) {
-	 		copyGTMCR(tl.source, newTL.source, ltmBoundary);
-	 		copyGTMCR(tl.destination, newTL.destination, ltmBoundary);
-	 	}
-	 	
-		tl.source.select = false;
-		tl.destination.select = false;
- 	}	
-}
-
-var pass : Integer = 0;
-while (pass < 12) {
-
+else 
+{
 	for(tl : GTM!Derive in deriveLinks) {	
-		var newTL = createDeriveTraceability(tl.source.artifactID, tl.destination.artifactID, cr, ltmBoundary, tl.traceUID, DERIVE_LINK_LOCAL, false);
-		
-	 	if (newTL != null) {
-	 		copyGTMCR(tl.source, newTL.source, ltmBoundary);
-	 		copyGTMCR(tl.destination, newTL.destination, ltmBoundary);
-	 	}
-	 	
-	}
-	
-	for(tl : GTM!Implement in implementLinks) {	
-		var newTL = createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, cr, ltmBoundary, tl.traceUID, IMPLEMENT_LINK_LOCAL, false);	
-		
-	 	if (newTL != null) {
-	 		copyGTMCR(tl.source, newTL.source, ltmBoundary);
-	 		copyGTMCR(tl.destination, newTL.destination, ltmBoundary);
-	 	}
-	 				
-	}
-	
-	for(tl : GTM!Verify in verifyLinks) {	
-		var newTL = createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, cr, ltmBoundary, tl.traceUID, VERIFY_LINK_LOCAL, false);		
-	 	
-	 	if (newTL != null) {
-	 		copyGTMCR(tl.source, newTL.source, ltmBoundary);
-	 		copyGTMCR(tl.destination, newTL.destination, ltmBoundary);
+		 if(tl.source.select or tl.destination.select) {
+		 	var newTL = createDeriveTraceability(tl.source.artifactID, tl.destination.artifactID, cr, ltmBoundary, tl.traceUID, DERIVE_LINK, false);
+		 	
+		 	if (newTL != null) {
+		 		copyGTMCR(tl.source, newTL.source, ltmBoundary);
+		 		copyGTMCR(tl.destination, newTL.destination, ltmBoundary);
+		 	}
+		 	
+			tl.source.select = false;
+			tl.destination.select = false;
 	 	}	
 	}
 	
-	pass = pass + 1;
+	for(tl : GTM!Implement in implementLinks) {	
+		 if(tl.source.select or tl.destination.select) {
+			var newTL = createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, cr, ltmBoundary, tl.traceUID, IMPLEMENT_LINK, false);	
+			
+		 	if (newTL != null) {
+		 		copyGTMCR(tl.source, newTL.source, ltmBoundary);
+		 		copyGTMCR(tl.destination, newTL.destination, ltmBoundary);
+		 	}
+		 				
+			tl.source.select = false;
+			tl.destination.select = false;
+	 	}	
+	}
+	
+	for(tl : GTM!Verify in verifyLinks) {	
+		 if(tl.source.select or tl.destination.select) {
+			var newTL = createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, cr, ltmBoundary, tl.traceUID, VERIFY_LINK, false);	
+			
+		 	if (newTL != null) {
+		 		copyGTMCR(tl.source, newTL.source, ltmBoundary);
+		 		copyGTMCR(tl.destination, newTL.destination, ltmBoundary);
+		 	}
+		 	
+			tl.source.select = false;
+			tl.destination.select = false;
+	 	}	
+	}
+	
+	var pass : Integer = 0;
+	while (pass < 12) {
+	
+		for(tl : GTM!Derive in deriveLinks) {	
+			var newTL = createDeriveTraceability(tl.source.artifactID, tl.destination.artifactID, cr, ltmBoundary, tl.traceUID, DERIVE_LINK_LOCAL, false);
+			
+		 	if (newTL != null) {
+		 		copyGTMCR(tl.source, newTL.source, ltmBoundary);
+		 		copyGTMCR(tl.destination, newTL.destination, ltmBoundary);
+		 	}
+		 	
+		}
+		
+		for(tl : GTM!Implement in implementLinks) {	
+			var newTL = createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, cr, ltmBoundary, tl.traceUID, IMPLEMENT_LINK_LOCAL, false);	
+			
+		 	if (newTL != null) {
+		 		copyGTMCR(tl.source, newTL.source, ltmBoundary);
+		 		copyGTMCR(tl.destination, newTL.destination, ltmBoundary);
+		 	}
+		 				
+		}
+		
+		for(tl : GTM!Verify in verifyLinks) {	
+			var newTL = createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, cr, ltmBoundary, tl.traceUID, VERIFY_LINK_LOCAL, false);		
+		 	
+		 	if (newTL != null) {
+		 		copyGTMCR(tl.source, newTL.source, ltmBoundary);
+		 		copyGTMCR(tl.destination, newTL.destination, ltmBoundary);
+		 	}	
+		}
+		
+		pass = pass + 1;
+	}
+
+
+	"Complete EOL".println();
 }
-
-
-"Complete EOL".println();

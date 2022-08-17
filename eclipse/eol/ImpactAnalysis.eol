@@ -28,8 +28,8 @@ if (userPrompt == true)
 	var tests : Set 			= new Set;
 	var crs : List 				= new List;
 	
-	var riskRealized : Integer = 0;
-	var riskNOTRealized : Integer = 0;
+	var riskRealized : Real = 0.0;
+	var riskNOTRealized : Real = 0.0;
 	
 	var selectedArtifacts = GTM!Artifact.all.select(p : GTM!Artifact | p.select == true);
 	
@@ -56,11 +56,11 @@ if (userPrompt == true)
 					crSummary += "    Actual Hours: " + cr.actualLOE.asString() + "\n";
 					
 					if (cr.actualLOE - cr.plannedLOE > 0) {
-						crSummary += "    Risk Realized!";
+						crSummary += "    Risk Realized!\n\n";
 						riskRealized++;	
 					}
 					else {
-						crSummary += "    Risk NOT Realized!";
+						crSummary += "    Risk NOT Realized!\n\n";
 						riskNOTRealized++;
 					}
 					crs.add(cr.crID);
@@ -90,7 +90,7 @@ if (userPrompt == true)
 	
 	if (crs.size > 0)
 	{
-		var por = (riskRealized/(riskRealized + riskNOTRealized)) * 100.0;
+		var por : Real = (riskRealized/(riskRealized + riskNOTRealized)) * 100.0;
 		por.print("Probability of realizing risk:  ");		
 		" %".println();
 	}

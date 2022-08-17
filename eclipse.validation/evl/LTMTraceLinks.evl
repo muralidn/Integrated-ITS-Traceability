@@ -37,12 +37,34 @@ context Artifact {
 	}  
 }
 
+context Change_Request_Ticket {
+  constraint PlannedLOE {
+	    check : self.plannedLOE != 0.0
+	    message : "Planned LOE is zero!"
+	}  
+
+  constraint ActualLOE {
+	    check : self.actualLOE != 0.0
+	    message : "Actual LOE is zero!"
+	}  
+	
+	critique TIM {
+	    check : self.chHelpful == "YES"
+	    message : "Note! CR-" + self.crID + " indicates that traceability was not useful"	
+	}	
+	
+	critique MergeRationale {
+	    check : self.mergeRationale != ""
+	    message : "Note! CR-" + self.crID + " has merge rationale"	
+	}	
+}
+
 post
 {
 	if (validationFail)
- 		"LTM Validation Failed".println();
+ 		"Model Validation Failed".println();
 	else
-		"LTM Validation Pass".println();	
+		"Model Validation Pass".println();	
 }
 
 

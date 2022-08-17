@@ -58,13 +58,19 @@ else
 		var traceLinks = LTM!Traceability.all;
 		for(tl : LTM!Traceability in traceLinks) {	
 			
+			var newTL = null;
+			
 			if (tl.eClass.name == "Derive")
-				createDeriveTraceability(tl.source.artifactID, tl.destination.artifactID, crDummy, gtmBoundary, tl.traceUID, DERIVE_LINK_LOCAL, false);
+				newTL = createDeriveTraceability(tl.source.artifactID, tl.destination.artifactID, crDummy, gtmBoundary, tl.traceUID, DERIVE_LINK_LOCAL, false);
 			else if (tl.eClass.name == "Implement")
-				createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, crDummy, gtmBoundary, tl.traceUID, IMPLEMENT_LINK_LOCAL, false);	
+				newTL = createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, crDummy, gtmBoundary, tl.traceUID, IMPLEMENT_LINK_LOCAL, false);	
 			else
-				createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, crDummy, gtmBoundary, tl.traceUID, VERIFY_LINK_LOCAL, false);		
+				newTL = createImplementVerifyTraceability(tl.destination.artifactID, tl.source.artifactID, crDummy, gtmBoundary, tl.traceUID, VERIFY_LINK_LOCAL, false);		
 		 	
+		 	if (newTL != null)
+		 	{
+		 		newTL.valid = true;
+		 	}
 		}
 		pass = pass + 1;
 	}

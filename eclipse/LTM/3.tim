@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalTraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Trace_Information_Model" xsi:schemaLocation="Trace_Information_Model ./model/TIM.ecore">
+  <funcRequirements artifactID="crs_req_func_spec.slreqx-1" progress="NO_CHANGE" changeRequests="//@CR_Tickets.0 //@CR_Tickets.1 //@CR_Tickets.2" downstreamTraceLinks="//@implementTraceLinks.0 //@verifyTraceLinks.0 //@implementTraceLinks.1"/>
+  <modelBlocks artifactID="crs_controller.slx-:241" progress="NO_CHANGE" changeRequests="//@CR_Tickets.0 //@CR_Tickets.1 //@CR_Tickets.2" upstreamTraceLinks="//@implementTraceLinks.0"/>
+  <modelBlocks artifactID="crs_controller.slx-:442" progress="HUNDRED_PERCENT" changeRequests="//@CR_Tickets.2" upstreamTraceLinks="//@implementTraceLinks.1"/>
+  <testBlocks artifactID="DriverSwRequest_Tests.mldatx-2badef91-0c2e-4efb-b02f-3b13de7311d8" progress="NO_CHANGE" changeRequests="//@CR_Tickets.0 //@CR_Tickets.1 //@CR_Tickets.2" upstreamTraceLinks="//@verifyTraceLinks.0"/>
+  <implementTraceLinks traceUID="1000" source="//@funcRequirements.0" destination="//@modelBlocks.0"/>
+  <implementTraceLinks traceUID="1002" source="//@funcRequirements.0" destination="//@modelBlocks.1"/>
+  <verifyTraceLinks traceUID="1001" source="//@funcRequirements.0" destination="//@testBlocks.0"/>
+  <CR_Tickets crID="1" summary="Verification of crs_req_func_spec.slreqx-1" description="crs_req_func_spec.slreqx-1 is not verified. &#xD;&#xA;&#xD;&#xA;This ticket is to perform an RBT verification of this requirement." version="1.0" chHelpful="YES" mergeRationale="New artifact added" plannedLOE="10.0" actualLOE="8.0" status="closed" affectedArtifacts="//@funcRequirements.0 //@modelBlocks.0 //@testBlocks.0"/>
+  <CR_Tickets crID="2" summary="Cruise Control fails intermittently" description="The cruise control does not engage properly. The button has to be pressed twice. &#xD;&#xA;&#xD;&#xA;NOTE: This is a mock ticket to demonstrate TraceITS." version="1.0" chHelpful="YES" mergeRationale="null" plannedLOE="40.0" actualLOE="56.0" status="closed" affectedArtifacts="//@funcRequirements.0 //@modelBlocks.0 //@testBlocks.0"/>
+  <CR_Tickets crID="3" summary="Cruse Control debounces" description="This CR has been automatically generated from the GTM on 2022-08-17T02:46:25.009" version="1.0" chHelpful="YES" mergeRationale="New Artifact added" plannedLOE="40.0" actualLOE="45.0" status="closed" affectedArtifacts="//@modelBlocks.0 //@modelBlocks.1 //@testBlocks.0 //@funcRequirements.0"/>
+</GlobalTraceModel>

@@ -48,7 +48,11 @@ public class ITSCore {
 		EOLModuleWrapper eolModule = new EOLModuleWrapper();
 		eolModule.addModel(model);
 
-		String eolCommand = "var cr = Change_Request_Ticket.all.first();";
+		String eolCommand = "var ltmFile = new Native(\"java.io.File\")(LTM.modelFile);\n" + 
+				"var ltmCR = ltmFile.getName().replace(\".tim\",\"\").asInteger();\n" + 
+				"\n" + 
+				"var cr = LTM!Change_Request_Ticket.all.selectOne(p : LTM!Change_Request_Ticket | p.crID == ltmCR);";
+		
 		methodStatus = eolModule.parseEOL(eolCommand);
 		if (methodStatus != 0) {
 			System.out.println("Failed to parse eol command: " + eolCommand);
@@ -67,7 +71,7 @@ public class ITSCore {
 		if (cr == null)
 			str.append("var cr = new LTM!Change_Request_Ticket;\n");
 		else
-			str.append("var cr = Change_Request_Ticket.all.first();\n");
+			str.append(eolCommand);
 
 		str.append("cr.crID = " + ticket.id + ";\n");
 		str.append("cr.summary = \"" + ticket.summary + "\";\n");
@@ -426,7 +430,9 @@ public class ITSCore {
 				if (objVersion != null) {
 					strVersion = objVersion.toString();
 				}
-
+				
+				syncCRs(tracConnector);
+				
 				if (boolNewCR) {
 					if (strVersion != "") {
 						Ticket ticket = tracConnector.CreateNewTicket(strVersion);
