@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="Trace_Information_Model" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmi:id="_UAGgEBWuEe2G6ps6JtOS_w" type="TIM" name="6.tim_diagram" measurementUnit="Pixel">
-  <styles xmi:type="notation:DiagramStyle" xmi:id="_UAGgERWuEe2G6ps6JtOS_w"/>
-  <element xmi:type="GlobalTraceModel" href="6.tim#/"/>
-</notation:Diagram>

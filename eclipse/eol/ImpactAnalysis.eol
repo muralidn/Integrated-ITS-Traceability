@@ -88,7 +88,7 @@ if (userPrompt == true)
 	
 	crSummary.println();
 	
-	if (riskNOTRealized > 0 or riskRealized > 0)
+	if (crs.size > 0)
 	{
 		var por = (riskRealized/(riskRealized + riskNOTRealized)) * 100.0;
 		por.print("Probability of realizing risk:  ");		
